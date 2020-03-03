@@ -1,0 +1,10 @@
+Symbols explained:
+! Not implemented
+& Implemented but not tested.
+* Considered fully implemented.
+
+------------------------------------------------------------
+
+! Make sound play specifically files that do not have a number in the name.
+! Add language translation using translate-shell.
+& Discard potions with no affects.
