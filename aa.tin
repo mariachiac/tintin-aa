@@ -1,0 +1,179 @@
+#ACTION {^Invalid name, try another.}
+{
+	#variable {loginName} {FALSE}
+}
+{9}
+
+#ACTION {^Password:}
+{
+	#if {"$loginName" != "FALSE"}
+	{
+		#variable {loginName} {${HOME}/${loginName}_pass};
+		#script {fileExists} {if [ -f "$loginName" ] ; then echo "true"; else echo "false"; fi};
+		#variable {fileExists} {${fileExists[1]}};
+		#if {"$fileExists" == "true"}
+		{
+			#textin {$loginName};
+			#cr
+		}
+	};
+	#variable {loginName} {FALSE}
+}
+{9}
+
+#ACTION {^Would you like to create a new character?}
+{
+	#if {"$loginName" != "FALSE"}
+	{
+		$loginName
+	}
+}
+{9}
+
+#ALIAS {^{aa|login}$}
+{
+	#if {!&{connected}}
+	{
+		#if {$mudPort == 3102 || $mudPort == 3110}
+		{
+			#ssl {$mudSessionName} {$mudAddress} {$mudPort}
+		};
+		#else
+		{
+			#session {$mudSessionName} {$mudAddress} {$mudPort}
+		}
+	};
+	#else
+	{
+		#showme {Huh?}
+	}
+}
+{8}
+
+#ALIAS {^bot{kill|load} %S$}
+{
+    #nop {Kill, load, or reload a specified bot.};
+    #if {"%1" == "kill"}
+    {
+        #local {exists} {@bot_%1{}};
+        #variable {exists} {$exists};
+        #if {"$exists" != "@%*"}
+        {
+            $exists
+        };
+        #class {bot_%2} {kill};
+        #class {gameData} {open};
+        #showme {bot %2 has been killed.}
+    };
+    #if {"%1" == "load"}
+    {
+        #showme {Loading bot %2.tin};
+        #class {gameData} {close};
+        #class {bot_%2} {read} {modules/bots/%2.tin};
+        #local {exists} {@bot_%1{}};
+        #variable {exists} {$exists};
+        #if {"$exists" != "@%*"}
+        {
+            $exists
+        }
+    }
+}
+{9}
+
+#ALIAS {^mod{kill|load|reload} %S$}
+{
+	#nop {reload all modules};
+	#if {"%0" == "modreload all"}
+	{
+		#script {for module in modules/*.tin ; do echo "#class {$(basename "$module" .tin)} {kill};#class {$(basename "$module" .tin)} {read} {$module}";done};
+		#echo {All modules reloaded}
+	};
+	#else
+	{
+		#nop {Kill, load, or reload a specified module.};
+		#if {"%1" == "{kill|reload}"}
+		{
+			#class {%2} {kill};
+			#showme {Class %2 has been killed.}
+		};
+		#if {"%1" == "{load|reload}"}
+		{
+			#showme {Loading modules/%2.tin};
+			#class {%2} {read} {modules/%2.tin};
+			#class {gameData} {open}
+		}
+	}
+}
+{9}
+
+#ALIAS {^{aa|login}%s%w$}
+{
+	#format {loginName} {%l} {%3};
+	#if {!&{connected}}
+	{
+		#if {$mudPort == 3102 || $mudPort == 3110}
+		{
+			#ssl {$mudSessionName} {$mudAddress} {$mudPort}
+		};
+		#else
+		{
+			#session {$mudSessionName} {$mudAddress} {$mudPort}
+		}
+	};
+	#else
+	{
+		#showme {Huh?}
+	}
+}
+{9}
+
+#ALIAS {^{quit|logoff}$}
+{
+	#class {gameData} {write} {$gameDataPath};
+	#if {&{name}}
+	{
+		#history {write} {$historyPath}
+	};
+	set ctrigger off | prefix silent_;
+	#send {quit}
+}
+{9}
+
+#EVENT {PROGRAM START}
+{
+	#system {clear};
+	#nop {Set the home directory variable.};
+	#script {HOME} {if [ -z "$XDG_CONFIG_HOME" ] ; then if ! [ -d "$HOME/.config/tintin-alteraeon/" ] ; then mkdir -p "$HOME/.config/tintin-alteraeon";fi;echo -n "$HOME/.config/tintin-alteraeon";else if ! [ -d "$XDG_CONFIG_HOME/tintin-alteraeon/" ] ; then mkdir -p "$XDG_CONFIG_HOME/tintin-alteraeon/";fi;echo -n "$XDG_CONFIG_HOME/tintin-alteraeon";fi};
+	#variable {HOME} {${HOME[1]}};
+	#replace {HOME} {-n } {};
+	#nop {Load all the .tin files in the modules directory in classes named after the module name.};
+	#script {for module in modules/*.tin ; do echo "#class {$(basename "$module" .tin)} {read} {$module}";done};
+	#nop {Display intro message.};
+	#echo {@separator{}};
+	#system {fold -w $(tput cols) -s MOTD};
+	#echo {@separator{}};
+	#echo {To get started type login};
+}
+
+#EVENT {SESSION CONNECTED}
+{
+	synth_play connectedSound;
+	#nop {Set connected to true so if you accidently type login it won't try to login twice.};
+	#variable {connected} {true};
+	#nop {Create the log directory if it doesn't exist. Log files are based on date and time.};
+	#script {logFilePath} {date +'log/%Y/%B/%d/'};
+	#variable {logFilePath} {${HOME}/${logFilePath[1]}};
+	#script {logFileName} {date +'%I_%M%p.log'};
+	#system {mkdir -p $logFilePath};
+	#log {overwrite} {${logFilePath}${logFileName[1]}}
+}
+
+#EVENT {SESSION DISCONNECTED}
+{
+	qcsave;
+	#unvariable {connected};
+	#end
+}
+
+#VARIABLE         {loginName}  {FALSE}
+#VARIABLE         {motd}  {}
