@@ -1,0 +1,10 @@
+Soulforge: Forge soulstones efficiently and automatically.
+
+Usage: smartforge <color>
+smartforge <color> <container>
+fullforge <color>
+fullforge <color> <container>
+
+These commands facilitate forging of soulstones such that the least amount of level is lost. For example, if you use smartforge to forge a purple soulstone with another purple soulstone, it will attempt to choose souls with the same level, then one level difference, then two, etc. Smartforge will forge two of the given souls together, fullforge will attempt to automatically forge the given soul color with any number of lower level soulstones.
+
+IMPORTANT NOTE: Fullforge is beta right now, and, if I got the code wrong, could result in you losing almost all of your soulstones to the forger so use at your own risk. If you do discover bugs, however, I recommend contacting lilmike in game immediately.

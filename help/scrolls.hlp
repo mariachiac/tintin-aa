@@ -1,0 +1,10 @@
+Scrolls: Use and manage scrolls, potions, and other consumables.
+
+Usage: uscroll <one word name> [target]
+scroll <one word name> <keywords of consumable>
+scroll <one word scroll name>
+dscroll <one word scroll name>
+scrolls
+Alt+backslash (macro)
+
+These commands allow you to easy use scrolls and other consumables, and manage the amount in your container. The uscroll command will take a scroll from your container and use it with an optional target. The scroll command will, when provided a single argument, tell you how many scrolls of the given name are in your container, and, when given multiple arguments, map a one word name to keywords for use and management. The scrolls command will list what scroll types you have set up, and the dscroll command will set a scroll as default, allowing you to use the alt+backslash macro to get and use it without typing anything. Note that once you have less than a certain amount of a scroll, you will hear a warning sound upon use or upon checking how many are available.

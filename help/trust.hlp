@@ -1,0 +1,7 @@
+Trust: Allow basic commands from trusted friends.
+
+Usage: trusted
+trust <person>
+untrust <person>
+
+These commands allow trusted friends to give certain basic commands, such as pick <door>, to your character. Trusted shows your trusted friends, and trust or untrust <person> adds or deletes the person from your trusted list. Note that when used extensively this has the chance to get you bot thwacked, and since these commands are mostly useful in groups, the consequences can be severe. Use at your own risk!

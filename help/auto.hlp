@@ -1,0 +1,42 @@
+Auto: wide ranging automatic action commands.
+
+Usage: Each command below can be prefixed with no, for example noautorefresh, to turn off the setting. When an argument is required or optional it will be noted, otherwise the no form of the command takes no argument.
+autoberserk: allows berserk to be automatically tried in combos (see chelp combos)
+autocharge: Use charge when typing assist.
+autovalor: renew valor when it falls
+autoweapon: remove your weapon, throw shadow blades, and rewield your weapon when trying combos. Otherwise it will simply throw the blades.
+autodisarm: allow disarm to be tried when using a random attack.
+autoretreat: attempt to retreat in the given direction when moving and in battle.
+autoreposte: Do a reposte wen you fail and switch out of your stance automatically.
+autostop: attempt to back out of combat when engaged in melee combat.
+autowithdraw: attempt to withdraw from combat when engaged in melee combat directly.
+autobone, clay, flesh, woad, metal, earthwall, mound, weird, liveoak, ice, fiend: Create said minion automatically when it dies. Woad, metal, and bone can accept an argument for what materials to use when creating them (for example autowoad log). Autofiend uses your default soulstone (set with dstone type).
+autoconsume: Consume from corpses when a mob dies.
+autobloodsacrifice: Blood sacrifice from a corpse when a mob dies.
+autoboneprison: Bone prison yourself whenlow on health.
+autobonearmor: Recreate bone armor when it falls.
+automend [number]: Automatically mend bones on skeletons. When provided a number, will not mend bones if below that number of teeth (defaults to 6).
+autosell <color>: Automatically sell soulstones stolen of given color. Autosell sels all. Noautosell can accept a color, otherwise stops selling all colors.
+autojunk <drop|donate|sacrifice>: Drop, donate, or drop and sacrifice useless or common harvested and foraged items, such as harvested bones, corpsecut spell components, and most food items foraged from the wilderness.
+autostealth: Automatically use stealthy movement when moving.
+autowaypoint: Automatically use bridges when a waypoint is too far but a bridge is available (also works with group waypoint).
+autotitle: Use supported music players and set your title to currently playing song when it changes.
+autorefresh: Use refresh type spells or second wind to regain movement when low.
+autothank: Automatically thank people when given newbie gifts.
+autopoints <skill or spell>: Automatically spend points (profession or combat) on a skill or spell when you gain enough. Sets the type of points independently, so you can have one skill automatically spending profession and one spending combat points. Noautopoints allows the argument pp, or cp to stop spending profession or combat points, respectively. Autopoints by itself tells you what you are spending on.
+Autogamble <type>: Spend gambling gold on the type of gambling game when you receive it as a daily gift. Type is currently merchant or slots. Autogamble with no arguments shows your setting.
+Autobuypractice: buy a practice with xp when you gain enough.
+autolevel <class|all>: Level the class, or the cheapest, when you gain enough xp. Autolevel by itself shows what you are levelling.
+autostore <item|all>: Recast tensors floating disks when they pop, and store the item(s) or all items in your inventory in them. If autostore is given multiple times, you can store multiple types of items in the disk. Autostore by itself shows your settings.
+autodonateunique, autogetunique: Get, or get and donate, random items from corpses.
+autosuncatcher, autolightcatcher, autostarcatcher, automooncatcher: Check for full lightcatchers periodically and alert when they are found. All forms of this command turn on the same setting I.E. you will be alerted of all full lightcatcher types, regardless of which form you used.
+Autofollow: automatically follow trusted characters when beckoned (see chelp trust).
+autocall: Re-call a failed call animal or waterborn automatically.
+autostopmining: Send the stop command when the client detects the maximum number of deposits in a room have been reached to prevent the game from uselessly spending movement points prospecting when nothing else can be found.
+autobrag [channel]: Brag many achievements, such as better ats, levels, etc, to a channel (or xp when not given).
+autorecall: Attempt to recall when low on health.
+Autoremovepoison: Attempt to remove poison when detected.
+cautoassist: Assist when minions rescue someone, someone assists, etc. Useful in combination with autocombat.
+autocombat <list of commands> [seconds]: Pick among the given commands to use when in combat automatically. List of commands must in enclosed in braces {} if multiple are provided, and separated by semicolons. Autocombat alone shows your settings. If a number is provided, does these commands every number of seconds, otherwises uses 3 by default.
+autobuy <amount>, autobid <amount>: Automatically bid up to amount gold on an auction currently in progress.
+autodepositgold <amount>: Deposit gold automatically wen you have more than amount. Requires private banking to be active.

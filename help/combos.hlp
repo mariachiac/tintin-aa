@@ -1,0 +1,10 @@
+Combos: Robust combo usage and solving system.
+
+Usage: <c|a|l>xcombo [skill]
+<c|a|l>combo [skill]
+{3-8}<combo|acombo|lcombo|ccombo> [skill]
+combo [skill]
+{3-8}<acombo|ccombo|lcombo|combo>set<letter> <skill>, <acombo|ccombo|lcombo|combo>set<letter> <skill>
+randomattack [target]
+
+These commands allow you to complete learned combos easily, and attempt to solve unlearned combos automatically and intelligently. The commands with x in the name attempt to discover neew moves in partially learned combos. The letter c, a, or l picks between cross class, advanced, and low level combos, respectively. The commands with 3 through 8 and c, a, l combo, or just combo, do a combo of types (mentioned above) or all, and optionally with the specified length. A skill can be provided, in which case it only selects combos with said skill in them. The commands with set and a letter will set a macro (alt with the letter, not all letters supported) to the combo commands. Randomattack picks a random attack of your learned skills and uses it with an optional target. This is useful, for example, when you have no unfinish combos and need to discover more. See chelp auto for certain commands that can affect which attacks are chosen with xcombo or randomattack.

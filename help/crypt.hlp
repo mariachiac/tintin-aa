@@ -1,0 +1,6 @@
+Crypt: send obfiscated messages.
+
+Usage: crypt <channel> <message>
+crypttell <person> <message>
+
+Uses a very uncryptographic algorithm to make your message less readable to casual observers. Only works with tintin-alteraeon users currently and is not secure in the least, so don't use for super sensative data. You really shouldn't use a mud for that kind of information though anyway.
