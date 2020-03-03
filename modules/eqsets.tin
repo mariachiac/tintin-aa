@@ -1,0 +1,141 @@
+#ACTION {^You are now wearing set '%S'.$}
+{
+	show stats | prefix silent_;
+	show clev | prefix silent_;
+	#if {"${auto[keyprofile]}" == "true"}
+	{
+		keyprofile %1
+	};
+	#if {"${character[cspam]}" == "true"}
+	{
+		#showme {You are now wearing '%1'.};
+		#line {gag}
+	}
+}
+{9}
+
+#ACTION {^silent_%1_{head|neck|arms|wrist|hands|finger|on body|about body|waist|legs|feet|held|shield|wielded|weapon}%* %S$}
+{
+	#switch {"%2"}
+	{
+		#case {"held"}
+		{
+			#list {eq_%1} {add} {hold}
+		};
+		#case {"{weapon|wielded}"}
+		{
+			#list {eq_%1} {add} {wield}
+		};
+		#default
+		{
+			#list {eq_%1} {add} {wear}
+		}
+	};
+	#list {eq_%1} {add} {%4}
+}
+{9}
+
+#ACTION {^silent_You can't wear that!$}
+{
+	wield $lastEq | grep nospam
+}
+{9}
+
+#ALIAS {%.set$}
+{
+	eqset wear %1set
+}
+{9}
+
+#ALIAS {^delset %S$}
+{
+	#list {eq_%1} {size} {eqTotalItems};
+	#if {$eqTotalItems == 0}
+	{
+		#showme {No set with that name.}
+	};
+	#else
+	{
+		#showme {Equipment set %1 deleted.};
+		#unvariable {eq_%1}
+	}
+}
+{9}
+
+#ALIAS {^newset %S$}
+{
+	#list {eq_%1} {size} {eqTotalItems};
+	#if {$eqTotalItems != 0}
+	{
+		#showme {Recreateing existing set %1.};
+		#list {eq_%1} {clear}
+	};
+	#else
+	{
+		#showme {Creating set %1.}
+	};
+	insult -head | prefix silent_%1_;
+	insult -neck1 | prefix silent_%1_;
+	insult -neck2 | prefix silent_%1_;
+	insult -arms | prefix silent_%1_;
+	insult -wrist1 | prefix silent_%1_;
+	insult -wrist2 | prefix silent_%1_;
+	insult -hands | prefix silent_%1_;
+	insult -finger1 | prefix silent_%1_;
+	insult -finger2 | prefix silent_%1_;
+	insult -onbody | prefix silent_%1_;
+	insult -about | prefix silent_%1_;
+	insult -waist | prefix silent_%1_;
+	insult -legs | prefix silent_%1_;
+	insult -feet | prefix silent_%1_;
+	insult -held | prefix silent_%1_;
+	insult -shield | prefix silent_%1_;
+	insult -weapon | prefix silent_%1_
+}
+{9}
+
+#ALIAS {^wearset %S$}
+{
+	#if {!&{character[equipmentContainer]}}
+	{
+		#variable {character[equipmentContainer]} {${character[container]}}
+	};
+	#list {eq_%1} {size} {eqTotalItems};
+	#if {$eqTotalItems == 0}
+	{
+		#showme {No set with that name.}
+	};
+	#else
+	{
+		set msp off | prefix silent_;
+		remove all | grep nospam;
+		put all in ${character[equipmentContainer]} | grep nospam;
+		#variable {eqLoopCounter} {1};
+		#while {$eqLoopCounter <= $eqTotalItems}
+		{
+			#if {$eqLoopCounter % 2 == 0}
+			{
+				get ${eq_%1[$eqLoopCounter]} from ${character[equipmentContainer]} | grep nospam;
+				$eqWearCommand ${eq_%1[$eqLoopCounter]} | grep nospam;
+				#variable {lastEq} {${eq_%1[$eqLoopCounter]}}
+			};
+			#else
+			{
+				#variable {eqWearCommand} {${eq_%1[$eqLoopCounter]}}
+			};
+			#math {eqLoopCounter} {$eqLoopCounter + 1}
+		};
+		set msp on | prefix silent_;
+		lecho You are now wearing set %1.
+	}
+}
+{9}
+
+#ALIAS {^{eqco|eqcon|eqcont|eqconta|eqcontai|eqcontain|eqcontaine|eqcontainer} %2}
+{
+	#variable {character[equipmentContainer]} {%2};
+	#showme {Equipment container set to ${character[equipmentContainer]}\.}
+}
+{9}
+
+#VARIABLE         {eqWearCommand}  {}

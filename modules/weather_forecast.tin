@@ -1,0 +1,1 @@
+#alias {rl-forecast %s%S$} {#system {elinks --dump -no-numbering 'http://mobile.wunderground.com/cgi-bin/findweather/hdfForecast?brand=mobile&query=%2' | head -n 71 | tr -s "[:space:]" > weatherForecast.txt};#scan weatherForecast.txt}

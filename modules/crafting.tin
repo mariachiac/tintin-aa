@@ -1,0 +1,96 @@
+#ACTION {^A deposit of %1 is depleted.$}
+{
+	#nop {Hook Name: mineFinish};
+	#nop {Hook Args: mined material.};
+	@do_hook{mineFinish;%1}
+}
+{9}
+
+#ACTION {^You are too tired to continue mining.$}
+{
+	@do_hook{mineFinishAbort}
+}
+{9}
+
+#ACTION {^You begin excavating a deposit of %1.$}
+{
+	#nop {Hook name: mineStart};
+	#nop {Hook args: %1 material being mined};
+	@do_hook{mineStart;%1}
+}
+{9}
+
+#ACTION {^You begin prospecting.$}
+{
+	#variable {isProspecting} {1};
+	@do_hook{prospectStart}
+}
+{9}
+
+#ACTION {^You determine that there is nowhere left to prospect and quit.$}
+{
+	synth_play notificationSound;
+	#variable {mineCounter} {0};
+	#variable {isProspecting} {0};
+	@do_hook{prospectFinish}
+}
+{9}
+
+#ACTION {^You give up on prospecting anymore.$}
+{
+	#variable {isProspecting} {0};
+	@do_hook{prospectFinish}
+}
+{9}
+
+#ACTION {^You {are too tired to continue|stop} prospecting}
+{
+	#variable {isProspecting} {0};
+	#if {"%1" == "are too tired to continue"}
+	{
+		@do_hook{prospectFinishAbort}
+	};
+	#else
+	{
+		@do_hook{prospectFinish}
+	}
+}
+{9}
+
+#ACTION {^{You uncover a deposit of .+ and stake it out\.|.+ discovers a deposit of .+\.}$}
+{
+	#math {mineCounter} {$mineCounter+1};
+	#if {!&{auto[stopMining]}}
+	{
+		#variable {auto[stopMining]} {0}
+	};
+	#if {$mineCounter >= ${minedTerrainList[${kxwt[terrain]}]}}
+	{
+		#if {${auto[stopMining]} && &{minedTerrainList[${kxwt[terrain]}]} && ${isProspecting}}
+		{
+			stop
+		};
+		synth_play notificationSound;
+		#variable {mineCounter} {0}
+	}
+}
+{9}
+
+#ALIAS {^{auto|noauto}stopmining$}
+{
+	#if {"%1" == "auto"}
+	{
+		#showme {Automatic stopping of mining upon depletion enabled.};
+		#variable {auto[stopMining]} {1}
+	};
+	#else
+	{
+		#showme {Automatic stopping of mining on depletion disabled.};
+		#variable {auto[stopMining]} {0}
+	}
+}
+{9}
+
+#VARIABLE         {isProspecting}  {0}
+#VARIABLE         {mineCounter}  {0}
+#VARIABLE         {minedTerrainList}  {{3}{2}{4}{2}{5}{2}{6}{2}{7}{2}{8}{4}{9}{3}{10}{6}{11}{4}{12}{4}{13}{2}{14}{4}{15}{4}{16}{1}{17}{1}{19}{4}{20}{4}{22}{5}{25}{3}{26}{2}{27}{4}{29}{2}{30}{4}{34}{2}{35}{1}{37}{1}}

@@ -1,0 +1,122 @@
+#ACTION {^Tensor's floating disc abruptly winks out of existence. (carried by you)$}
+{
+	#nop {There's no loop here, but this stores the number of items in the disc elsewhere, so may as well recycle.};
+	#list {discList} {size} {discLoopCounter};
+	#if {$discLoopCounter > 0 && "$discSpamCatcher" != "true"}
+	{
+		vcast tensors floating disc;
+#variable {discSpamCatcher} {true}
+	}
+}
+{9}
+
+#ACTION {^Tensor's floating disc cannot carry any more weight without sinking.$}
+{
+	#if {"$discSpamCatcher" == "true"}
+	{
+		#line {gag}
+	};
+	#nop {There's no loop here, but this stores the number of items in the disc elsewhere, so may as well recycle.};
+	#list {discList} {size} {discLoopCounter};
+	#if {"$discSpamCatcher" == "false" && $discLoopCounter > 0}
+	{
+		#variable {discSpamCatcher} {true};
+		vcast tensors floating disc
+	}
+}
+{9}
+
+#ACTION {^vcast_%*_A floating blue-tinted disc slowly solidifies and hovers before you.$}
+{
+	#list {discList} {find} {all} {discIndex};
+	#if {$discIndex != 0}
+	{
+		put all disc | grep Tensor's floating disc cannot carry any more weight without sinking.
+	};
+	#else
+	{
+		#list {discList} {size} {discLoopCounter};
+		#loop {1} {$discLoopCounter} {i}
+		{
+			put all\.${discList[$i]} disc | grep Tensor's floating disc cannot carry any more weight without sinking.
+		};
+		#unvariable {discLoopCounter}
+	};
+	#if {"$discSpamCatcher" == "true"}
+	{
+		#variable {discSpamCatcher} {false}
+	}
+}
+{9}
+
+#ACTION {^discmanager_{get|put}_wc - lines:%s%d$}
+{
+	#line {gag};
+	#loop {1} {%3} {i}
+	{
+		%1 $discItem $i\.disc | grep -v You don't see anything named
+	}
+}
+{9}
+
+#ALIAS {^{d|di|dis|disc|disk}get%s%2}
+{
+	#variable {discItem} {%2};
+	inventory | grep Tensor's floating disc | wc -l | prefix discmanager_get_
+}
+{9}
+
+#ALIAS {^{d|di|dis|disc|disk}store {-|\+|d|de|del|dele|delet|delete|a|ad|add|r|re|rem|remo|remov|remove} %3}
+{
+	#list {discList} {find} {%3%*} {discIndex};
+	#if {"%2" == "{-|d|de|del|dele|delet|delete|r|re|rem|remo|remov|remove}"}
+	{
+		#if {$discIndex != 0}
+		{
+			#showme {You will no longer store ${discList[$discIndex]} in tensors floating disc.};
+			#list {discList} {delete} {$discIndex}
+		};
+		#else
+		{
+			#showme {You aren't currently storing %3 in tensors floating disc.}
+		}
+	};
+	#else
+	{
+		#if {$discIndex == 0}
+		{
+			#showme {You will now store %3 in tensors floating disc.};
+			#list {discList} {add} {%3}
+		};
+		#else
+		{
+			#showme {You are already storing %3 in tensors floating disc.}
+		}
+	}
+}
+{9}
+
+#ALIAS {^{d|di|dis|disc|disk}store%sclear$}
+{
+	#unvariable {discList};
+	#showme {Tensors floating disc storage cleared.}
+}
+{9}
+
+#ALIAS {^{d|di|dis|disc|disk}store%slist$}
+{
+	#showme {Items that will be stored in tensors floating disc are:\n};
+	#list {discList} {size} {discLoopCounter};
+	#loop {1} {$discLoopCounter} {discIndex}
+	{
+		#showme {${discList[$discIndex]}}
+	};
+	#unvariable {discLoopCounter}
+}
+{9}
+
+#SUBSTITUTE       {^discmanager_%w_}  {}  {1}
+#VARIABLE         {discIndex}  {}
+#VARIABLE         {discItem}  {}
+#VARIABLE         {discLoopCounter}  {}
+#VARIABLE         {discSpamCatcher}  {false}

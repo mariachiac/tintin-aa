@@ -1,0 +1,194 @@
+#ACTION {^silent_%1%s(%d {hours|minutes} remaining)}
+{
+	#if {"%4" == "hours" && %3 > 1}
+	{
+		#math {levelTimer} {3600 * (%3 - 1)}
+	};
+	#elseif {"%4" == "hours"}
+	{
+		#math {levelTimer} {%3 * 800}
+	};
+	#else
+	{
+		#math {levelTimer} {%3 * 60}
+	};
+	#variable {justLeveled} {true};
+	#undelay {levelTimer};
+	#delay {levelTimer} {#variable {justLeveled} {false}} {$levelTimer}
+}
+{5}
+
+#ACTION {^silent_Your levels are:  Ma %1  Cl %2  Th %3  Wa %4  Nc %5}
+{
+	#variable {character[mageLevel]} {%1};
+	#variable {character[clericLevel]} {%2};
+	#variable {character[thiefLevel]} {%3};
+	#variable {character[warriorLevel]} {%4};
+	#variable {character[necromancerLevel]} {%5}
+}
+{7}
+
+#ACTION {^ %sYOU GAIN A LEVEL!$}
+{
+	#if {&{autolevelClass}}
+	{
+		#if {"${autolevelClass[1]}" == "{a|al|all}"}
+		{
+			autolevel all
+		};
+		#else
+		{
+			show cost ${autolevelClass[2]} | prefix silent_
+		}
+	}
+}
+{9}
+
+#ACTION {^ %sYou advance another rank closer to level %d %w!$}
+{
+	#if {&{autolevelClass}}
+	{
+		#if {"${autolevelClass[1]}" == "{a|al|all}"}
+		{
+			autolevel all
+		};
+		#else
+		{
+			show cost ${autolevelClass[2]} | prefix silent_
+		}
+	};
+	autobrag %3 microlevel!
+}
+{9}
+
+#ACTION {^You have leveled recently.  You must wait one day to level this class.$}
+{
+	level | grep -i ${autolevelClass[2]} | prefix silent_
+}
+{9}
+
+#ACTION {^You need %d experience to level {Cleric|Druid|Mage|Necromancer|Thief|Warrior} to %d and have %d experience. (%s%d%)$}
+{
+	#variable {showCost[cost]} {%1};
+	#variable {showCost[class]} {%2};
+	#variable {showCost[level]} {%3};
+	#variable {showCost[experience]} {%4};
+	#variable {showCost[percent]} {%6};
+	#line {gag};
+	level | grep %2 | prefix silent_
+}
+{9}
+
+#ACTION {^silent_That class type does not exist (yet).$}
+{
+	#showme {That class type does not exist (yet).}
+}
+{9}
+
+#ACTION {^silent_You are casting at level %d mage, level %d cleric, level %d necromancer, level %d druid%*}
+{
+	#if {!&{character[mageClev]}}
+	{
+	#variable {character[mageClev]} {0}
+	};
+	#if {!&{character[clericClev]}}
+	{
+	#variable {character[clericClev]} {0}
+	};
+	#if {!&{character[necromancerClev]}}
+	{
+	#variable {character[necromancerClev]} {0}
+	};
+	#if {!&{character[druidClev]}}
+	{
+	#variable {character[druidClev]} {0}
+	};
+	#if {${character[mageClev]} != %1}
+	{
+		#echo {You are now casting at level %1 mage.}
+	};
+	#if {${character[clericClev]} != %2}
+	{
+		#echo {You are now casting at level %2 cleric.}
+	};
+	#if {${character[necromancerClev]} != %3}
+	{
+		#echo {You are now casting at level %3 necromancer.}
+	};
+	#if {${character[druidClev]} != %4}
+	{
+		#echo {You are now casting at level %4 druid.}
+	};
+	#variable {character[mageClev]} {%1};
+	#variable {character[clericClev]} {%2};
+	#variable {character[necromancerClev]} {%3};
+	#variable {character[druidClev]} {%4}
+}
+{9}
+
+#ACTION {^silent_You need %d experience to {level|micro level} {Cleric|Druid|Mage|Necromancer|Thief|Warrior}%*}
+{
+	#list {autolevelClass} {add} {%3};
+	#list {autolevelClass} {add} {%1}
+}
+{9}
+
+#ACTION {^silent_{Cleric|Druid|Mage|Necromancer|Thief|Warrior} %s%d %s%d/%s%d %s%d%s(%12}
+{
+	#math {i} {%5+1};
+	#showme {You need ${showCost[cost]} experience to microlevel ${showCost[class]} to $i of %7 toward level ${showCost[level]} and have ${showCost[experience]} experience.%11 (%12}
+}
+{9}
+
+#ACTION {^silent_{Cleric|Druid|Mage|Necromancer|Thief|Warrior}%s %d%s %d$}
+{
+	#showme {You need ${showCost[cost]} experience to level ${showCost[class]} to ${showCost[level]} and have ${showCost[experience]} experience.}
+}
+{9}
+
+#ACTION {^silent_{Cleric|Druid|Mage|Necromancer|Thief|Warrior}%s %d%s %d%s(%7}
+{
+	#showme {You need ${showCost[cost]} experience to level ${showCost[class]} to ${showCost[level]} and have ${showCost[experience]} experience.%6(%7}
+}
+{9}
+
+#ALIAS {^autolevel %s{a|al|all|c|cl|cle|cler|cleri|cleric|d|dr|dru|drui|druid|m|ma|mag|mage|n|ne|nec|necr|necro|necrom|necroma|necroman|necromanc|necromance|necromancer|t|th|thi|thie|thief|w|wa|war|warr|warri|warrio|warrior}$}
+{
+	#list {autolevelClass} {clear};
+	#list {autolevelClass} {add} {%2};
+	#if {"%2" == "{a|al|all}"}
+	{
+		show cost | prefix silent_
+	};
+	#else
+	{
+		show cost %2 | prefix silent_
+	};
+	#showme {autolevel %2 set.}
+}
+{9}
+
+#ALIAS {^{auto|noauto}level$}
+{
+	#if {"%0" == "autolevel"}
+	{
+		#if {!&{autolevelClass}}
+		{
+			#showme {Autolevel is not set.}
+		};
+		#else
+		{
+			#showme {You are currently leveling ${autolevelClass[2]} automatically.}
+		}
+	};
+	#else
+	{
+		#showme {You will no longer automatically level anything.};
+		#unvariable {autolevelClass}
+	}
+}
+{9}
+
+#VARIABLE         {justLeveled}  {false}
+#VARIABLE         {levelTimer}  {0}
+#VARIABLE         {showCost}  {}

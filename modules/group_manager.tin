@@ -1,0 +1,204 @@
+#ACTION {^silent_follow %s(mutual)%s %w %4)$}
+{
+	#if {"${auto[follow]}" == "true"}
+	{
+		follow %3
+	}
+}
+{8}
+
+#ACTION {^%S quickly climbs up the side and boards the ship.$}
+{
+	#if {"${group[leader]}" == "%1"}
+	{
+		enter ship
+	}
+}
+{9}
+
+#ACTION {^%S stares at a painting of %2 and fades away.$}
+{
+	#if {"${group[leader]}" == "%1"}
+	{
+		#regexp {%2} {{.*} {.*}} {#if {"&0" == "a dark forest"} {l 2.forest};#else {look &2}}
+	}
+}
+{9}
+
+#ACTION {^%S touches the orb and disappears in a blinding flash of light.$}
+{
+	#if {"${group[leader]}" == "%1"}
+	{
+		touch pillar
+	}
+}
+{9}
+
+#ACTION {^%w beckons for you to follow.$}
+{
+	#if {"${auto[follow]}" == "true"}
+	{
+		friends find | grep -i %1 | prefix silent_follow
+	}
+}
+{9}
+
+#ACTION {^%w would like to join your group!  Use the 'group summon' command to add {her|him|it}.$}
+{
+	#macro {\eY} {group summon %1};
+	play group-request
+}
+{9}
+
+#ACTION {^You are now a group member.$}
+{
+	#variable {auto[donateunique]} {false};
+	#variable {auto[getunique]} {false};
+	#variable {groupRating[index]} {1};
+	#delay {autoGroupRating} {#echo {To give the group leader the recommended rank of ${groupRating[${groupRating[index]}]}, type rate.};synth_play notificationSound} {1200}
+}
+{9}
+
+#ACTION {^You have been removed from the group.$}
+{
+	#undelay {autoGroupRating}
+}
+{9}
+
+#ACTION {^You stop following %1.$}
+{
+	exp | prefix silent_;
+	#unvariable {group};
+	#undelay {autoGroupRating}
+}
+{9}
+
+#ACTION {^You stop using%*}
+{
+	#if {"${spam[stats]}" != "true"}
+	{
+		spamset stats show stats | prefix silent_;
+		show clev | prefix silent_
+	};
+	#undelay {wieldDelay};
+	#delay {wieldDelay} {eq | grep wielded | prefix silent_} {2}
+}
+{9}
+
+#ACTION {^You {are already|start} following %1.$}
+{
+	#variable {group[leader]} {%1}
+}
+{9}
+
+#ACTION {^Your blood curdles as you hear 's dying scream!$}
+{
+	#if {"${auto[earthwall]}" == "true"}
+	{
+		vcast earth wall
+	};
+	#elseif {"${auto[bone]}" == "true"}
+	{
+		guardian
+	};
+	#elseif {"${auto[mound]}" == "true"}
+	{
+		vcast shambling mound
+	};
+	#elseif {"${auto[woad]}" == "true"}
+	{
+		woad
+	};
+	#else
+	{
+		#if {"$clayMan" == "true"}
+		{
+			vcast clay
+		}
+	}
+}
+{9}
+
+#ACTION {^silent_follow %s(mutual)%s %w$}
+{
+	#if {"${auto[follow]}" == "true"}
+	{
+		follow %3
+	}
+}
+{9}
+
+#ALIAS {^group{t|ta|tan|tank} %s%S$}
+{
+	#format {group[tank} {%n} {%3]};
+	#echo {${group[tank]} is now set as tank.}
+}
+{9}
+
+#ALIAS {^oom$}
+{
+	#variable {channel[message]} {};
+	#if {${character[currentMana]} < ${character[maxMana]} / 3}
+	{
+		#math {groupI} {${character[currentMana]} / ${character[maxMana]} * 100.0};
+		#variable {channel[message]} {mana, $groupI%. }
+	};
+	#if {${character[currentMv]} < ${character[maxMv]} / 3}
+	{
+		#math {groupI} {${character[currentMv]} / ${character[maxMv]} * 100.0};
+		#variable {channel[message]} {${channel[message]}movement $groupI%. }
+	};
+	#if {${character[currentHp]} < ${character[maxHp]} / 2}
+	{
+		#math {groupI} {${character[currentHp]} / ${character[maxHp]} * 100.0};
+		#variable {channel[message]} {${channel[message]}health $groupI%.}
+	};
+	#if {"${channel[message]}" == ""}
+	{
+		#echo {I'm not sure what to warn the group  about, better do it manually.}
+	};
+	#else
+	{
+		warn ${channel[message]}
+	}
+}
+{9}
+
+#ALIAS {^rating$}
+{
+	#echo {The suggested rating for ${group[leader]}'s group is ${groupRating[${groupRating[index]}]}\.}
+}
+{9}
+
+#ALIAS {^{auto|noauto}follow$}
+{
+	#if {"%0" == "autofollow"}
+	{
+		#showme {You will now automatically follow people from your friends list.};
+		#variable {auto[follow]} {true}
+	};
+	#else
+	{
+		#showme {You will no longer automatically follow anyone.};
+		#variable {auto[follow]} {false}
+	}
+}
+{9}
+
+#ALIAS {^{rat|rate}$}
+{
+	#echo {Rating group as ${groupRating[${groupRating[index]}]}\.};
+	group rate ${groupRating[${groupRating[index]}]}
+}
+{9}
+
+#ALIAS {^{rat|rate}%s%d$}
+{
+	#echo {Rating ${group[leader]}'s group as ${groupRating[%3]}\. The suggested rating is ${groupRating[${groupRating[index]}]}\.};
+	group rate ${groupRating[%3]}
+}
+{9}
+
+#SUBSTITUTE       {^%S would like to join your group!  Use the 'group summon' command to add {her|him|it}.}                                                                     {%1 would like to join your group!  Press alt+shift+Y or use the 'group summon' command to add %2.}                                                                          {5}
+#VARIABLE         {group}  {}
+#VARIABLE         {groupRating}  {{index}{1}{1}{excellent}{2}{great}{3}{good}{4}{fair}{5}{poor}{6}{bad}{7}{dangerous}{8}{gamlin}}

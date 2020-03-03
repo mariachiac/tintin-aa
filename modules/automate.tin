@@ -1,0 +1,86 @@
+#ACTION {^{(?:A|An|a|an) (?:shambling bone man|straw man|wood woad|greater ice elemental|ice elemental|lesser ice elemental|greater crystal elemental|crystal elemental|lesser crystal elemental|greater fire elemental|fire pillar elemental|lesser fire elemental|bone guardian|flesh beast|metal construct|clay man|liveoak|ancient oak tree|water weird|shambling mound) heroically rescues|.+ jumps to the aid of|.+ rushes to aid} %*!$}
+{
+	#nop {Hook name: assist};
+	#nop {Hook args: none};
+	#if {!&{spam[cassist]} || "${spam[cassist]}" != "true"}
+	{
+		spamset cassist 3;
+		#if {"${character[inBattle]}" == "true"}
+		{
+			#return #nop
+		};
+		#if {&{auto[cassist]}}
+		{
+			#if {!&{hook[assist]}}
+			{
+				@command{a;assist}
+			};
+			#else
+			{
+				@do_hook{assist}
+			}
+		}
+	}
+}
+{9}
+
+#ALIAS {^{noc|c}autoassist$}
+{
+	#if {"%1" == "noc"}
+	{
+		#unvariable {auto[cassist]};
+		#showme {Client side autoassist disabled.}
+	};
+	#else
+	{
+		#variable {auto[cassist]} {1};
+		#showme {Client side autoassist enabled.}
+	}
+}
+{9}
+
+#FUNCTION {autorefresh}
+{
+	#if {"${kxwt[context]}" != "none" && "${kxwt[context]}" != ""}
+	{
+		#return #nop
+	};
+	#if {&{client[exhausted]} && "${character[inBattle]}" == "true"}
+	{
+		#return #nop
+	};
+	#if {"${skillsAndSpells[second wind]}" == "true" && "${character[inBattle]}" == "true"}
+	{
+		#if {${character[mvPercent]} <= 10 && "${client[exhausted]}" != "true"}
+		{
+			#return @command{sec;second wind}
+		}
+	};
+	#if {${kxwt[action]} > 50}
+	{
+		#return #nop
+	};
+	#if {"${skillsAndSpells[rejuvenate]}" == "true" && "${character[inBattle]}" != "true"}
+	{
+		#if {${character[mvPercent]} <= 15 && ${character[currentMana]} >= 35}
+		{
+			#return @command{c rejuv;cast rejuvenate}
+		}
+	};
+	#if {"${skillsAndSpells[area refresh]}" == "true" && "${character[inBattle]}" != "true"}
+	{
+		#if {${character[mvPercent]} <= 15 && ${character[currentMana]} >= 28}
+		{
+			#return @command{c area;cast area refresh}
+		}
+	};
+	#if {"${skillsAndSpells[refresh]}" == "true" && "${character[inBattle]}" != "true"}
+	{
+		#if {${character[mvPercent]} <= 15 && ${character[currentMana]} >= 15}
+		{
+			#return @command{c ref;cast refresh}
+		}
+	};
+	#return #nop
+}
+

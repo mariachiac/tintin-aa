@@ -1,0 +1,58 @@
+#ACTION {^amo_You get %*${amo}\.$}
+{
+	#line {gag};
+	#if {"${auto[store]}" == "true"}
+	{
+		#if {!&{character[amoContainer]}}
+		{
+			#variable {character[amoContainer]} {${character[container]}}
+		};
+		put $amo ${character[amoContainer]} | grep -v You put
+	}
+}
+{8}
+
+#ACTION {^You fire %1 at %2!$}
+{
+	get $amo | prefix amo_
+}
+{9}
+
+#ACTION {^You load %1 with %2.$}
+{
+	#regexp {%2} {{.*} {.*}} {#variable {amo} {&2}};
+	#else
+	{
+		#variable {amo} {&0}
+	}
+}
+{9}
+
+#ACTION {^amo_%*}
+{
+	#line {gag}
+}
+{9}
+
+#ACTION {^{A|An|The} %2 isn't loaded.$}
+{
+	#if {"${auto[store]}" == "true"}
+	{
+		get $amo ${character[amoContainer]} | grep nospam
+	};
+	#regexp {%2} {{.*} {.*}} {load &2};
+	#else
+	{
+		load &0
+	};
+	fire
+}
+{9}
+
+#ALIAS {^amocontainer %S$}
+{
+	#variable {character[amoContainer]} {%1};
+	#echo {Amo will now be stored in %1.}
+}
+{9}
+

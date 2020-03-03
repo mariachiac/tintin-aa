@@ -1,0 +1,567 @@
+#ACTION {^You add A liveoak to your group.$}
+{
+	#if {"${character[cspam]}" == "true"}
+	{
+		#line {gag}
+	}
+}
+{8}
+
+#ACTION {^%s'{Arim|Ber|Freth|Ganta|Gesu|Gesu-Char|Gesu-Ciru|Gesu-Faru|Gesu-Fell|Gesu-Ilnak|Gesu-Nar|Hett|Ilnak|Ilnak-Xix|Kenn|Oshi|Shul|Stis|Tal|Vin|Kama|Khil}'.}
+{
+	#variable {runeCarveMessage} {%0};
+	SHOW_CARVING %1
+}
+{9}
+
+#ACTION {^A liveoak {starts|stops} following you.$}
+{
+	#if {"${auto[liveoak]}" == "true"}
+	{
+		#if {"%1" == "stops"}
+		{
+			#if {"${character[inBattle]}" != "true"}
+			{
+				#if {${kxwt[terrain} >= 4 && ${kxwt[terrain} <= 6 || ${kxwt[terrain} == 17]]]}
+				{
+					vcast liveoak
+				};
+				#else
+				{
+					vcast liveoak acorn
+				}
+			};
+			#else
+			{
+				#if {"${skillsAndSpells[shambling mound]}" == "true" && ${character[currentMana]} >= 30}
+				{
+					vcast shambling mound
+				};
+				#elseif {"${skillsAndSpells[earth wall]}" == "true" && ${character[currentMana]} >= 25}
+				{
+					vcast earth wall
+				}
+			}
+		}
+	}
+}
+{9}
+
+#ACTION {^A shambling mound starts following you.$}
+{
+	#if {!&{auto[mound]}}
+	{
+		#line {gag};
+		#echo {A shambling mound starts following you. You can automatically make replacements with automound.}
+	}
+}
+{9}
+
+#ACTION {^A shambling mound {begins to fall apart and lose cohesion|stops following you}.}
+{
+	#if {"${auto[mound]}" == "true"}
+	{
+		#if {"%0" == "A shambling mound stops following you." && "${client[releasing]}" != "true"}
+		{
+			vcast shambling mound
+		};
+		#elseif {"%0" == "A shambling mound begins to fall apart and lose cohesion."}
+		{
+			vcast shambling mound
+		};
+		#else
+		{
+			#variable {client[releasing]} {false}
+		}
+	}
+}
+{9}
+
+#ACTION {^A wall of earth crumbles and collapses, returning to mother earth.$}
+{
+	#if {"${auto[earthwall]}" == "true"}
+	{
+		#variable {earthWall} {1}
+	}
+}
+{9}
+
+#ACTION {^It is %1  \x28{about |about -}%dC\x29$}
+{
+	#line {gag};
+	#if {"%2" != "about -"}
+	{
+		#math {i} {%3 * 1.8 + 32}
+	};
+	#else
+	{
+		#math {i} {-%3 * 1.8 + 32}
+	};
+	#replace {i} {.{[0-9]}} {};
+	#regexp {%2} {{.*}-{.*}} {#echo {It is %1  (about ${i}F, -%3C)}};
+	#else
+	{
+		#echo {It is %1  (about ${i}F, %3C)}
+	}
+}
+{9}
+
+#ACTION {^You carefully heat a branding tool and start firebranding %*.  Gradually you shape the rune '%*'.$}
+{
+	#variable {runeCarveMessage} {%0};
+	SHOW_CARVING %2
+}
+{9}
+
+#ACTION {^You carve the rune '%1' into %*.$}
+{
+	#variable {runeCarveMessage} {%0};
+	SHOW_CARVING %1
+}
+{9}
+
+#ACTION {^You examine %1 and start carving, and the knots and grain of the %2 fall into line with the rune '%3'.$}
+{
+	#variable {runeCarveMessage} {%0};
+	SHOW_CARVING %3
+}
+{9}
+
+#ACTION {^You find and gather up {a|some} {handful of different fruits|handful of local vegetables|large, edible roots|large greenish yellow squash|small, soft potato|stale bread crust}.}
+{
+	#if {"${auto[junk]}" == "true"}
+	{
+		#regexp {%2} {{.*} {.*}} {${auto[junkType]} &2}
+	}
+}
+{9}
+
+#ACTION {^You get out a pick and some other tiny enchanted tools and start chiseling on %*.  Gradually you shape the rune '%*'.$}
+{
+	#variable {runeCarveMessage} {%0};
+	SHOW_CARVING %2
+}
+{9}
+
+#ACTION {^You get out your heavily enchanted tools and start chiseling on %*.  Gradually you shape the rune '%*'.$}
+{
+	#variable {runeCarveMessage} {%0};
+	SHOW_CARVING %2
+}
+{9}
+
+#ACTION {^You have collected %d acorns.$}
+{
+	#if {"${character[cspam]}" == "true"}
+	{
+		#showme {%1 acorns.};
+		#line {gag}
+	}
+}
+{9}
+
+#ACTION {^You open your sewing kit and begin tailoring %1.%sFollowing your instincts, you embroider the rune '%3'.$}
+{
+	#variable {runeCarveMessage} {%0};
+	SHOW_CARVING %3
+}
+{9}
+
+#ACTION {^You throw a short spell to the wind and call for squirrels!$}
+{
+	#variable {auto[lastCalledAnimal]} {squirrel}
+}
+{9}
+
+#ACTION {^You throw your magic to the wind and call {A blue|A mantis|A massive|A swarm of|A tall|An|An electric|A} %2 to this place!$}
+{
+	#variable {auto[lastCalledAnimal]} {%2}
+}
+{9}
+
+#ACTION {^Your call goes unanswered.$}
+{
+	#if {"${auto[call]}" == "true"}
+	{
+		call ${auto[lastCalledAnimal]}
+	}
+}
+{9}
+
+#ACTION {^silent_[%s%d] a {star|sun|moon}catcher bottle in %4 - 100% full.$}
+{
+	synth_play notificationSound;
+	#showme {Full %3catcher in %4.};
+	notify-send Full %3catcher in %4.
+}
+{9}
+
+#ACTION {^{A|a} water weird stops following you.$}
+{
+	#if {"${client[releasing]}" != "true" && "${auto[weird]}" == "true"}
+	{
+		#if {"${kxwt[terrain]}" == "{38|32|29|21|20|19|18|7}" || "${client[spring]}" == "true"}
+		{
+			vcast water weird
+		}
+	}
+}
+{9}
+
+#ACTION {^{It has the following runes \w+ into it|It has the following runes upon it}: %*}
+{
+	#local {runes} {%2};
+	#replace {runes} { } {;};
+	#local {i} {};
+	#local {runeNames} {};
+	#local {tmp} {};
+	#foreach {$runes} {i}
+	{
+		#switch {"$i"}
+		{
+			#case {"Arim"}
+			{
+				#variable {tmp} {movement}
+			};
+			#case {"Ber"}
+			{
+				#variable {tmp} {damroll}
+			};
+			#case {"Ganta"}
+			{
+				#variable {tmp} {castability}
+			};
+			#case {"Freth"}
+			{
+				#variable {tmp} {wisdom}
+			};
+			#case {"Ilnak-Xix"}
+			{
+				#variable {tmp} {absorb magic or mana regeneration}
+			};
+			#case {"Kenn"}
+			{
+				#variable {tmp} {movement regeneration or hitpoint regeneration}
+			};
+			#case {"Hett"}
+			{
+				#variable {tmp} {charisma}
+			};
+			#case {"Stis"}
+			{
+				#variable {tmp} {intelligence}
+			};
+			#case {"Vin"}
+			{
+				#variable {tmp} {luck}
+			};
+			#case {"Gesu-Ciru"}
+			{
+				#variable {tmp} {saving cold}
+			};
+			#case {"Gesu-Char"}
+			{
+				#variable {tmp} {saving zap}
+			};
+			#case {"Gesu-Faru"}
+			{
+				#variable {tmp} {saving fire}
+			};
+			#case {"Gesu-Nar"}
+			{
+				#variable {tmp} {saving breath}
+			};
+			#case {"Gesu"}
+			{
+				#variable {tmp} {armor}
+			};
+			#case {"Gesu-Fell"}
+			{
+				#variable {tmp} {saving poison}
+			};
+			#case {"Gesu-Ilnak"}
+			{
+				#variable {tmp} {saving spell}
+			};
+			#case {"Ilnak"}
+			{
+				#variable {tmp} {mana}
+			};
+			#case {"Tal"}
+			{
+				#variable {tmp} {strength}
+			};
+			#case {"Oshi"}
+			{
+				#variable {tmp} {dexterity}
+			};
+			#case {"Shul"}
+			{
+				#variable {tmp} {hitpoints or constitution}
+			};
+			#case {"Khil"}
+			{
+				#variable {tmp} {hitroll}
+			};
+			#case {"Kama"}
+			{
+				#variable {tmp} {attack speed}
+			};
+			#default
+			{
+				#variable {tmp} {unknown}
+			}
+		};
+		#if {"$runeNames" == ""}
+		{
+			#variable {runeNames} {$tmp}
+		};
+		#else
+		{
+			#variable {runeNames} {$runeNames $tmp}
+		}
+	};
+	#line {gag};
+	#echo {%0 ($runeNames)}
+}
+{9}
+
+#ACTION {^{vcast_.+_|}There are no suitable trees here, and you don't have any acorns.$}
+{
+	vcast liveoak acorn;
+	#line gag
+}
+{9}
+
+#ACTION {^{vcast_.+_|}There are no suitable trees here, but you could use an acorn if necessary.$}
+{
+	#line {gag};
+	vcast liveoak acorn
+}
+{9}
+
+#ACTION {^{vcast_.+_|}There's not enough light left in a {cracked |}suncatcher bottle to create a liveoak{ from an acorn|}.$}
+{
+	#if {"${auto[liveoak]}" == "true"}
+	{
+		#if {"${skillsAndSpells[shambling mound]}" == "true" && ${character[currentMana]} >= 30}
+		{
+			vcast shambling mound
+		};
+		#elseif {"${skillsAndSpells[earth wall]}" == "true" && ${character[currentMana]} >= 25}
+		{
+			vcast earth wall
+		}
+	}
+}
+{9}
+
+#ACTION {^{vcast_.+_|}You don't have any acorns.$}
+{
+	#if {"${auto[liveoak]}" == "true"}
+	{
+		#if {"${skillsAndSpells[shambling mound]}" == "true" && ${character[currentMana]} >= 30}
+		{
+			vcast shambling mound
+		};
+		#elseif {"${skillsAndSpells[earth wall]}" == "true" && ${character[currentMana]} >= 25}
+		{
+			vcast earth wall
+		}
+	}
+}
+{9}
+
+#ACTION {^{vcast_.+_|}an earth wall {stops|starts} following you.$}
+{
+	#if {"${auto[earthwall]}" == "true"}
+	{
+		#if {"%1" == "stops" && $earthWall}
+		{
+			vcast earth wall
+		};
+		#else
+		{
+			#variable {earthWall} {0}
+		}
+	};
+	#else
+	{
+		\
+	}
+}
+{9}
+
+#ALIAS {SHOW_CARVING %1}
+{
+	#switch {"%1"}
+	{
+		#case {"Arim"}
+		{
+			#showme {$runeCarveMessage (movement)};
+			#line {gag}
+		};
+		#case {"Ber"}
+		{
+			#showme {$runeCarveMessage (damroll)};
+			#line {gag}
+		};
+		#case {"Ganta"}
+		{
+			#showme {$runeCarveMessage (cast ability)};
+			#line {gag}
+		};
+		#case {"Freth"}
+		{
+			#showme {$runeCarveMessage (wisdom)};
+			#line {gag}
+		};
+		#case {"Ilnak-Xix"}
+		{
+			#showme {$runeCarveMessage (absorb magic or mana regeneration)};
+			#line {gag}
+		};
+		#case {"Kenn"}
+		{
+			#showme {$runeCarveMessage (movement regeneration or hitpoint regeneration)};
+			#line {gag}
+		};
+		#case {"Hett"}
+		{
+			#showme {$runeCarveMessage (charisma)};
+			#line {gag}
+		};
+		#case {"Stis"}
+		{
+			#showme {$runeCarveMessage (intelligence)};
+			#line {gag}
+		};
+		#case {"Vin"}
+		{
+			#showme {$runeCarveMessage (Luck)};
+			#line {gag}
+		};
+		#case {"Gesu-Ciru"}
+		{
+			#showme {$runeCarveMessage (saving cold)};
+			#line {gag}
+		};
+		#case {"Gesu-Char"}
+		{
+			#showme {$runeCarveMessage (saving zap)};
+			#line {gag}
+		};
+		#case {"Gesu-Faru"}
+		{
+			#showme {$runeCarveMessage (saving fire)};
+			#line {gag}
+		};
+		#case {"Gesu-Nar"}
+		{
+			#showme {$runeCarveMessage (saving breath)};
+			#line {gag}
+		};
+		#case {"Gesu"}
+		{
+			#showme {$runeCarveMessage (armor)};
+			#line {gag}
+		};
+		#case {"Gesu-Fell"}
+		{
+			#showme {$runeCarveMessage (saving poison)};
+			#line {gag}
+		};
+		#case {"Gesu-Ilnak"}
+		{
+			#showme {$runeCarveMessage (saving spell)};
+			#line {gag}
+		};
+		#case {"Ilnak"}
+		{
+			#showme {$runeCarveMessage (mana)};
+			#line {gag}
+		};
+		#case {"Tal"}
+		{
+			#showme {$runeCarveMessage (strength)};
+			#line {gag}
+		};
+		#case {"Oshi"}
+		{
+			#showme {$runeCarveMessage (dexterity)};
+			#line {gag}
+		};
+		#case {"Shul"}
+		{
+			#showme {$runeCarveMessage (hitpoints or constitution)};
+			#line {gag}
+		};
+		#case {"Khil"}
+		{
+			#showme {$runeCarveMessage (hitroll)};
+			#line {gag}
+		};
+		#case {"Kama"}
+		{
+			#showme {$runeCarveMessage (attack speed)};
+			#line {gag}
+		}
+	}
+}
+{9}
+
+#ALIAS {^ac{o|or|orn|orns}$}
+{
+	show acorns
+}
+{9}
+
+#ALIAS {^{auto|noauto}weird$}
+{
+	#if {"%1" == "noauto"}
+	{
+		#showme {Autocasting of water weirds disabled.};
+		#variable {auto[weird]} {false}
+	};
+	#else
+	{
+		#showme {Autocasting of water weirds enabled.};
+		#variable {auto[weird]} {true}
+	}
+}
+{9}
+
+#ALIAS {^{auto|noauto}{call|earthwall|liveoak|mound}$}
+{
+	#if {"%1" == "auto"}
+	{
+		#variable {auto[%2]} {true};
+		#showme {auto%2 enabled.}
+	};
+	#else
+	{
+		#variable {auto[%2]} {false};
+		#showme {auto%2 disabled.}
+	}
+}
+{9}
+
+#ALIAS {^{auto|noauto}{sun|star|moon|light}catcher$}
+{
+	#if {"%1" == "auto"}
+	{
+		#variable {auto[suncatcher]} {true};
+		#showme {You will now automatically check for full lightcatchers and be alerted.}
+	};
+	#else
+	{
+		#variable {auto[suncatcher]} {false};
+		#showme {You will no longer automatically check for full lightcatchers.}
+	}
+}
+{9}
+
+#TICKER           {lightcatcher}  {#if {"${auto[suncatcher]}" == "true" && "${character[inBattle]}" == "false"}{gather lightcatcher list | prefix silent_}}                                                                                                {300.00}
+#VARIABLE  {client[spring]} {false}
+#VARIABLE         {earthWall}  {0}
+#VARIABLE         {runeCarveMessage}  {}

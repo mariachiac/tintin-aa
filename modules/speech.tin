@@ -1,0 +1,69 @@
+#ALIAS {^speak %1}
+{
+	#if {!&{speech[pitch]}}
+	{
+		#variable {speech[pitch]} {50}
+	};
+	#if {!&{speech[rate]}}
+	{
+		#variable {speech[rate]} {170}
+	};
+	#if {!&{speech[voice]}}
+	{
+		#variable {speech[voice]} {en-us}
+	};
+	#if {!&{speech[volume]}}
+	{
+		#variable {speech[volume]} {100}
+	};
+	#variable {speech[text]} {%1};
+	#replace {speech[text]} {"} {\"};
+	#if {!&{speech[variant]}}
+	{
+		#system {espeak -s ${speech[rate]} -v ${speech[voice]} -a ${speech[volume]} -p ${speech[pitch]} "${speech[text]}" &> /dev/null&}
+	};
+	#else
+	{
+		#system {espeak -s ${speech[rate]} -v ${speech[voice]}+${speech[variant]} -a ${speech[volume]} -p ${speech[pitch]} "${speech[text]}" &> /dev/null&}
+	}
+}
+{9}
+
+#ALIAS {^speech%s{on|off}$}
+{
+	#if {"%2" == "on"}
+	{
+		speak Speech enabled.;
+		#variable {speech[enabled]} {true}
+	};
+	#else
+	{
+		speak Speech disabled.;
+		#variable {speech[enabled]} {false}
+	}
+}
+{9}
+
+#ALIAS {^speech%s{pitch|rate|variant|voice|volume}%sclear$}
+{
+	#showme {espeak %2 set to default setting.};
+	#unvariable {speech[%2]}
+}
+{9}
+
+#ALIAS {^speech%s{pitch|rate|volume}%s%d$}
+{
+	#showme {espeak %2 set to %4.};
+	#variable {speech[%2]} {%4}
+}
+{9}
+
+#ALIAS {^speech%s{variant|voice}%s%S$}
+{
+	#showme {espeak %2 set to %4.};
+	#variable {speech[%2]} {%4}
+}
+{9}
+
+#VARIABLE         {speech[enabled]}  {false}
+#VARIABLE         {speech[text]}  {}

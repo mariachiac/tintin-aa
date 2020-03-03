@@ -1,0 +1,147 @@
+#ALIAS {^set{a|b|c|d|e|f|g|h|n|q|r|s|t|v|w|x|y|z|A|D|F|H|Q|W|E} %2}
+{
+	#if {!&{keySetName}}
+	{
+		#variable {keySetName} {Default}
+	};
+	#script {tmp} {echo "%2" | tr -d "{}"};
+	#variable {keyProfile[${keySetName}][%1]} {${tmp[1]}};
+	#macro {\e%1} {$keyProfile[${keySetName}][%1]};
+	set%1
+}
+{9}
+
+#ALIAS {^set{a|b|c|d|e|f|g|h|n|q|r|s|t|v|w|x|y|z|A|D|F|H|Q|W|E}$}
+{
+	#if {!&{keySetName}}
+	{
+		#variable {keySetName} {Default}
+	};
+	#if {&{keyProfile[${keySetName}][%1]}}
+	{
+		#showme {alt+%1 is set to ${keyProfile[${keySetName}][%1]}\.}
+	};
+	#else
+	{
+		#showme {alt+%1 is not set.}
+	}
+}
+{9}
+
+#ALIAS {^unset %1}
+{
+	#if {"${skillsAndSpells[%1]}" == "true"}
+	{
+		#unvariable {skillsAndSpells[%1]};
+		#showme {%1 unset}
+	};
+	#else
+	{
+		#showme {%1 not found.}
+	}
+}
+{9}
+
+#ALIAS {^{ke|key|keyp|keypr|keypro|keyprof|keyprofi|keyprofil|keyprofile|kp|kpr|kpro|kprof|kprofi|kprofil|kprofile|ks|kse|kset|keys|keyse|keyset} %s%S$}
+{
+	#format {keySetName} {%n} {%3};
+	#if {!&{keyProfile[${keySetName}]}}
+	{
+		#showme {keyset ${keySetName} (new).}
+	};
+	#else
+	{
+		#showme {keyset ${keySetName}\.}
+	}
+}
+{9}
+
+#ALIAS {^{ke|key|keyp|keypr|keypro|keyprof|keyprofi|keyprofil|keyprofile|kp|kpr|kpro|kprof|kprofi|kprofil|kprofile}$}
+{
+	#if {!&{keySetName}}
+	{
+		#variable {keySetName} {Default}
+	};
+	#showme {Keyset $keySetName\.}
+}
+{9}
+
+#ALIAS {^{noauto|auto}keyprofile$}
+{
+	#if {"%0" == "autokeyprofile"}
+	{
+		#variable {auto[keyprofile]} {true};
+		#showme {Auto keyprofile enabled.}
+	};
+	#else
+	{
+		#showme {Auto keyprofile enabled.};
+		#variable {auto[keyprofile]} {true}
+	}
+}
+{9}
+
+#MACRO {\cc}
+{
+	#send {\cc}
+}
+
+#MACRO {\eOR}
+{
+	f03
+}
+
+#MACRO {\eOS}
+{
+	f04
+}
+
+#MACRO {\e[15~}
+{
+	f05
+}
+
+#MACRO {\e[17~}
+{
+	f06
+}
+
+#MACRO {\e[18~}
+{
+	f07
+}
+
+#MACRO {\e[19~}
+{
+	f08
+}
+
+#MACRO {\e[20~}
+{
+	f09
+}
+
+#MACRO {\e[21~}
+{
+	f10
+}
+
+#MACRO {\e[23~}
+{
+	f11
+}
+
+#MACRO {\e[24~}
+{
+	f12
+}
+
+#MACRO {\e[OP}
+{
+	f01
+}
+
+#MACRO {\e[OQ}
+{
+	f02
+}

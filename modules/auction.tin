@@ -1,0 +1,182 @@
+#ACTION {^(auction) %1 sold for %d gold coins.$}
+{
+	Channel_Event auction %0;
+	#if {"${character[cspam]}" == "true"}
+	{
+		#line {gag};
+		#echo {%1 sold for %2 gold.}
+	};
+	#variable {auction[bidAmount]} {0}
+}
+{9}
+
+#ACTION {^(auction) '%1', going %S for %d gold coins.$}
+{
+	Channel_Event auction %0;
+	#if {"${character[cspam]}" == "true"}
+	{
+		#echo {'%1', going %2 for %3 gold.}
+	};
+	#else
+	{
+		#showme {%0 To bid the minimum amount of ${auction[minimumBid]} gold coins, type 'bid +'.}
+	};
+	#line {gag}
+}
+{9}
+
+#ACTION {^(auction) Auction failed, item returned to seller.$}
+{
+	Channel_Event auction %0;
+	#if {"${character[cspam]}" == "true"}
+	{
+		#echo {Auction failed.};
+		#line {gag}
+	};
+	#variable {auction[bidAmount]} {0}
+}
+{9}
+
+#ACTION {^(auction) Current bid is %d gold coins for '%2'.$}
+{
+	#if {"${character[cspam]}" == "true"}
+	{
+		#line {gag}
+	}
+}
+{9}
+
+#ACTION {^(auction) New bid: %d gold coins for '%2'.$}
+{
+	Channel_Event auction %0;
+	#line {gag};
+	#if {"${character[cspam]}" == "true"}
+	{
+		#echo {Bid: %1 gold.}
+	};
+	#else
+	{
+		#echo {%0 To bid the minimum amount of ${auction[minimumBid]} gold, type 'bid +'.}
+	};
+	#if {"${auction[myBid]}" != "true" && ${auction[bidAmount]} > %1}
+	{
+		bid +
+	};
+	#delay {0.25} {#variable {auction[myBid]} {false}}
+}
+{9}
+
+#ACTION {^(auction) Now accepting bids for '%1', minimum bid is %d gold coins.$}
+{
+	#variable {auction[minimumBid]} {%2};
+	#line {gag};
+	#if {"${character[cspam]}" != "true"}
+	{
+		#showme {%0 To bid the minimum amount of ${auction[minimumBid]} gold, type 'bid +'.}
+	}
+}
+{9}
+
+#ACTION {^(auction) Starting bid on '%1' at %d gold.$}
+{
+	Channel_Event auction %0;
+	#variable {auction[minimumBid]} {%2};
+	#line {gag};
+	#if {"${character[cspam]}" == "true"}
+	{
+		#showme {Starting bid: '%1' %2 gold.}
+	};
+	#else
+	{
+		#showme {%0 To bid the minimum amount of ${auction[minimumBid]} gold coins, type 'bid +'.}
+	}
+}
+{9}
+
+#ACTION {^(auction) The item of interest appears to have vanished.  Terminating auction.$}
+{
+	Channel_Event auction %0;
+	#variable {auction[bidAmount]} {0}
+}
+{9}
+
+#ACTION {^(auction) {First|Second|Last} call for '%2', at %d gold coins.$}
+{
+	Channel_Event auction %0;
+	#variable {auction[minimumBid]} {%3};
+	#if {"${character[cspam]}" == "true"}
+	{
+		#echo {%1: %2 %3 gold.}
+	};
+	#else
+	{
+		#showme {%0 To bid the minimum amount of ${auction[minimumBid]} gold coins, type 'bid +'.}
+	};
+	#line {gag};
+}
+{9}
+
+#ACTION {^You already have the highest bid.$}
+{
+	#variable {auction[myBid]} {false}
+}
+{9}
+
+#ACTION {^You must bid at least %d, or %2 higher than the current bid.$}
+{
+	#line {gag};
+	#if {"${character[cspam]}" != "true"}
+	{
+		#showme {%0 To bid this amount type 'bid +'.}
+	};
+	#variable {auction[myBid]} {true}
+}
+{9}
+
+#ACTION {^silent_Nothing is currently on the auction block.$}
+{
+	#showme {Nothing is currently on the auction block.}
+}
+{9}
+
+#ACTION {^silent_You must bid at least %d, or %2 higher than the current bid.$}
+{
+	bid %1 -f
+}
+{9}
+
+#ACTION {^silent_You must bid at least the minimum.$}
+{
+	bid ${auction[minimumBid]} -f
+}
+{9}
+
+#ALIAS {^{bi|bid}%s+$}
+{
+	bid 1 -f | prefix silent_;
+	#variable {auction[myBid]}  {true}
+}
+{8}
+
+#ALIAS {^auto{bi|bid} %s%d$}
+{
+	#if {%3 > 0}
+	{
+		bid +
+	};
+	#variable {auction[myBid]}  {true};
+	#variable {auction[bidAmount]}  {%3};
+	#showme {You will now bit up to $autoBidAmount gold on the current auction.}
+}
+{9}
+
+#ALIAS {^{bi|bid}%2$}
+{
+	#send {%0};
+	#variable {auction[myBid]} {true}
+}
+{9}
+
+#VARIABLE         {auction[bidAmount]}  {0}
+#VARIABLE         {auction[minimumBid]}  {0}
+#VARIABLE         {auction[myBid]}  {false}

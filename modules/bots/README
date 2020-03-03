@@ -1,0 +1,22 @@
+To create a bot, put the code in a file here (tintin-alteraeon/modules/bots) named with a .tin extension.
+Here is a list of variables you can use that are predefined for your bot.
+
+currentHp: Your current health.
+MaxHp Your maximum health.
+currentMv: Your current movement.
+MaxMv Your maximum movement.
+currentMana: Your current mana.
+MaxMana Your maximum mana.
+inBattle: If you are in battle will be true, otherwise undefined.
+exits: A list of exits stored in a list type variable.
+exitCount: The number of exits in the current room.
+areaName: The name of the current area, e.g." You are in the city of Ralnoth."
+areaNumber: the current area's number, e.g. 1190
+vnum: The current room's number.
+roomVnumList A list of rooms you have visited this session.
+
+Spell and skill names that the character know are all variables set to true. Remove spaces from names of skills and spells and caps the first letter of each word after the first one, Basically use standard variable syntax. For example, the spell cure light wounds would be cureLightWounds. If the skill or spell is unknown, the variable does not exist. You can use syntax like the following:
+#if {"$cureLightWounds" == "true"}
+Alternatively you may also test in this way which will execute if the variable is not found:
+#if {!&{cureLightWounds}}
+

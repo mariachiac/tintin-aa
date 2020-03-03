@@ -1,0 +1,15 @@
+#alias {^mailall$}
+{
+#script {recipientNames} {elinks -dump "http://alteraeon.com:8080/xml/clan/$clanNumber" | grep "[6-9]" | sed "s/ [6-9] [a-z]* [1-5]//g" | tr "\n" ' ' | cut -d ' ' -f 17- | tr -d "[:space:]" | tr "[:digit:]" ';'};
+#variable {recipientNames} {${recipientNames[1]}};
+#replace {recipientNames} {\\} {};
+#foreach {$recipientNames} {mailIndex} {#math {mailCounter} {$mailCounter + 1};#if {"$mailCounter" > 5} {#math {mailDelay} {$mailDelay + 30}};#delay {$mailDelay} {#format {mailIndex} {%n} {$mailIndex};#if {"$mailIndex" != "$name"} {mail send $mailIndex;#textin {mail.txt};/format $mailTop $mailBottom;/done}}}
+}
+{9}
+#variable {recipientNames} {}
+#variable {mailIndex} {}
+#variable {mailTop} {1}
+#variable {mailBottom} {9999}
+#variable {clanNumber} {15}
+#variable {mailCounter} {1}
+#variable {mailDelay} {0}

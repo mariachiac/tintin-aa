@@ -1,0 +1,55 @@
+#ACTION {^{You would surely drop something, you are carrying far too much!|A hedge wizard says, 'You should talk to me first before you go downstairs\.'|Radcliff the curator says to you, 'I'm sorry, but you must buy a pass to enter the museum\. The price is quite modest, I assure you!'|Only guild members are allowed beyond this point\.|.+ blocks your path, preventing you from passing\.}$}
+{
+	#if {!$secondTry}
+	{
+		#nop {Wander to get out of this room and hopefully pick another path.};
+		#delay {walk} {wander} {8d3};
+		#variable {secondTry} {1}
+	}
+}
+{9}
+
+#FUNCTION {bot_kill}
+{
+	#nop {Don't walk once after the bot dies.};
+	#undelay {walk};
+	#return #nop
+}
+
+#FUNCTION {bot_load}
+{
+	#nop {Walk once to get the bot started.};
+	#math {exitChoice} {1d$exitCount};
+	${exits[$exitChoice]};
+	#return #nop
+}
+
+#FUNCTION {walk}
+{
+	#nop {We moved, so clear secondTry variable.};
+	#variable {secondTry} {0};
+	#nop {Delay a tiny amount in case the mud sends area number after room number.};
+	#delay {0.05} {#if {$areaNumber != $targetAreaNumber} {backward}};
+	#nop {Remove walk delay in case we went backward as to not walk twice.};
+	#undelay {walk};
+	#nop {Now, pick an exit at random. We know we're in the right area because area number will be checked before $walkDelay expires.};
+	#delay {walk} {#math {exitChoice} {1d$exitCount};${exits[$exitChoice]}} {1 d ($walkDelayMax - $walkDelayMin) + $walkDelayMin};
+	#return #nop
+}
+
+#function {example_botthwack} {
+	#nop {We've been bot thwacked, kill the bot and recall in case it's us.};
+	botkill example;
+	/;
+	#nop {Twice in case.};
+	/;
+	#return #nop
+}
+
+#VARIABLE  {hook[botthwack][example_botthwack]} {}
+#VARIABLE         {exitChoice}  {}
+#VARIABLE {hook[rvnum][walk]} {}
+#VARIABLE         {secondTry}  {0}
+#VARIABLE         {targetAreaNumber}  {$areaNumber}
+#VARIABLE         {walkDelayMax}  {15}
+#VARIABLE         {walkDelayMin}  {10}

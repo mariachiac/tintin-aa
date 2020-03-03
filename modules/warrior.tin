@@ -1,0 +1,837 @@
+#ACTION {^You are rescued from certain death by %1!}
+{
+	a
+}
+{1}
+
+#ACTION {^You fail the rescue!}
+{
+	rescue $lastRescued
+}
+{1}
+
+#ACTION {^You find yourself too weak to use %1.$}
+{
+	#variable {rewield} {true};
+	eq | grep wielded | prefix silent_
+}
+{5}
+
+#ACTION {^silent_wielded     - $}
+{
+	#unvariable {weapon}
+}
+{5}
+
+#ACTION {^The physical reserve deep within you feels replenished.$}
+{
+	#nop {client variables are always temperary.};
+	#unvariable {client[exhausted]};
+	play reserve-replenish
+}
+{9}
+
+#ACTION {^You discover a way to use %1 in combination!$}
+{
+	Channel_Event all %0;
+	autobrag %0;
+	play new-combo
+}
+{9}
+
+#ACTION {^You don't have enough energy to do that again so soon.$}
+{
+	#send {assist}
+}
+{9}
+
+#ACTION {^You got a %d attack combo%2}
+{
+	#undelay {comboFail};
+	#delay {comboFail} {@do_hook{comboFail}} {5};
+	play combo-partial-%1
+}
+{9}
+
+#ACTION {^You successfully finished a full %d attack combo!}
+{
+	#undelay {comboFail};
+	play combo-full-%1;
+	@do_hook{comboFinish}
+}
+{9}
+
+#ACTION {^You suddenly feel less tired and more refreshed!$}
+{
+	#nop {client variables are always temperary.};
+	#variable {client[exhausted] {true}}
+}
+{9}
+
+#ACTION {^You {feel your enhanced courage fading|make a cut and paint yourself with your own blood, but don't feel any different}.$}
+{
+	#if {${character[currentHp]} > ${character[maxHp]} / 2}
+	{
+		@command{val;valor}
+	};
+	#if {"%1" == "feel your enhanced courage fading"}
+	{
+		play valor-drop
+	}
+}
+{9}
+
+#ACTION {^Your body is still too exhausted from last time.$}
+{
+	#nop {client variables are always temperary.};
+	#variable {client[exhausted] {true}}
+}
+{9}
+
+#ACTION {^silent_ Length %d \x7c %2}
+{
+	#variable {combo[attack]} {%2};
+	#replace {combo[attack]} {\x7c} { ${combo[target]};};
+	#replace {combo[attack]} {berserking} {berserk};
+	#replace {combo[attack]} {bloodlet } {};
+	#replace {combo[attack]} {crippling strike} {cripple};
+	#replace {combo[attack]} {ground strike} {gstrike};
+	#replace {combo[attack]} {leap attack} {leap};
+	#replace {combo[attack]} {pommel strike} {pommel};
+	#replace {combo[attack]} {dirt throwing} {dirt};
+	#replace {combo[attack]} {shield slam} {slam};
+	#nop #replace {combo[attack]} {x} {randomattack};
+	#nop #local {tmp} {};
+	#list {tmp} {create} {${combo[attack]}};
+	#foreach {${tmp[]}} {i}
+	{
+		#format {tmp[$i]} {%p} {${tmp[$i]}}
+	};
+	#nop #local {tmp2} {};
+	#nop #local {i} {};
+	#foreach {thrust;taunt;charge;lunge;bash;kick;riposte;pommel strike;jab;stomp;knockback;cleave} {i}
+	{
+		#variable {tmp2[$i]} {true}
+	};
+	#if {"${combo[type]}" == "{advanced|cross}"}
+	{
+		#foreach {leap attack;intimidate;disarm;berserking;whirlwind;ground strike;shield slam} {i}
+		{
+			#variable {tmp2[$i]} {true}
+		}
+	};
+	#if {"${combo[type]}" == "cross"}
+	{
+		#foreach {backstab;trip;bloodletting stab;dirt throwing;shadow bind;shadow strike;knife throwing;feint;crippling strike;flourish} {i}
+		{
+			#variable {tmp2[$i]} {true}
+		}
+	};
+	#if {"${tmp[1]}" != "x" || "${character[inBattle]}" == "true"}
+	{
+		#unvariable {tmp2[charge]};
+		#if {"${combo[type]}" == "cross"}
+		{
+			#unvariable {tmp2[backstab]}
+		}
+	};
+	#if {"${combo[type]}" == "{advanced|cross}"}
+	{
+		#list {tmp} {find} {disarm} {i};
+		#if {$i > 0}
+		{
+			#unvariable {tmp2[disarm]}
+		};
+		#list {tmp} {find} {berserking} {i};
+		#if {$i > 0 || !&{auto[berserk]} || "${auto[berserk]}" != "true"}
+		{
+			#unvariable {tmp2[berserking]}
+		};
+		#list {tmp} {find} {ground strike} {i};
+		#if {$i > 0}
+		{
+			#unvariable {tmp2[shield slam]}
+		};
+		#list {tmp} {find} {shield slam} {i};
+		#if {$i > 0}
+		{
+			#unvariable {tmp2[ground strike]}
+		};
+		#if {"${combo[target]}" == ""}
+		{
+			#unvariable {tmp2[intimidate]}
+		}
+	};
+	#if {"${combo[type]}" == "cross"}
+	{
+		#list {tmp} {find} {ground strike} {i};
+		#if {$i > 0}
+		{
+			#unvariable {tmp2[knife throwing]};
+			#unvariable {tmp2[backstab]};
+			#unvariable {tmp2[bloodletting stab]}
+		};
+		#list {tmp} {find} {knife throwing} {i};
+		#if {$i > 0}
+		{
+			#unvariable {tmp2[ground strike]}
+		};
+		#list {tmp} {find} {bloodletting stab} {i};
+		#if {$i > 0}
+		{
+			#unvariable {tmp2[ground strike]}
+		};
+		#list {tmp} {find} {backstab} {i};
+		#if {$i > 0}
+		{
+			#unvariable {tmp2[ground strike]}
+		}
+	};
+	#foreach {${tmp2[]}} {i}
+	{
+		#if {!&{skillsAndSpells[$i]}}
+		{
+			#unvariable {tmp2[$i]}
+		}
+	};
+	#nop #local {o} {};
+	#list {tmp} {size} {o};
+	#nop #local {tmp3} {};
+	#list {tmp3} {create} {${tmp2[]}};
+	#nop #local {tmp5} {};
+	#list {tmp3} {simplify} {tmp5};
+	#replace {tmp5} {berserking} {berserk};
+	#replace {tmp5} {bloodletting } {};
+	#replace {tmp5} {crippling strike} {cripple};
+	#replace {tmp5} {ground strike} {gstrike};
+	#replace {tmp5} {leap attack} {leap};
+	#replace {tmp5} {pommel strike} {pommel};
+	#replace {tmp5} {dirt throwing} {dirt};
+	#replace {tmp5} {shield slam} {slam};
+	#list {tmp3} {create} {$tmp5};
+	#foreach {${tmp[]}} {i}
+	{
+		#list {tmp} {find} {disarm} {p};
+		#if {$p > 0}
+		{
+			#list {tmp3} {find} {disarm} {p};
+			#if {$p > 0}
+			{
+				#list {tmp3} {delete} {$p}
+			}
+		};
+		#list {tmp} {find} {berserk} {p};
+		#if {$p > 0}
+		{
+			#list {tmp3} {find} {berserk} {p};
+			#if {$p > 0}
+			{
+				#list {tmp3} {delete} {$p}
+			}
+		};
+		#list {tmp} {find} {slam} {p};
+		#if {$p > 0}
+		{
+			#list {tmp3} {find} {gstrike} {p};
+			#if {$p > 0}
+			{
+				#list {tmp3} {delete} {$p}
+			}
+		};
+		#list {tmp} {find} {gstrike} {p};
+		#if {$p > 0}
+		{
+			#list {tmp3} {find} {slam} {p};
+			#if {$p > 0}
+			{
+				#list {tmp3} {delete} {$p}
+			};
+			#list {tmp3} {find} {stab} {p};
+			#if {$p > 0}
+			{
+				#list {tmp3} {delete} {$p}
+			};
+			#list {tmp3} {find} {backstab} {p};
+			#if {$p > 0}
+			{
+				#list {tmp3} {delete} {$p}
+			};
+			#list {tmp3} {find} {knife throwing} {p};
+			#if {$p > 0}
+			{
+				#list {tmp3} {delete} {$p}
+			}
+		};
+		#list {tmp} {find} {knife throwing} {p};
+		#if {$p > 0}
+		{
+			#list {tmp3} {find} {gstrike} {p};
+			#if {$p > 0}
+			{
+				#list {tmp3} {delete} {$p}
+			}
+		};
+		#list {tmp} {find} {stab} {p};
+		#if {$p > 0}
+		{
+			#list {tmp3} {find} {gstrike} {p};
+			#if {$p > 0}
+			{
+				#list {tmp3} {delete} {$p}
+			}
+		};
+		#list {tmp} {find} {backstab} {p};
+		#if {$p > 0}
+		{
+			#list {tmp3} {find} {gstrike} {p};
+			#if {$p > 0}
+			{
+				#list {tmp3} {delete} {$p}
+			}
+		};
+		#if {"${tmp[$i]}" == "{\s*x\s*}"}
+		{
+			#nop #local {tmp6} {${tmp3}};
+			#variable {tmp6} {${tmp3}};
+			#nop #local {tmp4} {};
+			#while {1}
+			{
+				#nop #local {continue} {0};
+				#variable {continue} {0};
+				#nop #local {j} {};
+				#nop #local {k} {};
+				#nop #local {l} {};
+				#list {tmp6} {size} {l};
+				#if {$l == 0}
+				{
+					#variable {tmp4} {randomattack};
+					#break
+				};
+				#else
+				{
+					#math {k} {1 d $l};
+					#variable {tmp4} {${tmp6[$k]}}
+				};
+				#nop #local {m} {};
+				#foreach {-2;-1;1;2} {m}
+				{
+					#nop #local {n} {};
+					#math {n} {$i + $m};
+					#if {$n < 1 || $n > $o}
+					{
+						#continue
+					};
+					#if {"${tmp[$n]}" == "{\s*$tmp4\s*}"}
+					{
+						#nop #local {p} {};
+						#list {tmp6} {find} {$tmp4} {p};
+						#if {$p > 0}
+						{
+							#list {tmp6} {delete} {$p}
+						};
+						#variable {continue} {1};
+						#break
+					}
+				};
+				#if {$continue}
+				{
+					#continue
+				};
+				#else
+				{
+					#break
+				}
+			};
+			#variable {tmp[$i]} {$tmp4}
+		}
+	};
+	#list {tmp} {simplify} {combo[attack]};
+	#if {"${auto[weapon]}" == "true"}
+	{
+		#replace {combo[attack]} {knife throwing} {remove $weapon;throw shadow;wield $weapon}
+	};
+	#else
+	{
+		#replace {combo[attack]} {knife throwing} {throw shadow}
+	};
+	#if {"${combo[setKey]}" != "false"}
+	{
+		set${combo[setKey]} ${combo[attack]}
+	};
+	#else
+	{
+		${combo[attack]}
+	};
+	#variable {combo[target]} {};
+	#variable {combo[setKey]} {false};
+	#foreach {j;k;l;m;n;o;p;;tmp2;tmp3;tmp4;tmp5;tmp6} {i}
+	{
+		#unvariable {$i}
+	};
+	#unvariable {i}
+}
+{9}
+
+#ACTION {^silent_combo_wc - lines:  %d}
+{
+	#math {i} {1d%1};
+	tactics all | grep -i length | grep -v x | grep -v charge | grep -v backstab | prefix silent_ | tail -n $i | head -n 1
+}
+{9}
+
+#ACTION {^silent_done_xcombo$}
+{
+	#if {"${combo[randomType]}" != ""}
+	{
+		#local {i};
+		#list {combo[randomType]} {size} {i};
+		#local {j} {};
+		#math {j} {1 d $i};
+		#switch {"${combo[randomType][$j]}"}
+		{
+			#case {"advanced"}
+			{
+				#variable {combo[tmp]} {a}
+			};
+			#case {"low level"}
+			{
+				#variable {combo[tmp]} {l}
+			};
+			#case {"cross-class"}
+			{
+				#variable {combo[tmp]} {c}
+			}
+		};
+		#if {"${combo[tmp]}" != ""}
+		{
+			#if {"${combo[tmpSkill]}" != ""}
+			{
+				#if {"${combo[target]}" != ""}
+				{
+					${combo[tmp]}xcombo ${combo[tmpSkill]} ${combo[target]}
+				};
+				#else
+				{
+					${combo[tmp]}xcombo ${combo[tmpSkill]}
+				}
+			};
+			#else
+			{
+				${combo[tmp]}xcombo
+			}
+		}
+	};
+	#else
+	{
+		#showme {No incomplete combos.}
+	}
+}
+{9}
+
+#ACTION {^silent_xcombo_You have found%s%d {low level|advanced|cross-class} attack combinations, and completed%s%d.$}
+{
+	#list {combo[randomType]} {add} {%3}
+}
+{9}
+
+#ACTION {^silent_xcombo_wc - lines:  %d}
+{
+	#math {i} {1d%1};
+	tactics ${combo[type]} | grep -i length | grep x | grep -v charge | grep -v backstab | prefix silent_ | tail -n $i | head -n 1
+}
+{9}
+
+#ACTION {^{You give up waiting, and shift out of your riposte stance|Your riposte .*|.* notices your riposte and moves quickly to block it}{\.|!}$}
+{
+	#if {"${skillsAndSpells[riposte]}" == "true" && "${auto[riposte]}" == "true" && "${character[inBattle]}" == "true"}
+	{
+		riposte
+	}
+}
+{9}
+
+#ALIAS {^randomattack%s%2}
+{
+	get_random_attack;
+	#list {randomAttack} {size} {i};
+	#math {r} {1d$i};
+	#if {$i >= 3}
+	{
+		#while {$r == ${lastRandomAttack[1]} || $r == ${lastRandomAttack[2]}}
+		{
+			#math {r} {1d$i}
+		}
+	};
+	#variable {lastRandomAttack[2]} {${lastRandomAttack[1]}};
+	#variable {lastRandomAttack[1]} {$r};
+	${randomAttack[$r]} %2
+}
+{5}
+
+#ALIAS {{wi|wie|wiel|wield} %1}
+{
+	#if {"%1" != "$stabWeapon"}
+	{
+		#variable {weapon} {%1}
+	};
+	\wield %1
+}
+{5}
+
+#ALIAS {^{3|4|5|6|7|8}{combo|acombo|ccombo|lcombo} %3$}
+{
+	#variable {combo[target]} {};
+	#switch {"%2"}
+	{
+		#case {"acombo"}
+		{
+			tactics advanced | grep %1 | grep %3 | grep -v x | prefix silent_ | head -n 1
+		};
+		#case {"ccombo"}
+		{
+			tactics cross class | grep %1 | grep %3 | grep -v x | prefix silent_ | head -n 1
+		};
+		#case {"lcombo"}
+		{
+			tactics low | grep %1 | grep %3 | grep -v x | prefix silent_ | head -n 1
+		};
+		#default
+		{
+			tactics all | grep %1 | grep %3 | grep -v x | prefix silent_ | head -n 1
+		}
+	}
+}
+{8}
+
+#ALIAS {^{a|c|l|}xcombo %S %S$}
+{
+	#variable {combo[target]} {%3 };
+	#switch {"%1"}
+	{
+		#case {"a"}
+		{
+			#variable {combo[type]} {advanced}
+		};
+		#case {"c"}
+		{
+			#variable {combo[type]} {cross}
+		};
+		#case {"l"}
+		{
+			#variable {combo[type]} {low}
+		};
+		#case {""}
+		{
+			#variable {combo[tmpSkill]} {%2};
+			#variable {combo[randomType]} {};
+			tactics |prefix silent_xcombo_;
+			lecho silent_done_xcombo
+		}
+	};
+	#if {"%1" != ""}
+	{
+		tactics ${combo[type]} | grep %2 | grep x | prefix silent_ | head -n 1
+	}
+}
+{8}
+
+#ALIAS {^{combo|acombo|ccombo|lcombo} %S %S$}
+{
+	#variable {combo[target]} {%3 };
+	#switch {"%1"}
+	{
+		#case {"acombo"}
+		{
+			tactics advanced | grep %2 | grep -v x | prefix silent_ | head -n 1
+		};
+		#case {"ccombo"}
+		{
+			tactics cross class | grep %2 | grep -v x | prefix silent_ | head -n 1
+		};
+		#case {"lcombo"}
+		{
+			tactics low | grep %2 | grep -v x | prefix silent_ | head -n 1
+		};
+		#default
+		{
+			tactics all | grep %2 | grep -v x | prefix silent_ | head -n 1
+		}
+	}
+}
+{8}
+
+#ALIAS {^combo$}
+{
+	#variable {combo[target]} {};
+	tactics all | grep -i length | grep -v x | grep -v charge | grep -v backstab | wc -l | prefix silent_combo_
+}
+{9}
+
+#ALIAS {^get_random_attack$}
+{
+	#list {randomAttack} {clear};
+	#if {"${skillsAndSpells[bash]}" == "true"}
+	{
+		#list {randomAttack} {add} {bash}
+	};
+	#if {"${skillsAndSpells[berserking]}" == "true" && "${skillsAndSpells[advanced tactics]}" == "true" && "${auto[berserk]}" == "true" && "${character[inBattle]}" == "true"}
+	{
+		#if {${character[currentHp]} >= ${character[maxHp]} / 2 && ${character[currentMv]} >= ${character[maxMv]} / 2}
+		{
+			#list {randomAttack} {add} {berserk}
+		}
+	};
+	#if {"${skillsAndSpells[bloodletting stab]}" == "true" && "${skillsAndSpells[cross class tactics]}" == "true" && "${character[inBattle]}" == "true"}
+	{
+		#list {randomAttack} {add} {stab}
+	};
+	#if {"${skillsAndSpells[charge]}" == "true" && "${character[inBattle]}" != "true"}
+	{
+		#list {randomAttack} {add} {charge}
+	};
+	#if {"${skillsAndSpells[cleave]}" == "true" && "${skillsAndSpells[advanced tactics]}" == "true"}
+	{
+		#list {randomAttack} {add} {cleave}
+	};
+	#if {"${skillsAndSpells[crippling strike]}" == "true" && "${skillsAndSpells[cross class tactics]}" == "true"}
+	{
+		#list {randomAttack} {add} {cripple}
+	};
+	#if {"${skillsAndSpells[disarm]}" == "true" && "${skillsAndSpells[advanced tactics]}" == "true" && "${auto[disarm]}" == "true"}
+	{
+		#list {randomAttack} {add} {disarm}
+	};
+	#if {"${skillsAndSpells[feint]}" == "true" && "${skillsAndSpells[cross class tactics]}" == "true" && "${character[inBattle]}" == "true"}
+	{
+		#list {randomAttack} {add} {feint}
+	};
+	#if {"${skillsAndSpells[ground strike]}" == "true" && "${skillsAndSpells[advanced tactics]}" == "true" && "${kxwt[terrain}" != "{7|18|19|20|21|23|25|29|31|32}"]}
+	{
+		#list {randomAttack} {add} {gstrike}
+	};
+	#if {"${skillsAndSpells[flourish]}" == "true" && "${skillsAndSpells[cross class tactics]}" == "true"}
+	{
+		#list {randomAttack} {add} {flourish}
+	};
+	#if {"${skillsAndSpells[intimidate]}" == "true" && "${skillsAndSpells[advanced tactics]}" == "true"}
+	{
+		#list {randomAttack} {add} {intimidate}
+	};
+	#if {"${skillsAndSpells[jab]}" == "true"}
+	{
+		#list {randomAttack} {add} {jab}
+	};
+	#if {"${skillsAndSpells[kick]}" == "true"}
+	{
+		#list {randomAttack} {add} {kick}
+	};
+	#if {"${skillsAndSpells[knife throwing]}" == "true" && "${skillsAndSpells[cross class tactics]}" == "true"}
+	{
+		#list {randomAttack} {add} {throw shadow}
+	};
+	#if {"${skillsAndSpells[knockback]}" == "true"}
+	{
+		#list {randomAttack} {add} {knockback}
+	};
+	#if {"${skillsAndSpells[leap attack]}" == "true"}
+	{
+		#list {randomAttack} {add} {leap}
+	};
+	#if {"${skillsAndSpells[lunge]}" == "true"}
+	{
+		#list {randomAttack} {add} {lunge}
+	};
+	#if {"${skillsAndSpells[pommel strike]}" == "true"}
+	{
+		#list {randomAttack} {add} {pommel}
+	};
+	#if {"${skillsAndSpells[riposte]}" == "true" && "${character[inBattle]}" == "true"}
+	{
+		#list {randomAttack} {add} {riposte}
+	};
+	#if {"${skillsAndSpells[shadow bind]}" == "true" && "${skillsAndSpells[cross class tactics]}" == "true"}
+	{
+		#list {randomAttack} {add} {shadow bind}
+	};
+	#if {"${skillsAndSpells[stomp]}" == "true"}
+	{
+		#list {randomAttack} {add} {stomp}
+	};
+	#if {"${skillsAndSpells[taunt]}" == "true"}
+	{
+		#list {randomAttack} {add} {taunt}
+	};
+	#if {"${skillsAndSpells[thrust]}" == "true"}
+	{
+		#list {randomAttack} {add} {thrust}
+	};
+	#if {"${skillsAndSpells[trip]}" == "true" && "${skillsAndSpells[cross class tactics]}" == "true"}
+	{
+		#list {randomAttack} {add} {trip}
+	};
+	#if {"${skillsAndSpells[whirlwind]}" == "true" && "${skillsAndSpells[advanced tactics]}" == "true"}
+	{
+		#list {randomAttack} {add} {whirlwind}
+	};
+	#list {randomAttack} {size} {i};
+	#if {$i == 0}
+	{
+		#list {randomAttack} {add} {#echo {You do not currently have any warrior attacks. If you believe this is wrong, try the load command.}};
+		#unvariable {lastRandomAttack}
+	}
+}
+{9}
+
+#ALIAS {^randomattack%s}
+{
+	get_random_attack;
+	#list {randomAttack} {size} {i};
+	#math {r} {1d$i};
+	if {$i >= 3}{#while {$r == ${lastRandomAttack[1]} || $r == ${lastRandomAttack[2]}}{#math {r} {1d$i}}};
+	#variable {lastRandomAttack[2]} {${lastRandomAttack[1]}};
+	#variable {lastRandomAttack[1]} {$r};
+	${randomAttack[$r]}
+}
+{9}
+
+#ALIAS {^re{s|sc|scu|scue} %s%3}
+{
+	#variable {lastRescued} {%3};
+	#send {%0}
+}
+{9}
+
+#ALIAS {^{3|4|5|6|7|8}{combo|lcombo|acombo|ccombo}set{a|b|c|d|e|f|g|h|n|q|r|s|t|v|w|x|y|z} %4}
+{
+	#variable {combo[setKey]} {%3};
+	%1%2 %4
+}
+{9}
+
+#ALIAS {^{auto|noauto}{berserk|charge|disarm|retreat|riposte|weapon|valor}$}
+{
+	#if {"%1" == "auto"}
+	{
+		#variable {auto[%2]} {true};
+		#echo {auto %2 enabled.}
+	};
+	#else
+	{
+		#variable {auto[%2]} {false};
+		#showme {auto %2 disabled.}
+	}
+}
+{9}
+
+#ALIAS {^{a|as|ass|assi|assis|assist}$}
+{
+	#if {"${skillsAndSpells[charge]}" == "true" && "${auto[charge]}" == "true" && ${character[currentMv]} > 20}
+	{
+		charge
+	};
+	#else
+	{
+		#send {assist}
+	}
+}
+{9}
+
+#ALIAS {^{a|c|l|}xcombo %S$}
+{
+	#variable {combo[target]} {};
+	#switch {"%1"}
+	{
+		#case {"a"}
+		{
+			#variable {combo[type]} {advanced}
+		};
+		#case {"c"}
+		{
+			#variable {combo[type]} {cross}
+		};
+		#case {"l"}
+		{
+			#variable {combo[type]} {low}
+		};
+		#case {""}
+		{
+			#variable {combo[tmpSkill]} {%2};
+			#variable {combo[randomType]} {};
+			tactics |prefix silent_xcombo_;
+			lecho silent_done_xcombo
+		}
+	};
+	#if {"%1" != ""}
+	{
+		tactics ${combo[type]} | grep %2 | grep x | prefix silent_ | head -n 1
+	}
+}
+{9}
+
+#ALIAS {^{a|c|l|}xcombo$}
+{
+	#variable {combo[target]} {};
+	#switch {"%1"}
+	{
+		#case {"a"}
+		{
+			#variable {combo[type]} {advanced}
+		};
+		#case {"c"}
+		{
+			#variable {combo[type]} {cross}
+		};
+		#case {"l"}
+		{
+			#variable {combo[type]} {low}
+		};
+		#case {""}
+		{
+			#variable {combo[tmpSkill]} {};
+			#variable {combo[randomType]} {};
+			tactics |prefix silent_xcombo_;
+			lecho silent_done_xcombo
+		}
+	};
+	#if {"%1" != ""}
+	{
+		tactics ${combo[type]} | grep -i length | grep x | grep -v charge | grep -v backstab | wc -l | prefix silent_xcombo_
+	}
+}
+{9}
+
+#ALIAS {^{combo|acombo|ccombo|lcombo} %S$}
+{
+	#variable {combo[target]} {};
+	#switch {"%1"}
+	{
+		#case {"acombo"}
+		{
+			tactics advanced | grep %2 | grep -v x | prefix silent_ | head -n 1
+		};
+		#case {"ccombo"}
+		{
+			tactics cross class | grep %2 | grep -v x | prefix silent_ | head -n 1
+		};
+		#case {"lcombo"}
+		{
+			tactics low | grep %2 | grep -v x | prefix silent_ | head -n 1
+		};
+		#default
+		{
+			tactics all | grep %2 | grep -v x | prefix silent_ | head -n 1
+		}
+	}
+}
+{9}
+
+#ALIAS {^{combo|lcombo|acombo|ccombo}set{a|b|c|d|e|f|g|h|n|q|r|s|t|v|w|x|y|z} %3}
+{
+	#variable {combo[setKey]} {%2};
+	%1 %3
+}
+{9}
+
+#VARIABLE         {combo}  {{setKey}{false}}
+#VARIABLE         {lastRandomAttack}  {{1}{0}{2}{0}}
+#VARIABLE         {lastRescued}  {}

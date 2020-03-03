@@ -1,0 +1,57 @@
+#ACTION {^Enter description.  Terminate with '@'.$}
+{
+	#variable {editorMode} {true}
+}
+{9}
+
+#ACTION {^Enter your message:$}
+{
+	#variable {editorMode} {true}
+}
+{9}
+
+#ACTION {^Hit return or '.' to post note for all to read...$}
+{
+	#history {insert} {#cr};
+	#variable {editorMode} {true}
+}
+{9}
+
+#ACTION {^Message {posted|written}.$}
+{
+	#variable {editorMode} {false}
+}
+{9}
+
+#ACTION {^Ok.$}
+{
+	#variable {editorMode} {false}
+}
+{9}
+
+#ACTION {^Subject:$}
+{
+	#variable {editorMode} {true}
+}
+{9}
+
+#ACTION {^Whatever you were writing on, it's gone now!$}
+{
+	#variable {editorMode} {false}
+}
+{9}
+
+#ACTION {^{Enter|Leav}ing door edit mode.$}
+{
+	#if {"%1" == "Enter"}
+	{
+		#variable {editorMode} {true}
+	};
+	#else
+	{
+		#variable {editorMode} {false}
+	}
+}
+{9}
+
+#VARIABLE         {editorMode}  {false}

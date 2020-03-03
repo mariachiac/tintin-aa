@@ -1,0 +1,132 @@
+#ACTION {^You follow %S %S.$}
+{
+	#if {"$pathing" == "true"}
+	{
+		Add_Direction %2
+	}
+}
+{9}
+
+#ALIAS {Add_Direction %S}
+{
+	#if {"$pathing" == "true"}
+	{
+		#switch {"%1"}
+		{
+			#case {"down"}
+			{
+				#path {insert} {down} {up}
+			};
+			#case {"east"}
+			{
+				#path {insert} {east} {west}
+			};
+			#case {"north"}
+			{
+				#path {insert} {north} {south}
+			};
+			#case {"northeast"}
+			{
+				#path {insert} {northeast} {southwest}
+			};
+			#case {"northwest"}
+			{
+				#path {insert} {northwest} {southeast}
+			};
+			#case {"south"}
+			{
+				#path {insert} {south} {north}
+			};
+			#case {"southeast"}
+			{
+				#path {insert} {southeast} {northwest}
+			};
+			#case {"southwest"}
+			{
+				#path {insert} {southwest} {northeast}
+			};
+			#case {"up"}
+			{
+				#path {insert} {up} {down}
+			};
+			#case {"west"}
+			{
+				#path {insert} {west} {east}
+			};
+			#default
+			{
+				#path {insert} {enter %1} {enter %1}
+			}
+		}
+	}
+}
+{9}
+
+#ALIAS {^nopath$}
+{
+	#if {"$pathing" == "true"}
+	{
+		#path {end};
+		#path {save} {forward} {$pathName};
+		#showme {Exported to the variable $pathName. To save changes immediately type csave.};
+		#unvariable {pathing}
+	};
+	#else
+	{
+		#showme {You are not currently working on a path.}
+	}
+}
+{9}
+
+#ALIAS {^path %S}
+{
+	#if {"$pathing" != "true"}
+	{
+		#showme {Recording path %1.};
+		#path {new};
+		#variable {pathName} {%1};
+		#variable {pathing} {true}
+	};
+	#else
+	{
+		#showme {You are already working on a path. Use nopath to stop and save your current progress.}
+	}
+}
+{9}
+
+#ALIAS {^pathload %S}
+{
+	#if {&{%1}}
+	{
+		#path {load} {$%1};
+		#variable {pathLoaded} {true}
+	};
+	#else
+	{
+		#showme {No path with the name "%1" found.}
+	}
+}
+{9}
+
+#ALIAS {^pathrun %S}
+{
+	#if {&{%1}}
+	{
+		#path {load} {$%1};
+		#path {run} {0.5}
+	};
+	#else
+	{
+		#showme {No path with the name "%1" found.}
+	}
+}
+{9}
+
+#EVENT {END OF PATH}
+{
+	#unvariable {pathLoaded};
+	@do_hook{endOfPath}
+}
+
+#VARIABLE         {pathName}  {}
+#VARIABLE         {pathing}  {}

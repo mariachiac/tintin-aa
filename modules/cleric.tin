@@ -1,0 +1,171 @@
+#ACTION {^You cast a powerful healing spell on yourself.$}
+{
+	FULL_HEAL
+}
+{9}
+
+#ACTION {^You feel sick.$}
+{
+	#if {"${auto[removepoison]}" == "true"}
+	{
+		#if {"${skillsAndSpells[cure poison]}" == "true"}
+		{
+			vcast cure poison
+		};
+		#elseif {"${skillsAndSpells[remove poison]}" == "true"}
+		{
+			vcast remove poison
+		}
+	}
+}
+{9}
+
+#ACTION {^You feel {a little better|better}{\.|!}$}
+{
+	FULL_HEAL
+}
+{9}
+
+#ALIAS {H}
+{
+	@harm{%0}
+}
+{9}
+
+#ALIAS {^/$}
+{
+	#if {${character[currentMana]} >= 17 && "${skillsAndSpells[word of recall]}" == "true"}
+	{
+		vcast word of recall
+	};
+	#else
+	{
+		recall
+	}
+}
+{9}
+
+#ALIAS {^FULL_HEAL$}
+{
+	#if {&{character[fullHeal]}  && ${character[currentMana]} > ${character[maxMana]} / 5 && ${character[currentHp]} < ${character[maxHp]} && "${character[inBattle]}" != "true" && "$busy" != "true"}
+	{
+		#delay {0.6} {c ${character[fullHeal]}};
+		#variable {msg} {false}
+	};
+	#elseif {${character[currentMana]} < ${character[maxMana]} / 5 && &{character[fullHeal]}}
+	{
+		#unvariable {character[fullHeal]};
+		#variable {msg} {Fullheal interupted due to low mana.}
+	};
+	#elseif {${character[currentHp]} >= ${character[maxHp]}  && &{character[fullHeal]}}
+	{
+		#unvariable {character[fullHeal]};
+		#variable {msg} {Fullheal complete.}
+	};
+	#elseif {"${character[inBattle]}" == "true" || "$busy" == "true" && &{character[fullHeal]}}
+	{
+		#unvariable {character[fullHeal]}
+	};
+	#if {&{msg} && "$msg" != "false"}
+	{
+		#echo {$msg};
+		#variable {msg} {false}
+	}
+}
+{9}
+
+#ALIAS {^fullheal$}
+{
+	#if {"${skillsAndSpells[major heal]}" == "true"}
+	{
+		#variable {character[fullHeal]} {major heal}
+	};
+	#elseif {"${skillsAndSpells[heal]}" == "true"}
+	{
+		#variable {character[fullHeal]} {heal}
+	};
+	#elseif {"${skillsAndSpells[bolster]}" == "true"}
+	{
+		#variable {character[fullHeal]} {bolster}
+	};
+	#else
+	{
+		#variable {character[fullHeal]} {soothe wounds}
+	};
+	vcast ${character[fullHeal]}
+}
+{9}
+
+#ALIAS {^{auto|noauto}{recall|removepoison}$}
+{
+	#if {"%1" == "auto"}
+	{
+		#variable {auto[%2]} {true};
+		#echo {Auto %2 enabled.}
+	};
+	#else
+	{
+		#variable {auto[%2]} {false};
+		#echo {Auto %2 disabled.}
+	}
+}
+{9}
+
+#ALIAS {h}
+{
+	@heal{%0}
+}
+{9}
+
+#FUNCTION {harm}
+{
+	#if {"${skillsAndSpells[harm]}" == "true"}
+	{
+		#variable {character[harmSpell]} {harm}
+	};
+	#elseif {"${skillsAndSpells[inflict suffering]}" == "true"}
+	{
+		#variable {character[harmSpell]} {inflict suffering}
+	};
+	#elseif {"${skillsAndSpells[chasten]}" == "true"}
+	{
+		#variable {character[harmSpell]} {chasten}
+	};
+	#else
+	{
+		#variable {character[harmSpell]} {inflict wounds}
+	};
+	#variable {result} {c ${character[harmSpell]} %0}
+}
+
+#FUNCTION {heal}
+{
+	#if {"%0" == "" && ${character[currentHp]} == ${character[maxHp]}}
+	{
+		#variable {result} {#echo {Your health is already at maximum.}}
+	};
+	#else
+	{
+		#if {"${skillsAndSpells[breath of life]}" == "true"}
+		{
+			#variable {character[healSpell]} {breath of life}
+		};
+		#elseif {"${skillsAndSpells[major heal]}" == "true"}
+		{
+			#variable {character[healSpell]} {major heal}
+		};
+		#elseif {"${skillsAndSpells[heal]}" == "true"}
+		{
+			#variable {character[healSpell]} {heal}
+		};
+		#elseif {"${skillsAndSpells[bolster]}" == "true"}
+		{
+			#variable {character[healSpell]} {bolster}
+		};
+		#else
+		{
+			#variable {character[healSpell]} {soothe wounds}
+		};
+		#variable {result} {c ${character[healSpell]} %0}
+	}
+}

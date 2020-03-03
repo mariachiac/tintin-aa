@@ -1,0 +1,102 @@
+#ACTION {^%w {tells the group|tells you|replies to you}, '{[^1-zA-Z0-9]}%4'$}
+{
+	#variable {channelSilence} {true};
+	Channel_Event grouptell %0;
+	#list {trustedList} {find} {%1} {trust[index]};
+	synth_play trustedCommandSound;
+	#if {${trust[index]} > 0}
+	{
+		#if {"%4" == "{${trustedCommands}}"}
+		{
+			#switch {"%4"}
+			{
+				#case {"fame"}
+				{
+					#delay {1d3} {brag gt areafame}
+				};
+				#case {"target%*"}
+				{
+					#if {"${skillsAndSpells[rally]}" == "true"}
+					{
+						#delay {1d3} {#regexp {%3} {{.*} {.*}} {rally &2}}
+					};
+					#else
+					{
+						#delay {1d3} {#regexp {%3} {{.*} {.*}} {target &2}}
+					}
+				};
+				#default
+				{
+					#delay {1d3} {%4}
+				}
+			}
+		};
+		@do_hook{trust;%4}
+	}
+}
+{6}
+
+#ACTION {^silent_{trust|untrust}_'%S' is not a valid player name.$}
+{
+	#showme {Couldn't find the play '%2.}
+}
+{9}
+
+#ACTION {^silent_{trust|untrust}_Name: '%S'$}
+{
+	#format {trust[name]} {%n} {%2};
+	#list {trustedList} {find} {${trust[name]}} {trust[index]};
+	#if {"%1" == "trust"}
+	{
+		#if {${trust[index]} == 0}
+		{
+			#list {trustedList} {add} {${trust[name]}};
+			#showme {You have granted trust to ${trust[name]}.}
+		};
+		#else
+		{
+			#showme {${trust[name]} is already in your trusted list.}
+		}
+	};
+	#else
+	{
+		#if {${trust[index]} > 0}
+		{
+			#showme {Removing trust for ${trustedList[${trust[index]}]}.};
+			#list {trustedList} {delete} {${trust[index]}}
+		};
+		#else
+		{
+			#showme {${trust[name]} isn't currently in your list of trusted users.}
+		}
+	}
+}
+{9}
+
+#ALIAS {^{trust|truste|trusted}$}
+{
+	#showme {You currently trust:};
+	#list {trustedList} {size} {trust[index]};
+	#if {${trust[index]} > 0}
+	{
+		#local {i} {};
+		#foreach {${trustedList[]}} {i}
+		{
+			#showme {${trustedList[$i]}}
+		}
+	};
+	#else
+	{
+		#showme {No one!}
+	}
+}
+{9}
+
+#ALIAS {^{trust|untrust}%s%S$}
+{
+	finger %3 | head -n 1 | prefix silent_%1_
+}
+{9}
+
+#VARIABLE         {trust}  {{index}{0}{name}{0}}
+#VARIABLE         {trustedCommands}  {fame|get .*|pick .*|pray here|recall|rest|sit|sleep|talk .*|target .*|quest .*|open .*|lock .*|unlock .*|use .*|wear .*|wield .*|way .*}

@@ -1,0 +1,73 @@
+#ACTION {^instancerepop_You are not currently the owner of any instances.$}
+{
+	#if {"${repop[instance]}" == "true"}
+	{
+		synth_play notificationSound;
+		#variable {repop[instance]}  {false}
+	};
+	#echo {You are not currently the owner of any instances.}^
+}
+{9}
+
+#ACTION {^instancerepop_[%d] %s%d %s%d %s%d %s%D %S$}
+{
+#if {%3 < 6}
+	{
+		#regexp {%9} {{.*} {\s+.*}} {#showme {%3 ticks until instance "&1" repops.}}
+	};
+	#if {%3 < 1}
+	{
+		synth_play notificationSound
+	}
+}
+{9}
+
+#ACTION {^mobrepop_%1->%2}
+{
+	#variable {repop[mob]} {false};
+	#showme {%1->%2};
+	play repop
+}
+{9}
+
+#ALIAS {^repop %S}
+{
+	#variable {repop[mob]} {%1};
+	#showme {Waiting for %1 to repop...}
+}
+{9}
+
+#ALIAS {^{nore|re}pop$}
+{
+	#if {"%0" == "norepop"}
+	{
+		#variable {repop[mob]} {false};
+		#showme {You are no longer waiting for anything to repop.}
+	};
+	#elseif {&{repop[mob]} && "${repop[mob]}" != "false"}
+	{
+		#echo {You are waiting for ${repop[mob]} to repop.}
+	};
+	#else
+	{
+		#showme {You are not currently waiting for anything to repop.}
+	}
+}
+{9}
+
+#ALIAS {^{nowatch|watch}instance$}
+{
+	#if {"%0" == "nowatchinstance"}
+	{
+		#variable {repop[instance]}  {false};
+		#showme {Instance repop notification cleared.}
+	};
+	#else
+	{
+		#variable {repop[instance]}  {true};
+		#showme {Instance repop notification set.}
+	}
+}
+{9}
+
+#GAG              {^{instance|mob}repop_%*}

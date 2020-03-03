@@ -1,0 +1,263 @@
+#ACTION {^[Exits: %*]{ \[Doors: .+\]|}$}
+{
+	#regexp {%0} {{.*} [Doors: {.*}} {play door;#var {doorFound} {1}};
+	#else
+	{
+		#unvariable {doorFound}
+	};
+	#variable {exits} {%1};
+	#replace {exits} { } {;};
+	#list {exits} {create} {$exits};
+	#list {exits} {size} {exitCount};
+	#local {i} {};
+	#foreach {$exits} {i}
+	{
+		#if {"$exitfind" == "$i"}
+		{
+			synth_play exitFindSound
+		}
+	}
+}
+{1}
+
+#ACTION {^You enter a huge portal.$}
+{
+	seq_play portal
+}
+{5}
+
+#ACTION {%1 arrives from%2portal%3}
+{
+	seq_play portal
+}
+{9}
+
+#ACTION {%1 {are|is} closed.$}
+{
+	#regexp {%1} {{.*} {.*}} {#variable {doorName} {&2}}
+}
+{9}
+
+#ACTION {^(You {may be able to|can} use waypoint %1 {to|to more easily} bridge the distance.)$}
+{
+	#if {"${auto[waypoint]}" == "true"}
+	{
+		#undelay {waypoint};
+		#send {$waypointType %1};
+		#delay {waypoint} {$waypointType $waypoint} {3}
+	}
+}
+{9}
+
+#ACTION {^({down|east|north|northeast|northwest|south|southeast|southwest|up|west}) %2 is closed.$}
+{
+	#variable {lastDirection} {%1};
+	#regexp {%2} {{.*} {.*}} {#variable {doorName} {&2}}
+}
+{9}
+
+#ACTION {^Alas, you cannot go that way.$}
+{
+	play bump;
+	#if {"$pathing" == "true"}
+	{
+		#path {del}
+	}
+}
+{9}
+
+#ACTION {^It seems to be locked.$}
+{
+	#if {&{doorName} && "${skillsAndSpells[pick locks]}" == "true"}
+	{
+		pick $doorName $lastDirection
+	}
+}
+{9}
+
+#ACTION {^The other waypoint is too far away, and you are unable to link up with it.  Better try again.$}
+{
+	#if {"${auto[waypoint]}" == "true"}
+	{
+		#delay {waypoint} {$waypointType $waypoint} {0.5}
+	}
+}
+{9}
+
+#ACTION {^You stand up and prepare to follow the group.$}
+{
+	#unvariable {position}
+}
+{9}
+
+#ALIAS {^{c|ca|cas|cast} {gr|gro|grou|group} {w|wa|way|wayp|waypo|waypoi|waypoin|waypoint} %4}
+{
+	#variable {waypointType} {cast group waypoint};
+	#variable {waypoint} {%4};
+	\cast group waypoint %4
+}
+{8}
+
+#ALIAS {^{way|wayp|waypo|waypoi|waypoin|waypoint} %1}
+{
+	#variable {waypointType} {waypoint};
+	#variable {waypoint} {%1};
+	\waypoint %1
+}
+{8}
+
+#ALIAS {^exit{f|fi|fin|find} {down|east|north|northeast|northwest|south|southeast|southwest|up|west}$}
+{
+	#variable {exitfind} {%2};
+	#showme {you will now be notified when there is a $exitfind exit.}
+}
+{9}
+
+#ALIAS {^noexit{f|fi|fin|find}$}
+{
+	#variable {exitfind} {false};
+	#showme {Exit notifications disabled.}
+}
+{9}
+
+#ALIAS {^te{r|rr|rra|rrai|rrain}$}
+{
+	help kxwt terrain | grep " ${kxwt[terrain]}" | head -n 1
+}
+{9}
+
+#ALIAS {^{auto|noauto}waypoint$}
+{
+	#if {"%0" == "autowaypoint"}
+	{
+		#showme {You will now try to bridge waypoints automatically.};
+		#variable {auto[waypoint]} {true}
+	};
+	#else
+	{
+		#showme {You will no longer try to bridge waypoints automatically.};
+		#unvariable {auto[waypoint]}
+	}
+}
+{9}
+
+#ALIAS {^{d|do|dow|down|e|ea|eas|east|n|ne|nea|neas|neast|no|nor|nort|north|northe|northea|northeas|northeast|northw|northwe|northwes|northwest|nw|nwe|nwes|nwest|s|se|sea|seas|seast|so|sou|sout|south|southe|southea|southeas|southeast|southw|southwe|southwes|southwest|sw|swe|swes|swest|u|up|w|we|wes|west}$}
+{
+	#variable {lastDirection} {%0};
+	#if {"${skillsAndSpells[retreat]}" == "true" && "$autoretreat" == "true" && "${character[inBattle]}" == "true"}
+	{
+		retreat $lastDirection
+	};
+	#elseif {"${auto[stealth]}" == "true"}
+	{
+		#send {sneak %0}
+	};
+	#else
+	{
+		#send {%0}
+	}
+}
+{9}
+
+#ALIAS {^{noauto|auto}{stealth}$}
+{
+	#if {"%1" == "auto"}
+	{
+		#variable {auto[%2]} {true};
+		#echo {auto%2 enabled.}
+	};
+	#else
+	{
+		#variable {auto[%2]} {false};
+		#echo {auto%2 disabled.}
+	}
+}
+{9}
+
+#ALIAS {^{op|ope|open|pi|pic|pick} %*}
+{
+	#variable {doorName} {%2};
+	#send {%0}
+}
+{9}
+
+#MACRO {\e,}
+{
+	south
+}
+
+#MACRO {\e.}
+{
+	southeast
+}
+
+#MACRO {\e<}
+{
+	down
+}
+
+#MACRO {\eI}
+{
+	up
+}
+
+#MACRO {\eK}
+{
+	#if {&{doorFound}}
+	{
+		#if {&{doorName}}
+		{
+			open $doorName $lastDirection
+		};
+		#else
+		{
+			#echo {Nothing to open.}
+		}
+	};
+	#else
+	{
+		enter portal
+	}
+}
+
+#MACRO {\ei}
+{
+	north
+}
+
+#MACRO {\ej}
+{
+	west
+}
+
+#MACRO {\ek}
+{
+	scan
+}
+
+#MACRO {\el}
+{
+	east
+}
+
+#MACRO {\em}
+{
+	southwest
+}
+
+#MACRO {\eo}
+{
+	northeast
+}
+
+#MACRO {\eu}
+{
+	northwest
+}
+
+#VARIABLE         {exitCount}  {}
+#VARIABLE         {exitfind}  {false}
+#VARIABLE         {exits}  {}
+#VARIABLE         {lastDirection}  {}
+#VARIABLE         {waypoint}  {}
+#VARIABLE         {waypointType}  {}

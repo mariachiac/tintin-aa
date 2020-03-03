@@ -1,0 +1,33 @@
+#ACTION {^You cut %1 from %2.$}
+{
+	#regexp {%1} {{.*} {.*}} {#if {"$autojunk" == "true"} {$junkType &2}}
+}
+{9}
+
+#ALIAS {^w{a|ad|add|ch|che|chec|check|cr|cre|crea|creat|create|f|fi|fin|fini|finis|finish|u|up|upg|upgr|upgra|upgrad|upgrade} %2}
+{
+	#switch {"%1"}
+	{
+		#case {"{a.*}"}
+		{
+			woodcraft add %2
+		};
+		#case {"{ch.*}"}
+		{
+			woodcraft check %2
+		};
+		#case {"{cr.*}"}
+		{
+			woodcraft create %2
+		};
+		#case {"{f.*}"}
+		{
+			woodcraft finish %2
+		};
+		#case {"{u.*}"}
+		{
+			woodcraft upgrade %2
+		}
+	}
+}
+{9}
