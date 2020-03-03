@@ -1,0 +1,3 @@
+To make brewing more convenient, set your brew container with the brew in command. For example, brew in bowl will use a container called bowl.
+When your brew container is set, you can simply type empty to empty it or bottle to bottle it.
+You will also automatically identify successful brews.

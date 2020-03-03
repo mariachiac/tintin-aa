@@ -148,10 +148,6 @@
 	#replace {HOME} {-n } {};
 	#nop {Load all the .tin files in the modules directory in classes named after the module name.};
 	#script {for module in modules/*.tin ; do echo "#class {$(basename "$module" .tin)} {read} {$module}";done};
-	#nop {Display intro message.};
-	#echo {@separator{}};
-	#system {fold -w $(tput cols) -s MOTD};
-	#echo {@separator{}};
 	#echo {To get started type login};
 }
 
@@ -176,4 +172,3 @@
 }
 
 #VARIABLE         {loginName}  {FALSE}
-#VARIABLE         {motd}  {}
