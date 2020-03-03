@@ -1,0 +1,4 @@
+#!/usr/bin/bash
+cd /opt/tintin-alteraeon
+tt++ aa.tin
+exit 0

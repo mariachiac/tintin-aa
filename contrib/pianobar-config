@@ -1,0 +1,4 @@
+user = email_address
+password = password
+event_command = ~/.config/pianobar/pianobar-eventcmd.sh
+audio_quality = high

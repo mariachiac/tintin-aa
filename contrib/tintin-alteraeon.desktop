@@ -1,0 +1,14 @@
+[Desktop Entry]
+Type=Application
+Version=1.0
+Encoding=UTF-8
+Name=Alter Aeon
+Name[en]=Alter Aeon
+GenericName=Sound and accessibility pack for Alter Aeon
+GenericName[en]=Sound and accessibility pack for Alter Aeon
+Comment=Sound and accessibility pack for Alter Aeon
+Comment[en]=Sound and accessibility pack for Alter Aeon
+Exec=/usr/bin/gnome-terminal --maximize --hide-menubar --working-directory=/opt/tintin-alteraeon/ --title="Alter Aeon" -e "/usr/bin/screen -c /etc/screenrc -q -t 'Alter Aeon' /usr/bin/tintin-alteraeon"
+StartupNotify=false
+Icon=alteraeon
+Categories=Application;Game;ArcadeGame
