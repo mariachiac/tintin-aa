@@ -20,7 +20,7 @@
 }
 {1}
 
-#ACTION {You are {now|in|the} %1.}
+#ACTION {^You are now in %1.$}
 {
 	seq_play new area
 }
