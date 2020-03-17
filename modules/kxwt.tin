@@ -5,7 +5,7 @@
 	#variable {areaName} {default};
 	#if {$oldAreaNumber != $areaNumber}
 	{
-		play new_area;
+		play new-area;
 		#variable {oldAreaNumber} {-1}
 	}
 }
@@ -301,18 +301,6 @@
 #ACTION {^kxwt_%1 %2}
 {
 	#variable {kxwt[%1]} {%2}
-}
-{9}
-
-#ACTION {^kxwt_supported$}
-{
-	#cursor {echo} {on};
-	#variable {client[gagPing]} {true};
-	ping;
-	set ctrigger on | prefix silent_;
-	set telnetga off | prefix silent_;
-	SHOW_VERSION;
-	%connect cowsay | prefix silent_
 }
 {9}
 
