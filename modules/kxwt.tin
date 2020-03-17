@@ -5,7 +5,7 @@
 	#variable {areaName} {default};
 	#if {$oldAreaNumber != $areaNumber}
 	{
-		play new-area;
+		play new_area;
 		#variable {oldAreaNumber} {-1}
 	}
 }
