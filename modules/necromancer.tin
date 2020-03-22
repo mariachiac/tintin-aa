@@ -1,17 +1,3 @@
-#ACTION {%1 resists the spell.$}
-{
-	#if {&{lastSoulsteal}}
-	{
-		#regexp {%1} {{.*} {.*}} {vcast soulsteal &2};
-		#else
-		{
-			vcast soulsteal %1
-		};
-		#unvariable {lastSoulsteal}
-	}
-}
-{1}
-
 #ACTION {^A deadly mist begins rising from %* body...$}
 {
 	#send {\cc};
@@ -27,29 +13,6 @@
 	}
 }
 {1}
-
-#ACTION {%1 is mortally wounded, and will die soon if not aided.$}
-{
-	#if {"${skillsAndSpells[soulsteal]}" == "true" && ${character[currentMana]} >= 15}
-	{
-		#if {"$lastSoulsteal" != "%1"}
-		{
-			#list {noSoulstealMobsList} {find} {%1} {noSoulstealIndex};
-			#if {$noSoulstealIndex == 0}
-			{
-				@command{c so;cast soulsteal}
-			}
-		};
-		#variable {lastSoulsteal} {%1}
-	};
-	seq_play mortally-wounded;
-	#if {"${character[cspam]}" == "true"}
-	{
-		#showme {%1 is morted.};
-		#line {gag}
-	}
-}
-{2}
 
 #ACTION {^A {clay man|bone guardian|flesh beast|metal construct|wood woad} {starts|stops} following you.$}
 {
