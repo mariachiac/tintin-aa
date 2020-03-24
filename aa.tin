@@ -30,7 +30,7 @@
 }
 {9}
 
-#ALIAS {^{aa|login}$}
+#ALIAS {^login$}
 {
 	#if {!&{connected}}
 	{
@@ -106,7 +106,7 @@
 }
 {9}
 
-#ALIAS {^{aa|login}%s%w$}
+#ALIAS {^login%s%w$}
 {
 	#format {loginName} {%l} {%3};
 	#if {!&{connected}}
