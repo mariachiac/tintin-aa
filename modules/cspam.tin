@@ -557,16 +557,6 @@
 }
 {9}
 
-#ALIAS {^{l|lo|loo|look} %s%S$}
-{
-	#send {%0};
-	#if {"${character[cspam]}" == "true"}
-	{
-		lecho silent_update
-	}
-}
-{9}
-
 #ALIAS {^{noc|c}spam$}
 {
 	#if {"%0" == "cspam"}
@@ -581,27 +571,5 @@
 	}
 }
 {9}
-
-#EVENT {RECEIVED LINE}
-{
-	#if {"${character[cspam]}" == "true"}
-	{
-		#regexp {%0} {^{${cspam[textCounterExceptions]}|}$} {#if {${cspam[lastLineOfTextCounter]} > 1}{#echo {(X${cspam[lastLineOfTextCounter]})};#variable {cspam[oldText]} {${cspam[lastLineOfText]}}};#variable {cspam[lastLineOfText]} {%0};#variable {cspam[lastLineOfTextCounter]} {1}};
-		#else
-		{
-			#regexp {%0} {^${cspam[lastLineOfText]}$} {#math {cspam[lastLineOfTextCounter]} {${cspam[lastLineOfTextCounter]} + 1};#line {gag}};
-			#else
-			{
-				#if {${cspam[lastLineOfTextCounter]} > 1}
-				{
-					#echo {(X${cspam[lastLineOfTextCounter]})};
-					#variable {cspam[oldText]} {${cspam[lastLineOfText]}}
-				};
-				#variable {cspam[lastLineOfText]} {%0};
-				#variable {cspam[lastLineOfTextCounter]} {1}
-			}
-		}
-	}
-}
 
 #VARIABLE         {cspam}  {{formatString}{}{lastLineOfText}{}{lastLineOfTextCounter}{1}{oldText}{}{textCounterExceptions}{!!SOUND.*|\(using a .* soulstone\)|Alas,.*|.*empty\.|kxwt.*|\(auction\).*|\*tick\*|finger      - .*|neck        - .*|wrist       - .*|.* growls at you, warning you away\.|.* is mortally wounded, and will die soon if not aided\.|.* someone else beat .*|Mudmail.*|Sorry.*|You .*|.* rips a bone .*|.* starts harvesting .*|.* from the corpse.*|Nothing\.|Someone.*|\*interrupt\*|\[new line\]:|.*cannot carry any more weight without sinking\.|In your dreams, or what\?|silent_.*|scrollcounter_.*}}
