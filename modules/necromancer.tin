@@ -1,3 +1,14 @@
+#ACTION {%1 is mortally wounded, and will die soon if not aided.$}
+	{
+	seq_play mortally-wounded;
+	#if {"${character[cspam]}" == "true"}
+	{
+		#showme {%1 is morted.};
+		#line {gag}
+	}
+	}
+{2}
+
 #ACTION {^A deadly mist begins rising from %* body...$}
 {
 	#send {\cc};
