@@ -10,26 +10,6 @@
 }
 {9}
 
-#ACTION {%1 approaches, but is unable to come near enough to attack.$}
-{
-	#if {"${character[cspam]}" == "true"}
-	{
-		#variable {cspam[lastLineOfTextCounter]} {0};
-		#line {gag}
-	}
-}
-{9}
-
-#ACTION {%1 circles at a distance, but does not approach.$}
-{
-	#if {"${character[cspam]}" == "true"}
-	{
-		#variable {cspam[lastLineOfTextCounter]} {0};
-		#line {gag}
-	}
-}
-{9}
-
 #ACTION {%1 kicks at %2 but barely makes contact.$}
 {
 	#if {"${character[cspam]}" == "true"}
@@ -44,16 +24,6 @@
 	#if {"${character[cspam]}" == "true"}
 	{
 		#showme {%1 ignores your feignt.};
-		#line {gag}
-	}
-}
-{9}
-
-#ACTION {%1 shrinks away in fear.$}
-{
-	#if {"${character[cspam]}" == "true"}
-	{
-		#variable {cspam[lastLineOfTextCounter]} {0};
 		#line {gag}
 	}
 }
@@ -500,17 +470,6 @@
 }
 {9}
 
-#ACTION {^\x28%s%d\x29%3}
-{
-	#if {"${character[cspam]}" == "true"}
-	{
-		#showme {%3 %2};
-		#line {gag}
-	};
-	#regexp {%3} {{.*}corpse of{.*}} {seq_play corpse}
-}
-{9}
-
 #ACTION {^{A|An|The} %1 twitches and starts fidgeting.$}
 {
 	#if {"${character[cspam]}" == "true"}
@@ -571,5 +530,3 @@
 	}
 }
 {9}
-
-#VARIABLE         {cspam}  {{formatString}{}{lastLineOfText}{}{lastLineOfTextCounter}{1}{oldText}{}{textCounterExceptions}{!!SOUND.*|\(using a .* soulstone\)|Alas,.*|.*empty\.|kxwt.*|\(auction\).*|\*tick\*|finger      - .*|neck        - .*|wrist       - .*|.* growls at you, warning you away\.|.* is mortally wounded, and will die soon if not aided\.|.* someone else beat .*|Mudmail.*|Sorry.*|You .*|.* rips a bone .*|.* starts harvesting .*|.* from the corpse.*|Nothing\.|Someone.*|\*interrupt\*|\[new line\]:|.*cannot carry any more weight without sinking\.|In your dreams, or what\?|silent_.*|scrollcounter_.*}}
