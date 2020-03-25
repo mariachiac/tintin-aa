@@ -149,7 +149,7 @@
 }
 {9}
 
-#ACTION {^The corpse of %* is lying here.$}
+#ACTION {%* The corpse of %* is lying here.$}
 {
 	seq_play corpse
 }
