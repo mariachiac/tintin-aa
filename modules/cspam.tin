@@ -1,15 +1,3 @@
-#ACTION {%1 *** %2 *** %3!$}
-{
-	#if {"${character[cspam]}" == "true"}
-	{
-		#variable {cspam[formatString]} {%0};
-		#line SUBSTITUTE ESCAPES #replace {cspam[formatString]} {***} {*};
-		#showme {${cspam[formatString]}};
-		#line {gag}
-	}
-}
-{9}
-
 #ACTION {%1 kicks at %2 but barely makes contact.$}
 {
 	#if {"${character[cspam]}" == "true"}
