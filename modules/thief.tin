@@ -50,13 +50,6 @@
 }
 {5}
 
-#ACTION {^You slip {from the shadows|quietly from your hiding spot}.$}
-{
-	#variable {busy} {false};
-	play hide-slip
-}
-{8}
-
 #ACTION {^You throw a %1 {bottle|potion} of %3 at %4, but it fails to break!$}
 {
 	get %2
@@ -72,22 +65,6 @@
 }
 {9}
 
-#ACTION {^You attempt to pin %1's shadow to the ground, but miss!$}
-{
-	#if {"${skillsAndSpells[shadow bind]}" == "true" && "${character[inBattle]}" == "false" && &{client[bindName]}}
-	{
-		shadow bind ${client[bindName]}
-	}
-}
-{9}
-
-#ACTION {^You slip%*hiding spot.$}
-{
-	#variable {busy} {true};
-	play hide-success
-}
-{9}
-
 #ACTION {^You throw %1 at %2{!|\.}$}
 {
 	#regexp {%1} {{.*} {.*}} {#if {"&2" != "{electricity|fire.*|ice|snowball|unfire}"} {get &2}}
@@ -100,13 +77,6 @@
 	{
 		stop
 	}
-}
-{9}
-
-#ACTION {^You try to move stealthily, but fail!$}
-{
-	#variable {busy} {false};
-	play hide-fail
 }
 {9}
 
@@ -212,14 +182,12 @@
 #ALIAS {^{bin|bind} %1}
 {
 	shadow bind %1;
-	#variable {client[bindName]} {%1}
 }
 {9}
 
 #ALIAS {^{bin|bind}$}
 {
 	shadow bind;
-	#variable {client[bindName]} {}
 }
 {9}
 
