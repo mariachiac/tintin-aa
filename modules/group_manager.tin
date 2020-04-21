@@ -54,14 +54,6 @@
 {
 	#variable {auto[donateunique]} {false};
 	#variable {auto[getunique]} {false};
-	#variable {groupRating[index]} {1};
-	#delay {autoGroupRating} {#echo {To give the group leader the recommended rank of ${groupRating[${groupRating[index]}]}, type rate.};synth_play notificationSound} {1200}
-}
-{9}
-
-#ACTION {^You have been removed from the group.$}
-{
-	#undelay {autoGroupRating}
 }
 {9}
 
@@ -69,7 +61,6 @@
 {
 	exp | prefix silent_;
 	#unvariable {group};
-	#undelay {autoGroupRating}
 }
 {9}
 
@@ -164,12 +155,6 @@
 }
 {9}
 
-#ALIAS {^rating$}
-{
-	#echo {The suggested rating for ${group[leader]}'s group is ${groupRating[${groupRating[index]}]}\.}
-}
-{9}
-
 #ALIAS {^{auto|noauto}follow$}
 {
 	#if {"%0" == "autofollow"}
@@ -185,20 +170,5 @@
 }
 {9}
 
-#ALIAS {^{rat|rate}$}
-{
-	#echo {Rating group as ${groupRating[${groupRating[index]}]}\.};
-	group rate ${groupRating[${groupRating[index]}]}
-}
-{9}
-
-#ALIAS {^{rat|rate}%s%d$}
-{
-	#echo {Rating ${group[leader]}'s group as ${groupRating[%3]}\. The suggested rating is ${groupRating[${groupRating[index]}]}\.};
-	group rate ${groupRating[%3]}
-}
-{9}
-
 #SUBSTITUTE       {^%S would like to join your group!  Use the 'group summon' command to add {her|him|it}.}                                                                     {%1 would like to join your group!  Press alt+shift+Y or use the 'group summon' command to add %2.}                                                                          {5}
 #VARIABLE         {group}  {}
-#VARIABLE         {groupRating}  {{index}{1}{1}{excellent}{2}{great}{3}{good}{4}{fair}{5}{poor}{6}{bad}{7}{dangerous}{8}{gamlin}}
