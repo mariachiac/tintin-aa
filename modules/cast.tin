@@ -1,0 +1,19 @@
+#ACTION {^You can't control %* right now.$}
+{
+	#variable {castTankMinion} {true}
+}
+{9}
+
+#ACTION {^silent_recast_%S_Spell '%2',%*}
+{
+	recast %1 %2
+}
+{9}
+
+#ALIAS {^{v|verify}cast %1}
+{
+	cast %1 | prefix vcast_%1_
+}
+{9}
+
+#SUBSTITUTE       {^vcast_%*_}  {}  {5}
