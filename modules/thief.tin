@@ -65,12 +65,6 @@
 }
 {9}
 
-#ACTION {^You throw %1 at %2{!|\.}$}
-{
-	#regexp {%1} {{.*} {.*}} {#if {"&2" != "{electricity|fire.*|ice|snowball|unfire}"} {get &2}}
-}
-{9}
-
 #ACTION {^You throw caution to the wind and engage %1 in melee combat!$}
 {
 	#if {"${auto[stop]}" == "true"}
