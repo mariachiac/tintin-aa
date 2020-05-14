@@ -1,227 +1,227 @@
-#ACTION {^%S yel{ls|l}, '{W|w}azzup!'$}
+#action {^%S yel{ls|l}, '{W|w}azzup!'$}
 {
 	Channel_Event all %0;
 		seq_play socials/wazzup
 }
 {4}
 
-#ACTION {^You emote: %S yells, 'Wazzup!'$}
+#action {^You emote: %S yells, 'Wazzup!'$}
 {
 	seq_play socials/wazzup
 }
 {4}
 
-#ACTION {%1 leans out the van window and says, 'Hey, you want %2? It's in the van... get in.'$}
+#action {%1 leans out the van window and says, 'Hey, you want %2? It's in the van... get in.'$}
 {
 	seq_play socials/perv
 }
 {5}
 
-#ACTION {^%S loudly exclai{m|ms}, 'FTF!'$}
+#action {^%S loudly exclai{m|ms}, 'FTF!'$}
 {
 	seq_play socials/ftf
 }
 {7}
 
-#ACTION {^You howl at the moon.$}
+#action {^You howl at the moon.$}
 {
 	seq_play socials/howl
 }
 {8}
 
-#ACTION {%1 burps at %2.$}
+#action {%1 burps at %2.$}
 {
 	seq_play socials/burp
 }
 {9}
 
-#ACTION {%1 burps in your general direction.$}
+#action {%1 burps in your general direction.$}
 {
 	seq_play socials/burp
 }
 {9}
 
-#ACTION {%1 bur{ps|p}.$}
+#action {%1 bur{ps|p}.$}
 {
 	seq_play socials/burp
 }
 {9}
 
-#ACTION {%1 enjoys a cup of coffee.$}
+#action {%1 enjoys a cup of coffee.$}
 {
 	seq_play socials/coffee
 }
 {9}
 
-#ACTION {%1 farts, and is engulfed in a swirling green stench cloud.$}
+#action {%1 farts, and is engulfed in a swirling green stench cloud.$}
 {
 	seq_play socials/fart
 }
 {9}
 
-#ACTION {%1 grins at everyone lecherously.$}
+#action {%1 grins at everyone lecherously.$}
 {
 	seq_play socials/perv
 }
 {9}
 
-#ACTION {%1 has 'urges', please excuse {her|him|it}.$}
+#action {%1 has 'urges', please excuse {her|him|it}.$}
 {
 	seq_play socials/perv
 }
 {9}
 
-#ACTION {%1 po{p|ps} open a bottle of beer and enjo{y|ys}.$}
+#action {%1 po{p|ps} open a bottle of beer and enjo{y|ys}.$}
 {
 	seq_play socials/beer
 }
 {9}
 
-#ACTION {%1 wags {her|his|its} tail and barks excitedly.$}
+#action {%1 wags {her|his|its} tail and barks excitedly.$}
 {
 	seq_play socials/bark
 }
 {9}
 
-#ACTION {%1 {bark|barks} at %2.$}
+#action {%1 {bark|barks} at %2.$}
 {
 	seq_play socials/bark
 }
 {9}
 
-#ACTION {%1 {fart|farts uncerimoniously} in %2 direction.$}
+#action {%1 {fart|farts uncerimoniously} in %2 direction.$}
 {
 	seq_play socials/fart
 }
 {9}
 
-#ACTION {%1 {feel two-dimensional and bark for some odd reason|barf|barfs} {at the thought|just thinking about it|does an impression of the dog from Family Circus}.$}
+#action {%1 {feel two-dimensional and bark for some odd reason|barf|barfs} {at the thought|just thinking about it|does an impression of the dog from Family Circus}.$}
 {
 	seq_play socials/barf
 }
 {9}
 
-#ACTION {%1 {puke|pukes} all over {yourself, how gross|herself, EWWWW|himself, EWWWW|itself, EWWWW|the place}{\.|!}$}
+#action {%1 {puke|pukes} all over {yourself, how gross|herself, EWWWW|himself, EWWWW|itself, EWWWW|the place}{\.|!}$}
 {
 	seq_play socials/puke
 }
 {9}
 
-#ACTION {^%S grabs %1 and humps it for all he's worth.$}
+#action {^%S grabs %1 and humps it for all he's worth.$}
 {
 	seq_play socials/hump
 }
 {9}
 
-#ACTION {^%S howls like a forlorn coyote.$}
+#action {^%S howls like a forlorn coyote.$}
 {
 	seq_play socials/howl
 }
 {9}
 
-#ACTION {^%S humps {her|his|its} hand.$}
+#action {^%S humps {her|his|its} hand.$}
 {
 	seq_play socials/hump
 }
 {9}
 
-#ACTION {^%S jumps onto %2 and humps {her|him|it} like a 15-year-old boy.$}
+#action {^%S jumps onto %2 and humps {her|him|it} like a 15-year-old boy.$}
 {
 	seq_play socials/hump
 }
 {9}
 
-#ACTION {^%S loo{k|ks} for a leg to hump.$}
+#action {^%S loo{k|ks} for a leg to hump.$}
 {
 	seq_play socials/hump
 }
 {9}
 
-#ACTION {^%S than{k|ks} {the world for music|herself, for a job well done|himself, for a job well done|itself, for a job well done|yourself, for a job well done}.$}
+#action {^%S than{k|ks} {the world for music|herself, for a job well done|himself, for a job well done|itself, for a job well done|yourself, for a job well done}.$}
 {
 	seq_play socials/thanks
 }
 {9}
 
-#ACTION {^%S {give|gives} %3 the birdie.$}
+#action {^%S {give|gives} %3 the birdie.$}
 {
 	seq_play socials/bird
 }
 {9}
 
-#ACTION {^%S {thank|thanks} %S.$}
+#action {^%S {thank|thanks} %S.$}
 {
 	seq_play socials/thanks
 }
 {9}
 
-#ACTION {^%S {throw|throws} back {her|his|its|your} head and {howl|howls} mournfully at %5's misfortune.$}
+#action {^%S {throw|throws} back {her|his|its|your} head and {howl|howls} mournfully at %5's misfortune.$}
 {
 	seq_play socials/howl
 }
 {9}
 
-#ACTION {^%S {throw|throws} back {her|his|its|your} head and {howl|howls} mournfully at {her|his|its|your} own misfortune.$}
+#action {^%S {throw|throws} back {her|his|its|your} head and {howl|howls} mournfully at {her|his|its|your} own misfortune.$}
 {
 	seq_play socials/howl
 }
 {9}
 
-#ACTION {^%S {throw|throws} back {her|his|its|your} head and {howl|howls} mournfully.$}
+#action {^%S {throw|throws} back {her|his|its|your} head and {howl|howls} mournfully.$}
 {
 	seq_play socials/howl
 }
 {9}
 
-#ACTION {^Arf! Woof! Aroooo!$}
+#action {^Arf! Woof! Aroooo!$}
 {
 	seq_play socials/bark
 }
 {9}
 
-#ACTION {^Finding no one to hump, you decide to hump yourself.$}
+#action {^Finding no one to hump, you decide to hump yourself.$}
 {
 	seq_play socials/hump
 }
 {9}
 
-#ACTION {^You attempt to use %1 as a lure.$}
+#action {^You attempt to use %1 as a lure.$}
 {
 	seq_play socials/perv
 }
 {9}
 
-#ACTION {^You burp in the general direction of %1.}
+#action {^You burp in the general direction of %1.}
 {
 	seq_play socials/burp
 }
 {9}
 
-#ACTION {^You grab %1 and hump it like there's no tomorrow.$}
+#action {^You grab %1 and hump it like there's no tomorrow.$}
 {
 	seq_play socials/hump
 }
 {9}
 
-#ACTION {^You hold your precious coffee mug with care and love and sip the elixir within.$}
+#action {^You hold your precious coffee mug with care and love and sip the elixir within.$}
 {
 	seq_play socials/coffee
 }
 {9}
 
-#ACTION {^You jump onto %* and hump {her|him|it} till the cows come home.$}
+#action {^You jump onto %* and hump {her|him|it} till the cows come home.$}
 {
 	seq_play socials/hump
 }
 {9}
 
-#ACTION {^You {fart, and are totally amazed at the resulting smell|fart then look around innocently|smell something foul\. Ok, who farted}{\.|\?}$}
+#action {^You {fart, and are totally amazed at the resulting smell|fart then look around innocently|smell something foul\. Ok, who farted}{\.|\?}$}
 {
 	seq_play socials/fart
 }
 {9}
 
-#ACTION {^You're a pervert and you know it.$}
+#action {^You're a pervert and you know it.$}
 {
 	seq_play socials/perv
 }
@@ -242,130 +242,130 @@
 #SUBSTITUTE       {^You emote: %S smiles a little, then stops.$}                          {You smile a little, then stop.}       {5}
 #SUBSTITUTE       {^You emote: %S yells, 'Wazzup!'$}              {You yell, 'Wazzup!'}  {5}
 
-#ACTION {^You yawn so wide everyone can see your tonsils.$}
+#action {^You yawn so wide everyone can see your tonsils.$}
 {
 seq_play socials/yawn
 }
 {5}
 
-#ACTION {^%1 yawns so wide you can see {her|his|its} tonsils.$}
+#action {^%1 yawns so wide you can see {her|his|its} tonsils.$}
 {
 seq_play socials/yawn
 }
 {5}
 
-#ACTION {^%S laug{h|hs} out loud.$}
+#action {^%S laug{h|hs} out loud.$}
 {
 seq_play socials/laugh
 }
 {9}
 
-#ACTION {^%w rol{l|ls} about the floor laughing.$}
+#action {^%w rol{l|ls} about the floor laughing.$}
 {
 seq_play socials/laugh
 }
 {9}
 
-#ACTION {^%w rol{l|ls} around the floor laughing at {her|his|its|your} stupidity.$}
+#action {^%w rol{l|ls} around the floor laughing at {her|his|its|your} stupidity.$}
 {
 seq_play socials/laugh
 }
 {9}
 
-#ACTION {^Wink, wink, nudge nudge.$}
+#action {^Wink, wink, nudge nudge.$}
 {
 seq_play socials/nudge
 }
 {5}
-#ACTION {^I do not even want to know what you are thinking.$}
+#action {^I do not even want to know what you are thinking.$}
 {
 seq_play socials/nudge
 }
 {5}
-#ACTION {^You give %1 a soft nudge.$}
+#action {^You give %1 a soft nudge.$}
 {
 seq_play socials/nudge
 }
 {5}
 
-#ACTION {^You poke at something.$}
+#action {^You poke at something.$}
 {
 seq_play socials/poke
 }
 {5}
-#ACTION {^%S pokes you in the ribs.$}
+#action {^%S pokes you in the ribs.$}
 {
 seq_play socials/nudge
 }
 {5}
-#ACTION {^You poke yourself in the gut, looking at your sparetire.$}
+#action {^You poke yourself in the gut, looking at your sparetire.$}
 {
 seq_play socials/poke
 }
 {5}
-#ACTION {^%w pokes {herself|himself|itself} in the gut, ever self-conscious of {her|his|its} appearance.$}
+#action {^%w pokes {herself|himself|itself} in the gut, ever self-conscious of {her|his|its} appearance.$}
 {
 seq_play socials/poke
 }
 {9}
 
-#ACTION {^You sigh.$}
+#action {^You sigh.$}
 {
 seq_play socials/sigh
 }
 {9}
-#ACTION {^%1 sighs somberly.$}
+#action {^%1 sighs somberly.$}
 {
 seq_play socials/sigh
 }
 {9}
-#ACTION {^You sigh in your own general direction.$}
+#action {^You sigh in your own general direction.$}
 {
 seq_play socials/sigh
 }
 {9}
-#ACTION {^%1 sighs at you.$}
+#action {^%1 sighs at you.$}
 {
 seq_play socials/sigh
 }
 {9}
-#ACTION {^%1 sighs at %2.$}
+#action {^%1 sighs at %2.$}
 {
 seq_play socials/sigh
 }
 {9}
-#ACTION {^You cough loudly.$}
+#action {^You cough loudly.$}
 {
 seq_play socials/cough
 }
 {9}
-#ACTION {^You cough quietly to yourself.$}
+#action {^You cough quietly to yourself.$}
 {
 seq_play socials/cough
 }
 {9}
-#ACTION {^%w coughs loudly.$}
+#action {^%w coughs loudly.$}
 {
 seq_play socials/cough
 }
 {9}
-#ACTION {^You cough *bullshit* at %1.$}
+#action {^You cough *bullshit* at %1.$}
 {
 seq_play socials/cough
 }
 {9}
-#ACTION {^%1 coughs quietly to {her|him|itself}.$}
+#action {^%1 coughs quietly to {her|him|itself}.$}
 {
 seq_play socials/cough
 }
 {9}
-#ACTION {^%1 coughs *bullshit* at %2.$}
+#action {^%1 coughs *bullshit* at %2.$}
 {
 seq_play socials/cough
 }
 {9}
 
-#ACTION {^%w snicker%*.$}
+#action {^%w snicker%*.$}
 {
 seq_play socials/laugh
 }
