@@ -1,3 +1,3 @@
-#VARIABLE         {mudAddress}  {alteraeon.com}
-#VARIABLE         {mudPort}  {3010}
-#VARIABLE         {mudSessionName}  {Alter Aeon}
+#variable         {mudAddress}  {alteraeon.com}
+#variable         {mudPort}  {3010}
+#variable         {mudSessionName}  {Alter Aeon}
