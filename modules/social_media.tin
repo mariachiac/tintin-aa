@@ -1,4 +1,4 @@
-#ACTION {^The pumpkin cannon operator says, 'the record distance is %1 feet, held by %2'$}
+#action {^The pumpkin cannon operator says, 'the record distance is %1 feet, held by %2'$}
 {
 	#if {&{pumpkinCannonFeet} && &{pumpkinCannonLocation}}
 	{
@@ -14,7 +14,7 @@
 }
 {9}
 
-#ACTION {^You have achieved the rank of '%1' in %2!$}
+#action {^You have achieved the rank of '%1' in %2!$}
 {
 	post $name has achieved the rank of '%1' in %2!;
 	notify-send $name has achieved the rank of '%1' in %2!;
@@ -22,14 +22,14 @@
 }
 {5}
 
-#ACTION {^You turn %1 years old today!$}
+#action {^You turn %1 years old today!$}
 {
 	post $name turned %1 years old today! Happy birthday!;
 	notify-send $name turned %1 years old today! Happy birthday!
 }
 {5}
 
-#ACTION {^You weep as you think of the %d experience that you lost.$}
+#action {^You weep as you think of the %d experience that you lost.$}
 {
 	#if {${character[currentHp]} >= 1}
 	{
@@ -49,7 +49,7 @@
 }
 {5}
 
-#ACTION {^[event] The pumpkin cannon operator: %S shot a pumpkin a distance of %d feet %3!$}
+#action {^[event] The pumpkin cannon operator: %S shot a pumpkin a distance of %d feet %3!$}
 {
 	#if {"%1" == "%i$name"}
 	{
@@ -59,7 +59,7 @@
 }
 {9}
 
-#ACTION {^ %1You are now level %2 %3, with %4 total levels!$}
+#action {^ %1You are now level %2 %3, with %4 total levels!$}
 {
 	show stats | prefix silent_;
 	show clev | prefix silent_;
@@ -69,14 +69,14 @@
 }
 {9}
 
-#ACTION {^%w calls upon %2 to bring the corpse of $name back to life!$}
+#action {^%w calls upon %2 to bring the corpse of $name back to life!$}
 {
 	post $name was resurrected by %1!;
 	notify-send $name was resurrected by %1!
 }
 {9}
 
-#ACTION {^You have completed the achievement:%1}
+#action {^You have completed the achievement:%1}
 {
 	post $name has completed the achievement %1!;
 	notify-send $name has completed the achievement %1!;
@@ -84,7 +84,7 @@
 }
 {9}
 
-#ACTION {^You have {advanced|fallen} to position %d on the '%3' leaderboard!$}
+#action {^You have {advanced|fallen} to position %d on the '%3' leaderboard!$}
 {
 	#if {"$leaderboardUpdateString" == ""}
 	{
@@ -97,7 +97,7 @@
 }
 {9}
 
-#ACTION {^\x28notify\x29 $name%1}
+#action {^\x28notify\x29 $name%1}
 {
 	post $name %1;
 	notify-send $name %1
@@ -114,7 +114,7 @@
 }
 {9}
 
-#ALIAS {^leaderboard_update$}
+#alias {^leaderboard_update$}
 {
 	#if {"$leaderboardUpdateString" != ""}
 	{
@@ -159,7 +159,7 @@
 }
 {9}
 
-#ALIAS {^{facebook|gnusocial|pump.io|twitter|nofacebook|nognusocial|nopump.io|notwitter}$}
+#alias {^{facebook|gnusocial|pump.io|twitter|nofacebook|nognusocial|nopump.io|notwitter}$}
 {
 	#switch {"%0"}
 	{
@@ -207,4 +207,4 @@
 }
 {9}
 
-#VARIABLE         {leaderboardUpdateString}     {}
+#variable         {leaderboardUpdateString}     {}
