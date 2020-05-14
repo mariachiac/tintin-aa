@@ -1,10 +1,10 @@
-#ACTION {^You cast a powerful healing spell on yourself.$}
+#action {^You cast a powerful healing spell on yourself.$}
 {
 	FULL_HEAL
 }
 {9}
 
-#ACTION {^You feel sick.$}
+#action {^You feel sick.$}
 {
 	#if {"${auto[removepoison]}" == "true"}
 	{
@@ -20,19 +20,19 @@
 }
 {9}
 
-#ACTION {^You feel {a little better|better}{\.|!}$}
+#action {^You feel {a little better|better}{\.|!}$}
 {
 	FULL_HEAL
 }
 {9}
 
-#ALIAS {H}
+#alias {H}
 {
 	@harm{%0}
 }
 {9}
 
-#ALIAS {^/$}
+#alias {^/$}
 {
 	#if {${character[currentMana]} >= 17 && "${skillsAndSpells[word of recall]}" == "true"}
 	{
@@ -45,7 +45,7 @@
 }
 {9}
 
-#ALIAS {^FULL_HEAL$}
+#alias {^FULL_HEAL$}
 {
 	#if {&{character[fullHeal]}  && ${character[currentMana]} > ${character[maxMana]} / 5 && ${character[currentHp]} < ${character[maxHp]} && "${character[inBattle]}" != "true" && "$busy" != "true"}
 	{
@@ -74,7 +74,7 @@
 }
 {9}
 
-#ALIAS {^fullheal$}
+#alias {^fullheal$}
 {
 	#if {"${skillsAndSpells[major heal]}" == "true"}
 	{
@@ -96,7 +96,7 @@
 }
 {9}
 
-#ALIAS {^{auto|noauto}{recall|removepoison}$}
+#alias {^{auto|noauto}{recall|removepoison}$}
 {
 	#if {"%1" == "auto"}
 	{
@@ -111,13 +111,13 @@
 }
 {9}
 
-#ALIAS {h}
+#alias {h}
 {
 	@heal{%0}
 }
 {9}
 
-#FUNCTION {harm}
+#function {harm}
 {
 	#if {"${skillsAndSpells[harm]}" == "true"}
 	{
@@ -138,7 +138,7 @@
 	#variable {result} {c ${character[harmSpell]} %0}
 }
 
-#FUNCTION {heal}
+#function {heal}
 {
 	#if {"%0" == "" && ${character[currentHp]} == ${character[maxHp]}}
 	{
