@@ -1,4 +1,4 @@
-#ALIAS {^set{a|b|c|d|e|f|g|h|n|q|r|s|t|v|w|x|y|z|A|D|F|H|Q|W|E} %2}
+#alias {^set{a|b|c|d|e|f|g|h|n|q|r|s|t|v|w|x|y|z|A|D|F|H|Q|W|E} %2}
 {
 	#if {!&{keySetName}}
 	{
@@ -11,7 +11,7 @@
 }
 {9}
 
-#ALIAS {^set{a|b|c|d|e|f|g|h|n|q|r|s|t|v|w|x|y|z|A|D|F|H|Q|W|E}$}
+#alias {^set{a|b|c|d|e|f|g|h|n|q|r|s|t|v|w|x|y|z|A|D|F|H|Q|W|E}$}
 {
 	#if {!&{keySetName}}
 	{
@@ -28,7 +28,7 @@
 }
 {9}
 
-#ALIAS {^unset %1}
+#alias {^unset %1}
 {
 	#if {"${skillsAndSpells[%1]}" == "true"}
 	{
@@ -42,7 +42,7 @@
 }
 {9}
 
-#ALIAS {^{ke|key|keyp|keypr|keypro|keyprof|keyprofi|keyprofil|keyprofile|kp|kpr|kpro|kprof|kprofi|kprofil|kprofile|ks|kse|kset|keys|keyse|keyset} %s%S$}
+#alias {^{ke|key|keyp|keypr|keypro|keyprof|keyprofi|keyprofil|keyprofile|kp|kpr|kpro|kprof|kprofi|kprofil|kprofile|ks|kse|kset|keys|keyse|keyset} %s%S$}
 {
 	#format {keySetName} {%n} {%3};
 	#if {!&{keyProfile[${keySetName}]}}
@@ -56,7 +56,7 @@
 }
 {9}
 
-#ALIAS {^{ke|key|keyp|keypr|keypro|keyprof|keyprofi|keyprofil|keyprofile|kp|kpr|kpro|kprof|kprofi|kprofil|kprofile}$}
+#alias {^{ke|key|keyp|keypr|keypro|keyprof|keyprofi|keyprofil|keyprofile|kp|kpr|kpro|kprof|kprofi|kprofil|kprofile}$}
 {
 	#if {!&{keySetName}}
 	{
@@ -66,7 +66,7 @@
 }
 {9}
 
-#ALIAS {^{noauto|auto}keyprofile$}
+#alias {^{noauto|auto}keyprofile$}
 {
 	#if {"%0" == "autokeyprofile"}
 	{
@@ -81,67 +81,67 @@
 }
 {9}
 
-#MACRO {\cc}
+#macro {\cc}
 {
 	#send {\cc}
 }
 
-#MACRO {\eOR}
+#macro {\eOR}
 {
 	f03
 }
 
-#MACRO {\eOS}
+#macro {\eOS}
 {
 	f04
 }
 
-#MACRO {\e[15~}
+#macro {\e[15~}
 {
 	f05
 }
 
-#MACRO {\e[17~}
+#macro {\e[17~}
 {
 	f06
 }
 
-#MACRO {\e[18~}
+#macro {\e[18~}
 {
 	f07
 }
 
-#MACRO {\e[19~}
+#macro {\e[19~}
 {
 	f08
 }
 
-#MACRO {\e[20~}
+#macro {\e[20~}
 {
 	f09
 }
 
-#MACRO {\e[21~}
+#macro {\e[21~}
 {
 	f10
 }
 
-#MACRO {\e[23~}
+#macro {\e[23~}
 {
 	f11
 }
 
-#MACRO {\e[24~}
+#macro {\e[24~}
 {
 	f12
 }
 
-#MACRO {\e[OP}
+#macro {\e[OP}
 {
 	f01
 }
 
-#MACRO {\e[OQ}
+#macro {\e[OQ}
 {
 	f02
 }
