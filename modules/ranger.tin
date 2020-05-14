@@ -1,10 +1,10 @@
-#ACTION {^You cut %1 from %2.$}
+#action {^You cut %1 from %2.$}
 {
 	#regexp {%1} {{.*} {.*}} {#if {"$autojunk" == "true"} {$junkType &2}}
 }
 {9}
 
-#ALIAS {^w{a|ad|add|ch|che|chec|check|cr|cre|crea|creat|create|f|fi|fin|fini|finis|finish|u|up|upg|upgr|upgra|upgrad|upgrade} %2}
+#alias {^w{a|ad|add|ch|che|chec|check|cr|cre|crea|creat|create|f|fi|fin|fini|finis|finish|u|up|upg|upgr|upgra|upgrad|upgrade} %2}
 {
 	#switch {"%1"}
 	{
