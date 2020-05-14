@@ -1,4 +1,4 @@
-#ACTION {^amo_You get %*${amo}\.$}
+#action {^amo_You get %*${amo}\.$}
 {
 	#line {gag};
 	#if {"${auto[store]}" == "true"}
@@ -12,13 +12,13 @@
 }
 {8}
 
-#ACTION {^You fire %1 at %2!$}
+#action {^You fire %1 at %2!$}
 {
 	get $amo | prefix amo_
 }
 {9}
 
-#ACTION {^You load %1 with %2.$}
+#action {^You load %1 with %2.$}
 {
 	#regexp {%2} {{.*} {.*}} {#variable {amo} {&2}};
 	#else
@@ -28,13 +28,13 @@
 }
 {9}
 
-#ACTION {^amo_%*}
+#action {^amo_%*}
 {
 	#line {gag}
 }
 {9}
 
-#ACTION {^{A|An|The} %2 isn't loaded.$}
+#action {^{A|An|The} %2 isn't loaded.$}
 {
 	#if {"${auto[store]}" == "true"}
 	{
@@ -49,7 +49,7 @@
 }
 {9}
 
-#ALIAS {^amocontainer %S$}
+#alias {^amocontainer %S$}
 {
 	#variable {character[amoContainer]} {%1};
 	#echo {Amo will now be stored in %1.}
