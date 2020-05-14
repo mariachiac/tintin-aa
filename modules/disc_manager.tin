@@ -1,4 +1,4 @@
-#ACTION {^Tensor's floating disc abruptly winks out of existence. (carried by you)$}
+#action {^Tensor's floating disc abruptly winks out of existence. (carried by you)$}
 {
 	#nop {There's no loop here, but this stores the number of items in the disc elsewhere, so may as well recycle.};
 	#list {discList} {size} {discLoopCounter};
@@ -10,7 +10,7 @@
 }
 {9}
 
-#ACTION {^Tensor's floating disc cannot carry any more weight without sinking.$}
+#action {^Tensor's floating disc cannot carry any more weight without sinking.$}
 {
 	#if {"$discSpamCatcher" == "true"}
 	{
@@ -26,7 +26,7 @@
 }
 {9}
 
-#ACTION {^vcast_%*_A floating blue-tinted disc slowly solidifies and hovers before you.$}
+#action {^vcast_%*_A floating blue-tinted disc slowly solidifies and hovers before you.$}
 {
 	#list {discList} {find} {all} {discIndex};
 	#if {$discIndex != 0}
@@ -49,7 +49,7 @@
 }
 {9}
 
-#ACTION {^discmanager_{get|put}_wc - lines:%s%d$}
+#action {^discmanager_{get|put}_wc - lines:%s%d$}
 {
 	#line {gag};
 	#loop {1} {%3} {i}
@@ -59,14 +59,14 @@
 }
 {9}
 
-#ALIAS {^{d|di|dis|disc|disk}get%s%2}
+#alias {^{d|di|dis|disc|disk}get%s%2}
 {
 	#variable {discItem} {%2};
 	inventory | grep Tensor's floating disc | wc -l | prefix discmanager_get_
 }
 {9}
 
-#ALIAS {^{d|di|dis|disc|disk}store {-|\+|d|de|del|dele|delet|delete|a|ad|add|r|re|rem|remo|remov|remove} %3}
+#alias {^{d|di|dis|disc|disk}store {-|\+|d|de|del|dele|delet|delete|a|ad|add|r|re|rem|remo|remov|remove} %3}
 {
 	#list {discList} {find} {%3%*} {discIndex};
 	#if {"%2" == "{-|d|de|del|dele|delet|delete|r|re|rem|remo|remov|remove}"}
@@ -96,14 +96,14 @@
 }
 {9}
 
-#ALIAS {^{d|di|dis|disc|disk}store%sclear$}
+#alias {^{d|di|dis|disc|disk}store%sclear$}
 {
 	#unvariable {discList};
 	#showme {Tensors floating disc storage cleared.}
 }
 {9}
 
-#ALIAS {^{d|di|dis|disc|disk}store%slist$}
+#alias {^{d|di|dis|disc|disk}store%slist$}
 {
 	#showme {Items that will be stored in tensors floating disc are:\n};
 	#list {discList} {size} {discLoopCounter};
@@ -115,8 +115,8 @@
 }
 {9}
 
-#SUBSTITUTE       {^discmanager_%w_}  {}  {1}
-#VARIABLE         {discIndex}  {}
-#VARIABLE         {discItem}  {}
-#VARIABLE         {discLoopCounter}  {}
-#VARIABLE         {discSpamCatcher}  {false}
+#substitute       {^discmanager_%w_}  {}  {1}
+#variable         {discIndex}  {}
+#variable         {discItem}  {}
+#variable         {discLoopCounter}  {}
+#variable         {discSpamCatcher}  {false}
