@@ -1,4 +1,4 @@
-#ALIAS {^spamset %1}
+#alias {^spamset %1}
 {
 	#regexp {%1} {{.*} {\d+}} {#variable {spam[&1]} {true};#delay {&2} {#variable {spam[&1]} {false}}};
 	#else
@@ -9,4 +9,4 @@
 }
 {9}
 
-#VARIABLE         {spam}  {}
+#variable         {spam}  {}
