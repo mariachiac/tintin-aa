@@ -749,6 +749,6 @@
 
 #substitute       {^\^}  {}  {9}
 #variable         {channel}  {}
-#variable         {channelBuffer}  {{1}{all}{2}{auction}{3}{bovine}{4}{cowsay}{5}{clantell}{6}{event}{7}{friend}{8}{gossip}{9}{grouptell}{10}{music}{11}{tell}{12}{say}{13}{chat}{14}{imm}}
+#VARIABLE         {channelBuffer}  {{1}{all}{2}{tell}{3}{group tell}{4}{friend}{5}{auction}{6}{event}{7}{bovine}{8}{gossip}{9}{clantell}{10}{music}{11}{cowsay}{12}{say}{13}{chat}{14}{imm}}
 #variable         {channelBufferIndex}  {1}
 #variable         {channelSilence}  {false}
