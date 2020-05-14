@@ -1,4 +1,4 @@
-#ALIAS {^Get_Music_Message_String$}
+#alias {^Get_Music_Message_String$}
 {
 	#switch {"${music[player]}"}
 	{
@@ -67,7 +67,7 @@
 }
 {9}
 
-#ALIAS {^musiclinks %s%S %s%S$}
+#alias {^musiclinks %s%S %s%S$}
 {
 	#variable {music[links[apiUrl]]} {%2/yourls-api.php};
 	#variable {music[links[apiKey]]} {%4};
@@ -75,7 +75,7 @@
 }
 {9}
 
-#ALIAS {^musicplayer %s{audacious|cmus|moc|mopidy|mpc|mpd|pianobar|xmms2}$}
+#alias {^musicplayer %s{audacious|cmus|moc|mopidy|mpc|mpd|pianobar|xmms2}$}
 {
 	#if {"%2" == "mpc"}
 	{
@@ -89,7 +89,7 @@
 }
 {9}
 
-#ALIAS {^m{p|po|pos|post} %2}
+#alias {^m{p|po|pos|post} %2}
 {
 	Get_Music_Message_String;
 	#if {!&{music[links[apiKey]]}}
@@ -108,7 +108,7 @@
 }
 {9}
 
-#ALIAS {^{auto|noauto}title$}
+#alias {^{auto|noauto}title$}
 {
 	#if {"%0" == "autotitle"}
 	{
@@ -123,14 +123,14 @@
 }
 {9}
 
-#ALIAS {^{musicc|musicch|musiccha|musicchan|musicchann|musicchanne|musicchannel} %s%S$}
+#alias {^{musicc|musicch|musiccha|musicchan|musicchann|musicchanne|musicchannel} %s%S$}
 {
 	#variable {character[musicChannel]} {%3};
 	#echo {Music channel set to %3.}
 }
 {9}
 
-#ALIAS {^{nom|m}usiclinks$}
+#alias {^{nom|m}usiclinks$}
 {
 	#if {"%0" == "musiclinks"}
 	{
@@ -146,14 +146,14 @@
 }
 {9}
 
-#ALIAS {mp{l|ly|lyr|lyri|lyric|lyrics} %2}
+#alias {mp{l|ly|lyr|lyri|lyric|lyrics} %2}
 {
 	Get_Music_Message_String;
 	#script {scripts/lyrics.sh '%2' "${music[newAutoTitleString]}"}
 }
 {9}
 
-#MACRO {\e+}
+#macro {\e+}
 {
 	#nop {Increase music player volume};
 	#switch {"${music[player]}"}
@@ -187,7 +187,7 @@
 	}
 }
 
-#MACRO {\eB}
+#macro {\eB}
 {
 	#nop {Music player next};
 	#switch {"${music[player]}"}
@@ -219,7 +219,7 @@
 	}
 }
 
-#MACRO {\eC}
+#macro {\eC}
 {
 	#nop {Music player pause};
 	#switch {"${music[player]}"}
@@ -251,7 +251,7 @@
 	}
 }
 
-#MACRO {\eM}
+#macro {\eM}
 {
 	#if {!&{character[musicChannel]}}
 	{
@@ -260,7 +260,7 @@
 	mpost ${character[musicChannel]}
 }
 
-#MACRO {\eR}
+#macro {\eR}
 {
 	#nop {Music player repeat.};
 	#switch {"${music[player]}"}
@@ -289,7 +289,7 @@
 	}
 }
 
-#MACRO {\eS}
+#macro {\eS}
 {
 	#nop {Music player randomize tracks.};
 	#switch {"${music[player]}"}
@@ -318,14 +318,14 @@
 	}
 }
 
-#MACRO {\eU}
+#macro {\eU}
 {
 	#nop {Currently playing track};
 	Get_Music_Message_String;
 	#showme {$msg\.}
 }
 
-#MACRO {\eV}
+#macro {\eV}
 {
 	#nop {Music player stop.};
 	#switch {"${music[player]}"}
@@ -357,7 +357,7 @@
 	}
 }
 
-#MACRO {\eX}
+#macro {\eX}
 {
 	#nop {Music player play.};
 	#switch {"${music[player]}"}
@@ -389,7 +389,7 @@
 	}
 }
 
-#MACRO {\eZ}
+#macro {\eZ}
 {
 	#nop {Music player previous track.};
 	#switch {"${music[player]}"}
@@ -417,7 +417,7 @@
 	}
 }
 
-#MACRO {\e\x7B}
+#macro {\e\x7B}
 {
 	#nop {Music player seek backward.};
 	#switch {"${music[player]}"}
@@ -445,7 +445,7 @@
 	}
 }
 
-#MACRO {\e\x7D}
+#macro {\e\x7D}
 {
 	#nop {Music player seek forward.};
 	#switch {"${music[player]}"}
@@ -473,7 +473,7 @@
 	}
 }
 
-#MACRO {\e_}
+#macro {\e_}
 {
 	#nop {Music player volume down.};
 	#switch {"${music[player]}"}
@@ -507,4 +507,4 @@
 	}
 }
 
-#TICKER           {autotitle}  {#if {"${auto[title]}" == "true" && "${kxwt[context]}" == "{(none)?}"}{Get_Music_Message_String;#if {"${music[newAutoTitleString]}" != "${music[oldAutoTitleString]}"}{#variable {music[oldAutoTitleString]} {${music[newAutoTitleString]}};title ${music[newAutoTitleString]} | prefix silent_}}}                                                                                                                                                                                                                                                         {0.50}
+#ticker           {autotitle}  {#if {"${auto[title]}" == "true" && "${kxwt[context]}" == "{(none)?}"}{Get_Music_Message_String;#if {"${music[newAutoTitleString]}" != "${music[oldAutoTitleString]}"}{#variable {music[oldAutoTitleString]} {${music[newAutoTitleString]}};title ${music[newAutoTitleString]} | prefix silent_}}}                                                                                                                                                                                                                                                         {0.50}
