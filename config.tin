@@ -1,0 +1,216 @@
+#action {^Invalid name, try another.}
+{
+     #variable {loginName} {FALSE}
+}
+{9}
+
+#action {^Password:}
+{
+     #if {"$loginName" != "FALSE"}
+     {
+          #variable {loginName} {${HOME}/${loginName}_pass};
+          #script {fileExists} {if [ -f "$loginName" ] ; then echo "true"; else echo "false"; fi};
+          #variable {fileExists} {${fileExists[1]}};
+          #if {"$fileExists" == "true"}
+          {
+               #textin {$loginName};
+               #cr
+          }
+     };
+     #variable {loginName} {FALSE}
+}
+{9}
+
+#action {^Would you like to create a new character?}
+{
+     #if {"$loginName" != "FALSE"}
+     {
+          $loginName
+     }
+}
+{9}
+
+
+#alias {^login$}
+{
+     #if {!&{connected}}
+     {
+          #if {$mudPort == 3102 || $mudPort == 3110}
+          {
+               #ssl {$mudSessionName} {$mudAddress} {$mudPort}
+          };
+          #else
+          {
+               #session {$mudSessionName} {$mudAddress} {$mudPort}
+          }
+     };
+     #else
+     {
+          #showme {Huh?}
+     }
+}
+{8}
+
+#alias {^bot{kill|load} %S$}
+{
+     #nop {Kill, load, or reload a specified bot.};
+     #if {"%1" == "kill"}
+     {
+          #local {exists} {@bot_%1{}};
+          #variable {exists} {$exists};
+          #if {"$exists" != "@%*"}
+          {
+               $exists
+          };
+          #class {bot_%2} {kill};
+          #class {gameData} {open};
+          #showme {bot %2 has been killed.}
+     };
+     #if {"%1" == "load"}
+     {
+          #showme {Loading bot %2.tin};
+          #class {gameData} {close};
+          #class {bot_%2} {read} {modules/bots/%2.tin};
+          #local {exists} {@bot_%1{}};
+          #variable {exists} {$exists};
+          #if {"$exists" != "@%*"}
+          {
+               $exists
+          }
+     }
+}
+{9}
+
+#alias {^login%s%w$}
+{
+     #format {loginName} {%l} {%3};
+     #if {!&{connected}}
+     {
+          #if {$mudPort == 3102 || $mudPort == 3110}
+          {
+               #ssl {$mudSessionName} {$mudAddress} {$mudPort}
+          };
+          #else
+          {
+               #session {$mudSessionName} {$mudAddress} {$mudPort}
+          }
+     };
+     #else
+     {
+          #showme {Huh?}
+     }
+}
+{9}
+
+#alias {^mod{kill|load|reload} %S$}
+{
+     #nop {reload all modules};
+     #if {"%0" == "modreload all"}
+     {
+          #script {for module in modules/*.tin ; do echo "#class {$(basename "$module" .tin)} {kill};#class {$(basename "$module" .tin)} {read} {$module}";done};
+          #echo {All modules reloaded}
+     };
+     #else
+     {
+          #nop {Kill, load, or reload a specified module.};
+          #if {"%1" == "{kill|reload}"}
+          {
+               #class {%2} {kill};
+               #showme {Class %2 has been killed.}
+          };
+          #if {"%1" == "{load|reload}"}
+          {
+               #showme {Loading modules/%2.tin};
+               #class {%2} {read} {modules/%2.tin};
+               #class {gameData} {open}
+          }
+     }
+}
+{9}
+
+#alias {^{quit|logoff}$}
+{
+     #class {gameData} {write} {$gameDataPath};
+     #if {&{name}}
+     {
+          #history {write} {$historyPath}
+     };
+     set ctrigger off | prefix silent_;
+     #send {quit}
+}
+{9}
+
+
+#config           {auto tab}  {5000}
+#config           {buffer size}  {10000}
+#config           {charset}  {ascii}
+#config           {color mode}  {true}
+#config           {color patch}  {off}
+#config           {command color}  {\e[0;37m}
+#config           {command echo}  {on}
+#config           {connect retry}  {15.0}
+#config           {history size}  {1000}
+#config           {log mode}  {plain}
+#config           {mouse tracking}  {off}
+#config           {packet patch}  {0.01}
+#CONFIG           {RANDOM SEED}  {1829883516}
+#config           {repeat char}  {!}
+#config           {repeat enter}  {on}
+#config           {screen reader}  {on}
+#config           {scroll lock}  {on}
+#config           {speedwlak}  {off}
+#config           {tab width}  {8}
+#config           {telnet}  {on}
+#config           {tintin char}  {#}
+#config           {verbatim}  {off}
+#config           {verbatim char}  {\}
+#config           {verbose}  {off}
+#config           {wordwrap}  {on}
+
+#event {PROGRAM START}
+{
+     #system {clear};
+     #nop {Set the home directory variable.};
+     #script {HOME} {if [ -z "$XDG_CONFIG_HOME" ] ; then if ! [ -d "$HOME/.config/tintin-alteraeon/" ] ; then mkdir -p "$HOME/.config/tintin-alteraeon";fi;echo -n "$HOME/.config/tintin-alteraeon";else if ! [ -d "$XDG_CONFIG_HOME/tintin-alteraeon/" ] ; then mkdir -p "$XDG_CONFIG_HOME/tintin-alteraeon/";fi;echo -n "$XDG_CONFIG_HOME/tintin-alteraeon";fi};
+     #variable {HOME} {${HOME[1]}};
+     #replace {HOME} {-n } {};
+     #nop {Load all the .tin files in the modules directory in classes named after the module name.};
+     #script {for module in modules/*.tin ; do echo "#class {$(basename "$module" .tin)} {read} {$module}";done};
+     #echo {To get started type login}
+}
+
+#event {SESSION CONNECTED}
+{
+     synth_play connectedSound;
+     #nop {Set connected to true so if you accidently type login it won't try to login twice.};
+     #variable {connected} {true};
+     #nop {Create the log directory if it doesn't exist. Log files are based on date and time.};
+     #script {logFilePath} {date +'log/%Y/%B/%d/'};
+     #variable {logFilePath} {${HOME}/${logFilePath[1]}};
+     #script {logFileName} {date +'%I_%M%p.log'};
+     #system {mkdir -p $logFilePath};
+     #log {overwrite} {${logFilePath}${logFileName[1]}}
+}
+
+#event {SESSION DISCONNECTED}
+{
+     qcsave;
+     #unvariable {connected};
+     #end
+}
+
+
+#PATHDIR          {d}  {u}  {32}
+#PATHDIR          {e}  {w}  {2}
+#PATHDIR          {n}  {s}  {1}
+#PATHDIR          {ne}  {sw}  {3}
+#PATHDIR          {nw}  {se}  {9}
+#PATHDIR          {s}  {n}  {4}
+#PATHDIR          {se}  {nw}  {6}
+#PATHDIR          {sw}  {ne}  {12}
+#PATHDIR          {u}  {d}  {16}
+#PATHDIR          {w}  {e}  {8}
+
+#variable         {HOME}  {/Users/lima/.config/tintin-alteraeon}
+#variable         {loginName}  {FALSE}
+
