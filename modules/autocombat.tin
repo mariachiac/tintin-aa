@@ -1,4 +1,4 @@
-#ACTION {^You jump to {assist|attack} %*!$}
+#action {^You jump to {assist|attack} %*!$}
 {
 	#undelay {autocombatDelay};
 	#unvariable {autocombatPaused};
@@ -6,7 +6,7 @@
 }
 {9}
 
-#ACTION {^You're already targeting %*!$}
+#action {^You're already targeting %*!$}
 {
 	#undelay {autocombatDelay};
 	#unvariable {autocombatPaused};
@@ -14,7 +14,7 @@
 }
 {9}
 
-#ACTION {^{If you really want to cast that on yourself, you must use your name\.|They are no longer here\.|You don't have enough mana\.|\w+ who\?|\w+ whom\?|You are not currently in battle\.  What enemy do you want to cast it on\?}$}
+#action {^{If you really want to cast that on yourself, you must use your name\.|They are no longer here\.|You don't have enough mana\.|\w+ who\?|\w+ whom\?|You are not currently in battle\.  What enemy do you want to cast it on\?}$}
 {
 	#variable {autocombatPaused} {1};
 	#if {"%0" == "You don't have enough mana."}
@@ -24,7 +24,7 @@
 }
 {9}
 
-#ALIAS {^autocombat %1 %d$}
+#alias {^autocombat %1 %d$}
 {
 	#list {autocombatList} {clear};
 	#list {autocombatList} {add} {@strip_braces{%1}};
@@ -35,7 +35,7 @@
 }
 {8}
 
-#ALIAS {^autocombat {pause|resume}$}
+#alias {^autocombat {pause|resume}$}
 {
 	#if {"%1" == "pause"}
 	{
@@ -50,7 +50,7 @@
 }
 {8}
 
-#ALIAS {^autocombat %1}
+#alias {^autocombat %1}
 {
 	#list {autocombatList} {clear};
 	#list {autocombatList} {add} {@strip_braces{%1}};
@@ -61,7 +61,7 @@
 }
 {9}
 
-#ALIAS {^autocombat$}
+#alias {^autocombat$}
 {
 	#local {i} {};
 	#echo {Automatic combat:};
@@ -76,7 +76,7 @@
 }
 {9}
 
-#ALIAS {^noautocombat$}
+#alias {^noautocombat$}
 {
 	#list {autocombatList} {clear};
 	#echo {automatic combat disabled.};
@@ -85,7 +85,7 @@
 }
 {9}
 
-#FUNCTION {createAutocombatTicker}
+#function {createAutocombatTicker}
 {
 	#ticker {auto_combat}  {#if {"${autocombatList}" != "" && !&{autocombatForcePaused} && !&{autocombatPaused}}{#var {autocombatAttack} {${autocombatList[@list_rand{autocombatList}]}};#if {"$autocombatAttack" != "{c|ca|cas|cast|vc|vca|vcas|vcast} %*" && "${kxwt[fighting]}" == "-1"} {#var {autocombatPaused} {1};#unvar {autocombatAttack}};#else {$autocombatAttack;#unvar {autocombatAttack}}}}                                                                                            {%1};
 	#return #nop
