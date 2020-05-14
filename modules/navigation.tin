@@ -1,4 +1,4 @@
-#ACTION {^[Exits: %*]{ \[Doors: .+\]|}$}
+#action {^[Exits: %*]{ \[Doors: .+\]|}$}
 {
 	#regexp {%0} {{.*} [Doors: {.*}} {play door;#var {doorFound} {1}};
 	#else
@@ -20,25 +20,25 @@
 }
 {1}
 
-#ACTION {^You enter a huge portal.$}
+#action {^You enter a huge portal.$}
 {
 	seq_play portal
 }
 {5}
 
-#ACTION {%1 arrives from%2portal%3}
+#action {%1 arrives from%2portal%3}
 {
 	seq_play portal
 }
 {9}
 
-#ACTION {%1 {are|is} closed.$}
+#action {%1 {are|is} closed.$}
 {
 	#regexp {%1} {{.*} {.*}} {#variable {doorName} {&2}}
 }
 {9}
 
-#ACTION {^(You {may be able to|can} use waypoint %1 {to|to more easily} bridge the distance.)$}
+#action {^(You {may be able to|can} use waypoint %1 {to|to more easily} bridge the distance.)$}
 {
 	#if {"${auto[waypoint]}" == "true"}
 	{
@@ -49,14 +49,14 @@
 }
 {9}
 
-#ACTION {^({down|east|north|northeast|northwest|south|southeast|southwest|up|west}) %2 is closed.$}
+#action {^({down|east|north|northeast|northwest|south|southeast|southwest|up|west}) %2 is closed.$}
 {
 	#variable {lastDirection} {%1};
 	#regexp {%2} {{.*} {.*}} {#variable {doorName} {&2}}
 }
 {9}
 
-#ACTION {^Alas, you cannot go that way.$}
+#action {^Alas, you cannot go that way.$}
 {
 	play bump;
 	#if {"$pathing" == "true"}
@@ -66,7 +66,7 @@
 }
 {9}
 
-#ACTION {^It seems to be locked.$}
+#action {^It seems to be locked.$}
 {
 	#if {&{doorName} && "${skillsAndSpells[pick locks]}" == "true"}
 	{
@@ -75,7 +75,7 @@
 }
 {9}
 
-#ACTION {^The other waypoint is too far away, and you are unable to link up with it.  Better try again.$}
+#action {^The other waypoint is too far away, and you are unable to link up with it.  Better try again.$}
 {
 	#if {"${auto[waypoint]}" == "true"}
 	{
@@ -84,13 +84,13 @@
 }
 {9}
 
-#ACTION {^You stand up and prepare to follow the group.$}
+#action {^You stand up and prepare to follow the group.$}
 {
 	#unvariable {position}
 }
 {9}
 
-#ALIAS {^{c|ca|cas|cast} {gr|gro|grou|group} {w|wa|way|wayp|waypo|waypoi|waypoin|waypoint} %4}
+#alias {^{c|ca|cas|cast} {gr|gro|grou|group} {w|wa|way|wayp|waypo|waypoi|waypoin|waypoint} %4}
 {
 	#variable {waypointType} {cast group waypoint};
 	#variable {waypoint} {%4};
@@ -98,7 +98,7 @@
 }
 {8}
 
-#ALIAS {^{way|wayp|waypo|waypoi|waypoin|waypoint} %1}
+#alias {^{way|wayp|waypo|waypoi|waypoin|waypoint} %1}
 {
 	#variable {waypointType} {waypoint};
 	#variable {waypoint} {%1};
@@ -106,27 +106,27 @@
 }
 {8}
 
-#ALIAS {^exit{f|fi|fin|find} {down|east|north|northeast|northwest|south|southeast|southwest|up|west}$}
+#alias {^exit{f|fi|fin|find} {down|east|north|northeast|northwest|south|southeast|southwest|up|west}$}
 {
 	#variable {exitfind} {%2};
 	#showme {you will now be notified when there is a $exitfind exit.}
 }
 {9}
 
-#ALIAS {^noexit{f|fi|fin|find}$}
+#alias {^noexit{f|fi|fin|find}$}
 {
 	#variable {exitfind} {false};
 	#showme {Exit notifications disabled.}
 }
 {9}
 
-#ALIAS {^te{r|rr|rra|rrai|rrain}$}
+#alias {^te{r|rr|rra|rrai|rrain}$}
 {
 	help kxwt terrain | grep " ${kxwt[terrain]}" | head -n 1
 }
 {9}
 
-#ALIAS {^{auto|noauto}waypoint$}
+#alias {^{auto|noauto}waypoint$}
 {
 	#if {"%0" == "autowaypoint"}
 	{
@@ -141,7 +141,7 @@
 }
 {9}
 
-#ALIAS {^{d|do|dow|down|e|ea|eas|east|n|ne|nea|neas|neast|no|nor|nort|north|northe|northea|northeas|northeast|northw|northwe|northwes|northwest|nw|nwe|nwes|nwest|s|se|sea|seas|seast|so|sou|sout|south|southe|southea|southeas|southeast|southw|southwe|southwes|southwest|sw|swe|swes|swest|u|up|w|we|wes|west}$}
+#alias {^{d|do|dow|down|e|ea|eas|east|n|ne|nea|neas|neast|no|nor|nort|north|northe|northea|northeas|northeast|northw|northwe|northwes|northwest|nw|nwe|nwes|nwest|s|se|sea|seas|seast|so|sou|sout|south|southe|southea|southeas|southeast|southw|southwe|southwes|southwest|sw|swe|swes|swest|u|up|w|we|wes|west}$}
 {
 	#variable {lastDirection} {%0};
 	#if {"${skillsAndSpells[retreat]}" == "true" && "$autoretreat" == "true" && "${character[inBattle]}" == "true"}
@@ -159,7 +159,7 @@
 }
 {9}
 
-#ALIAS {^{noauto|auto}{stealth}$}
+#alias {^{noauto|auto}{stealth}$}
 {
 	#if {"%1" == "auto"}
 	{
@@ -174,34 +174,34 @@
 }
 {9}
 
-#ALIAS {^{op|ope|open|pi|pic|pick} %*}
+#alias {^{op|ope|open|pi|pic|pick} %*}
 {
 	#variable {doorName} {%2};
 	#send {%0}
 }
 {9}
 
-#MACRO {\e,}
+#macro {\e,}
 {
 	south
 }
 
-#MACRO {\e.}
+#macro {\e.}
 {
 	southeast
 }
 
-#MACRO {\e<}
+#macro {\e<}
 {
 	down
 }
 
-#MACRO {\eI}
+#macro {\eI}
 {
 	up
 }
 
-#MACRO {\eK}
+#macro {\eK}
 {
 	#if {&{doorFound}}
 	{
@@ -220,44 +220,44 @@
 	}
 }
 
-#MACRO {\ei}
+#macro {\ei}
 {
 	north
 }
 
-#MACRO {\ej}
+#macro {\ej}
 {
 	west
 }
 
-#MACRO {\ek}
+#macro {\ek}
 {
 	scan
 }
 
-#MACRO {\el}
+#macro {\el}
 {
 	east
 }
 
-#MACRO {\em}
+#macro {\em}
 {
 	southwest
 }
 
-#MACRO {\eo}
+#macro {\eo}
 {
 	northeast
 }
 
-#MACRO {\eu}
+#macro {\eu}
 {
 	northwest
 }
 
-#VARIABLE         {exitCount}  {}
-#VARIABLE         {exitfind}  {false}
-#VARIABLE         {exits}  {}
-#VARIABLE         {lastDirection}  {}
-#VARIABLE         {waypoint}  {}
-#VARIABLE         {waypointType}  {}
+#variable         {exitCount}  {}
+#variable         {exitfind}  {false}
+#variable         {exits}  {}
+#variable         {lastDirection}  {}
+#variable         {waypoint}  {}
+#variable         {waypointType}  {}
