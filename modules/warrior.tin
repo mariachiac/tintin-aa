@@ -1,29 +1,29 @@
-#ACTION {^You are rescued from certain death by %1!}
+#action {^You are rescued from certain death by %1!}
 {
 	a
 }
 {1}
 
-#ACTION {^You fail the rescue!}
+#action {^You fail the rescue!}
 {
 	rescue $lastRescued
 }
 {1}
 
-#ACTION {^You find yourself too weak to use %1.$}
+#action {^You find yourself too weak to use %1.$}
 {
 	#variable {rewield} {true};
 	eq | grep wielded | prefix silent_
 }
 {5}
 
-#ACTION {^silent_wielded     - $}
+#action {^silent_wielded     - $}
 {
 	#unvariable {weapon}
 }
 {5}
 
-#ACTION {^The physical reserve deep within you feels replenished.$}
+#action {^The physical reserve deep within you feels replenished.$}
 {
 	#nop {client variables are always temperary.};
 	#unvariable {client[exhausted]};
@@ -31,7 +31,7 @@
 }
 {9}
 
-#ACTION {^You discover a way to use %1 in combination!$}
+#action {^You discover a way to use %1 in combination!$}
 {
 	Channel_Event all %0;
 	autobrag %0;
@@ -39,13 +39,13 @@
 }
 {9}
 
-#ACTION {^You don't have enough energy to do that again so soon.$}
+#action {^You don't have enough energy to do that again so soon.$}
 {
 	#send {assist}
 }
 {9}
 
-#ACTION {^You got a %d attack combo%2}
+#action {^You got a %d attack combo%2}
 {
 	#undelay {comboFail};
 	#delay {comboFail} {@do_hook{comboFail}} {5};
@@ -53,7 +53,7 @@
 }
 {9}
 
-#ACTION {^You successfully finished a full %d attack combo!}
+#action {^You successfully finished a full %d attack combo!}
 {
 	#undelay {comboFail};
 	play combo-full-%1;
@@ -61,14 +61,14 @@
 }
 {9}
 
-#ACTION {^You suddenly feel less tired and more refreshed!$}
+#action {^You suddenly feel less tired and more refreshed!$}
 {
 	#nop {client variables are always temperary.};
 	#variable {client[exhausted] {true}}
 }
 {9}
 
-#ACTION {^You {feel your enhanced courage fading|make a cut and paint yourself with your own blood, but don't feel any different}.$}
+#action {^You {feel your enhanced courage fading|make a cut and paint yourself with your own blood, but don't feel any different}.$}
 {
 	#if {${character[currentHp]} > ${character[maxHp]} / 2}
 	{
@@ -81,14 +81,14 @@
 }
 {9}
 
-#ACTION {^Your body is still too exhausted from last time.$}
+#action {^Your body is still too exhausted from last time.$}
 {
 	#nop {client variables are always temperary.};
 	#variable {client[exhausted] {true}}
 }
 {9}
 
-#ACTION {^silent_ Length %d \x7c %2}
+#action {^silent_ Length %d \x7c %2}
 {
 	#variable {combo[attack]} {%2};
 	#replace {combo[attack]} {\x7c} { ${combo[target]};};
@@ -372,14 +372,14 @@
 }
 {9}
 
-#ACTION {^silent_combo_wc - lines:  %d}
+#action {^silent_combo_wc - lines:  %d}
 {
 	#math {i} {1d%1};
 	tactics all | grep -i length | grep -v x | grep -v charge | grep -v backstab | prefix silent_ | tail -n $i | head -n 1
 }
 {9}
 
-#ACTION {^silent_done_xcombo$}
+#action {^silent_done_xcombo$}
 {
 	#if {"${combo[randomType]}" != ""}
 	{
@@ -428,20 +428,20 @@
 }
 {9}
 
-#ACTION {^silent_xcombo_You have found%s%d {low level|advanced|cross-class} attack combinations, and completed%s%d.$}
+#action {^silent_xcombo_You have found%s%d {low level|advanced|cross-class} attack combinations, and completed%s%d.$}
 {
 	#list {combo[randomType]} {add} {%3}
 }
 {9}
 
-#ACTION {^silent_xcombo_wc - lines:  %d}
+#action {^silent_xcombo_wc - lines:  %d}
 {
 	#math {i} {1d%1};
 	tactics ${combo[type]} | grep -i length | grep x | grep -v charge | grep -v backstab | prefix silent_ | tail -n $i | head -n 1
 }
 {9}
 
-#ACTION {^{You give up waiting, and shift out of your riposte stance|Your riposte .*|.* notices your riposte and moves quickly to block it}{\.|!}$}
+#action {^{You give up waiting, and shift out of your riposte stance|Your riposte .*|.* notices your riposte and moves quickly to block it}{\.|!}$}
 {
 	#if {"${skillsAndSpells[riposte]}" == "true" && "${auto[riposte]}" == "true" && "${character[inBattle]}" == "true"}
 	{
@@ -450,7 +450,7 @@
 }
 {9}
 
-#ALIAS {^randomattack%s%2}
+#alias {^randomattack%s%2}
 {
 	get_random_attack;
 	#list {randomAttack} {size} {i};
@@ -468,7 +468,7 @@
 }
 {5}
 
-#ALIAS {{wi|wie|wiel|wield} %1}
+#alias {{wi|wie|wiel|wield} %1}
 {
 	#if {"%1" != "$stabWeapon"}
 	{
@@ -478,7 +478,7 @@
 }
 {5}
 
-#ALIAS {^{3|4|5|6|7|8}{combo|acombo|ccombo|lcombo} %3$}
+#alias {^{3|4|5|6|7|8}{combo|acombo|ccombo|lcombo} %3$}
 {
 	#variable {combo[target]} {};
 	#switch {"%2"}
@@ -503,7 +503,7 @@
 }
 {8}
 
-#ALIAS {^{a|c|l|}xcombo %S %S$}
+#alias {^{a|c|l|}xcombo %S %S$}
 {
 	#variable {combo[target]} {%3 };
 	#switch {"%1"}
@@ -535,7 +535,7 @@
 }
 {8}
 
-#ALIAS {^{combo|acombo|ccombo|lcombo} %S %S$}
+#alias {^{combo|acombo|ccombo|lcombo} %S %S$}
 {
 	#variable {combo[target]} {%3 };
 	#switch {"%1"}
@@ -560,14 +560,14 @@
 }
 {8}
 
-#ALIAS {^combo$}
+#alias {^combo$}
 {
 	#variable {combo[target]} {};
 	tactics all | grep -i length | grep -v x | grep -v charge | grep -v backstab | wc -l | prefix silent_combo_
 }
 {9}
 
-#ALIAS {^get_random_attack$}
+#alias {^get_random_attack$}
 {
 	#list {randomAttack} {clear};
 	#if {"${skillsAndSpells[bash]}" == "true"}
@@ -682,7 +682,7 @@
 }
 {9}
 
-#ALIAS {^randomattack%s}
+#alias {^randomattack%s}
 {
 	get_random_attack;
 	#list {randomAttack} {size} {i};
@@ -694,21 +694,21 @@
 }
 {9}
 
-#ALIAS {^re{s|sc|scu|scue} %s%3}
+#alias {^re{s|sc|scu|scue} %s%3}
 {
 	#variable {lastRescued} {%3};
 	#send {%0}
 }
 {9}
 
-#ALIAS {^{3|4|5|6|7|8}{combo|lcombo|acombo|ccombo}set{a|b|c|d|e|f|g|h|n|q|r|s|t|v|w|x|y|z} %4}
+#alias {^{3|4|5|6|7|8}{combo|lcombo|acombo|ccombo}set{a|b|c|d|e|f|g|h|n|q|r|s|t|v|w|x|y|z} %4}
 {
 	#variable {combo[setKey]} {%3};
 	%1%2 %4
 }
 {9}
 
-#ALIAS {^{auto|noauto}{berserk|charge|disarm|retreat|riposte|weapon|valor}$}
+#alias {^{auto|noauto}{berserk|charge|disarm|retreat|riposte|weapon|valor}$}
 {
 	#if {"%1" == "auto"}
 	{
@@ -723,7 +723,7 @@
 }
 {9}
 
-#ALIAS {^{a|as|ass|assi|assis|assist}$}
+#alias {^{a|as|ass|assi|assis|assist}$}
 {
 	#if {"${skillsAndSpells[charge]}" == "true" && "${auto[charge]}" == "true" && ${character[currentMv]} > 20}
 	{
@@ -736,7 +736,7 @@
 }
 {9}
 
-#ALIAS {^{a|c|l|}xcombo %S$}
+#alias {^{a|c|l|}xcombo %S$}
 {
 	#variable {combo[target]} {};
 	#switch {"%1"}
@@ -768,7 +768,7 @@
 }
 {9}
 
-#ALIAS {^{a|c|l|}xcombo$}
+#alias {^{a|c|l|}xcombo$}
 {
 	#variable {combo[target]} {};
 	#switch {"%1"}
@@ -800,7 +800,7 @@
 }
 {9}
 
-#ALIAS {^{combo|acombo|ccombo|lcombo} %S$}
+#alias {^{combo|acombo|ccombo|lcombo} %S$}
 {
 	#variable {combo[target]} {};
 	#switch {"%1"}
@@ -825,13 +825,13 @@
 }
 {9}
 
-#ALIAS {^{combo|lcombo|acombo|ccombo}set{a|b|c|d|e|f|g|h|n|q|r|s|t|v|w|x|y|z} %3}
+#alias {^{combo|lcombo|acombo|ccombo}set{a|b|c|d|e|f|g|h|n|q|r|s|t|v|w|x|y|z} %3}
 {
 	#variable {combo[setKey]} {%2};
 	%1 %3
 }
 {9}
 
-#VARIABLE         {combo}  {{setKey}{false}}
-#VARIABLE         {lastRandomAttack}  {{1}{0}{2}{0}}
-#VARIABLE         {lastRescued}  {}
+#variable         {combo}  {{setKey}{false}}
+#variable         {lastRandomAttack}  {{1}{0}{2}{0}}
+#variable         {lastRescued}  {}
