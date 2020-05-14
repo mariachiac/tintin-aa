@@ -1,4 +1,4 @@
-#ACTION {^(auction) %1 sold for %d gold coins.$}
+#action {^(auction) %1 sold for %d gold coins.$}
 {
 	Channel_Event auction %0;
 	#if {"${character[cspam]}" == "true"}
@@ -10,7 +10,7 @@
 }
 {9}
 
-#ACTION {^(auction) '%1', going %S for %d gold coins.$}
+#action {^(auction) '%1', going %S for %d gold coins.$}
 {
 	Channel_Event auction %0;
 	#if {"${character[cspam]}" == "true"}
@@ -25,7 +25,7 @@
 }
 {9}
 
-#ACTION {^(auction) Auction failed, item returned to seller.$}
+#action {^(auction) Auction failed, item returned to seller.$}
 {
 	Channel_Event auction %0;
 	#if {"${character[cspam]}" == "true"}
@@ -37,7 +37,7 @@
 }
 {9}
 
-#ACTION {^(auction) Current bid is %d gold coins for '%2'.$}
+#action {^(auction) Current bid is %d gold coins for '%2'.$}
 {
 	#if {"${character[cspam]}" == "true"}
 	{
@@ -46,7 +46,7 @@
 }
 {9}
 
-#ACTION {^(auction) New bid: %d gold coins for '%2'.$}
+#action {^(auction) New bid: %d gold coins for '%2'.$}
 {
 	Channel_Event auction %0;
 	#line {gag};
@@ -66,7 +66,7 @@
 }
 {9}
 
-#ACTION {^(auction) Now accepting bids for '%1', minimum bid is %d gold coins.$}
+#action {^(auction) Now accepting bids for '%1', minimum bid is %d gold coins.$}
 {
 	#variable {auction[minimumBid]} {%2};
 	#line {gag};
@@ -77,7 +77,7 @@
 }
 {9}
 
-#ACTION {^(auction) Starting bid on '%1' at %d gold.$}
+#action {^(auction) Starting bid on '%1' at %d gold.$}
 {
 	Channel_Event auction %0;
 	#variable {auction[minimumBid]} {%2};
@@ -93,14 +93,14 @@
 }
 {9}
 
-#ACTION {^(auction) The item of interest appears to have vanished.  Terminating auction.$}
+#action {^(auction) The item of interest appears to have vanished.  Terminating auction.$}
 {
 	Channel_Event auction %0;
 	#variable {auction[bidAmount]} {0}
 }
 {9}
 
-#ACTION {^(auction) {First|Second|Last} call for '%2', at %d gold coins.$}
+#action {^(auction) {First|Second|Last} call for '%2', at %d gold coins.$}
 {
 	Channel_Event auction %0;
 	#variable {auction[minimumBid]} {%3};
@@ -116,13 +116,13 @@
 }
 {9}
 
-#ACTION {^You already have the highest bid.$}
+#action {^You already have the highest bid.$}
 {
 	#variable {auction[myBid]} {false}
 }
 {9}
 
-#ACTION {^You must bid at least %d, or %2 higher than the current bid.$}
+#action {^You must bid at least %d, or %2 higher than the current bid.$}
 {
 	#line {gag};
 	#if {"${character[cspam]}" != "true"}
@@ -133,32 +133,32 @@
 }
 {9}
 
-#ACTION {^silent_Nothing is currently on the auction block.$}
+#action {^silent_Nothing is currently on the auction block.$}
 {
 	#showme {Nothing is currently on the auction block.}
 }
 {9}
 
-#ACTION {^silent_You must bid at least %d, or %2 higher than the current bid.$}
+#action {^silent_You must bid at least %d, or %2 higher than the current bid.$}
 {
 	bid %1 -f
 }
 {9}
 
-#ACTION {^silent_You must bid at least the minimum.$}
+#action {^silent_You must bid at least the minimum.$}
 {
 	bid ${auction[minimumBid]} -f
 }
 {9}
 
-#ALIAS {^{bi|bid}%s+$}
+#alias {^{bi|bid}%s+$}
 {
 	bid 1 -f | prefix silent_;
 	#variable {auction[myBid]}  {true}
 }
 {8}
 
-#ALIAS {^auto{bi|bid} %s%d$}
+#alias {^auto{bi|bid} %s%d$}
 {
 	#if {%3 > 0}
 	{
@@ -170,13 +170,13 @@
 }
 {9}
 
-#ALIAS {^{bi|bid}%2$}
+#alias {^{bi|bid}%2$}
 {
 	#send {%0};
 	#variable {auction[myBid]} {true}
 }
 {9}
 
-#VARIABLE         {auction[bidAmount]}  {0}
-#VARIABLE         {auction[minimumBid]}  {0}
-#VARIABLE         {auction[myBid]}  {false}
+#variable         {auction[bidAmount]}  {0}
+#variable         {auction[minimumBid]}  {0}
+#variable         {auction[myBid]}  {false}
