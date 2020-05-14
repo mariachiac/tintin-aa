@@ -1,4 +1,4 @@
-#ACTION {kxwt_gold %d}
+#action {kxwt_gold %d}
 {
 	#variable {kxwt[gold]} {%1};
 	#if {${auto[depositgold]} > 0 && %1 > ${auto[depositgold]} && "$busy" != "true"}
@@ -8,13 +8,13 @@
 }
 {8}
 
-#ACTION {^Purchased %d total credits, used %d total gold (%d gpc.)$}
+#action {^Purchased %d total credits, used %d total gold (%d gpc.)$}
 {
 	credits | tail -n 1
 }
 {9}
 
-#ACTION {^silent_The current best market price for credits is %d gpc (gold per credit.)$}
+#action {^silent_The current best market price for credits is %d gpc (gold per credit.)$}
 {
 	#math {bankTmp} {${kxwt[gold}/%1]};
 	#if {$bankTmp < 1}
@@ -28,32 +28,32 @@
 }
 {9}
 
-#ACTION {^silent_{d|de|dep|depo|depos|deposi|deposit}You have %d gold coins.$}
+#action {^silent_{d|de|dep|depo|depos|deposi|deposit}You have %d gold coins.$}
 {
 	bank %1 %2
 }
 {9}
 
-#ACTION {^silent_{w|wi|wit|with|withd|withdr|withdra|withdraw}You have %d gold coins in the bank.$}
+#action {^silent_{w|wi|wit|with|withd|withdr|withdra|withdraw}You have %d gold coins in the bank.$}
 {
 	bank %1 %2
 }
 {9}
 
-#ALIAS {^{ban|bank} %s{d|de|dep|depo|depos|deposi|deposit|w|wi|wit|with|withd|withdr|withdra|withdraw} %s{a|al|all}$}
+#alias {^{ban|bank} %s{d|de|dep|depo|depos|deposi|deposit|w|wi|wit|with|withd|withdr|withdra|withdraw} %s{a|al|all}$}
 {
 	gold | prefix silent_%3
 }
 {9}
 
-#ALIAS {^{gol|gold}$}
+#alias {^{gol|gold}$}
 {
 	#send {gold};
 	gamble | tail -n 1 | grep -v reforge
 }
 {9}
 
-#ALIAS {^{noauto|auto}deposit{gold|gold\s+\d+}$}
+#alias {^{noauto|auto}deposit{gold|gold\s+\d+}$}
 {
 	#if {"%1" == "auto"}
 	{
@@ -71,10 +71,10 @@
 }
 {9}
 
-#ALIAS {{mm|moneym|moneyma|moneymar|moneyemark|moneymarke|moneymarket} %sbuy %s{cred|credi|credit|credits} %sall$}
+#alias {{mm|moneym|moneyma|moneymar|moneyemark|moneymarke|moneymarket} %sbuy %s{cred|credi|credit|credits} %sall$}
 {
 	%1 %2buy %3%4 | tail -n 1 | prefix silent_
 }
 {9}
 
-#VARIABLE         {bankTmp}  {}
+#variable         {bankTmp}  {}
