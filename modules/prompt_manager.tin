@@ -1,4 +1,4 @@
-#ACTION {^*{pingtime\s+\d+|pong}*$}
+#action {^*{pingtime\s+\d+|pong}*$}
 {
 	#if {"%1" == "pong"}
 	{
@@ -20,35 +20,35 @@
 }
 {1}
 
-#ACTION {<%dhp %dm %dmv %dac> %5 <%6>$}
+#action {<%dhp %dm %dmv %dac> %5 <%6>$}
 {
 	#nop {Captures the prompt to convert to colored prompt. The color codes are set in kxwt.tin. We have to use #echo instead of #prompt for color codes to work.};
 	#echo {{<$hpColor><%1hp <$mnColor>%2m <$mvColor>%3mv <099>%4ac> %5 <%6>}  {1}}
 }
 {9}
 
-#ACTION {<%dhp %dm %dmv>}
+#action {<%dhp %dm %dmv>}
 {
 	#nop {Captures the prompt to convert to colored prompt. The color codes are set in kxwt.tin. We have to use #echo instead of #prompt for color codes to work.};
 	#echo {{<$hpColor><%1hp <$mnColor>%2m <$mvColor>%3mv>}  {1}}
 }
 {9}
 
-#ACTION {^HP%d:%d MN%3:%4 MV%d:%d}
+#action {^HP%d:%d MN%3:%4 MV%d:%d}
 {
 	#nop {Captures the prompt to convert to colored prompt. The color codes are set in kxwt.tin. We have to use #echo instead of #prompt for color codes to work.};
 	#echo {{<$hpColor>HP%1:%2 <$mnColor>MN%3:%4 <$mvColor>MV%5:%6}  {1}}
 }
 {9}
 
-#ACTION {^Room: %d  Zone: %d  Wizinvis: %d>}
+#action {^Room: %d  Zone: %d  Wizinvis: %d>}
 {
 	#line {gag};
 	#echo {{%0} {1}}
 }
 {9}
 
-#ALIAS {^beeps$}
+#alias {^beeps$}
 {
 	#nop {Turn on beeping enemy condition (default)};
 	#showme {beeps on};
@@ -56,7 +56,7 @@
 }
 {9}
 
-#ALIAS {^nobeeps$}
+#alias {^nobeeps$}
 {
 	#nop {Turn off beeping enemy condition};
 	#showme {beeps off};
@@ -64,6 +64,6 @@
 }
 {9}
 
-#GAG              {<%dhp %dm %dmv %dac> %5 <%6>$}
-#GAG              {<%dhp %dm %dmv>}
-#GAG              {^HP%d:%d MN%3:%4 MV%d:%d}
+#gag              {<%dhp %dm %dmv %dac> %5 <%6>$}
+#gag              {<%dhp %dm %dmv>}
+#gag              {^HP%d:%d MN%3:%4 MV%d:%d}
