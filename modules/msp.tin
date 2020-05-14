@@ -1,4 +1,4 @@
-#ACTION {^!!SOUND(%1.wav{\)| R=\d*\)}$}
+#action {^!!SOUND(%1.wav{\)| R=\d*\)}$}
 {
 	#nop {Keep track of the last 10 items sent via msp.};
 	#list {soundHistory} {insert} {1} {%1};
@@ -41,7 +41,7 @@
 }
 {9}
 
-#ACTION {^{silent_MSP|MSP} mode is {already|now} {dis|en}abled.$}
+#action {^{silent_MSP|MSP} mode is {already|now} {dis|en}abled.$}
 {
 	#nop {Because one action handles this, we need to check for en or dis. En is enabled, dis is disabled.};
 	#if {"%3" == "en"}
@@ -55,7 +55,7 @@
 }
 {9}
 
-#ALIAS {^synth_play %1}
+#alias {^synth_play %1}
 {
 	#if {!&{volume}}
 	{
@@ -68,7 +68,7 @@
 }
 {9}
 
-#ALIAS {seq_{play|play_norandom} %S}
+#alias {seq_{play|play_norandom} %S}
 {
 	#if {!&{volume}}
 	{
@@ -94,7 +94,7 @@
 }
 {9}
 
-#ALIAS {play %S}
+#alias {play %S}
 {
 	#if {!&{volume}}
 	{
@@ -107,14 +107,14 @@
 }
 {9}
 
-#EVENT {IAC WILL MSP}
+#event {IAC WILL MSP}
 {
 	#send {\xFF\xFD\x5A\};
 	#unevent {IAC WILL MSP}
 }
 
-#GAG              {^!!SOUND%*}
-#MACRO {\e>}
+#gag              {^!!SOUND%*}
+#macro {\e>}
 {
 	#if {$volume <= -40}
 	{
@@ -127,7 +127,7 @@
 	synth_play newVolumeSound
 }
 
-#MACRO {\e?}
+#macro {\e?}
 {
 	#if {$volume >= 0}
 	{
@@ -140,5 +140,5 @@
 	synth_play newVolumeSound
 }
 
-#VARIABLE         {msp}  {true}
-#VARIABLE         {soundHistory}  {}
+#variable         {msp}  {true}
+#variable         {soundHistory}  {}
