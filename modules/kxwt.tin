@@ -282,7 +282,7 @@
 #action {^kxwt_time %1}
 {
 	#variable {kxwt[time]} {%1};
-	#regexp {%1} {{.*} {.*}:{.*} {.*}} {#if {$lastPlayedTime != &2} {#if {"$editorMode" != "true"}{#delay {0.5}{#if {!&{repop[mob]}}{#variable {repop[mob]} {false}};#if {"${repop[mob]}" != "false"}{where ${repop[mob]} | prefix mobrepop_};#if {"${repop[instance]}" == "true"}{instance | prefix instancerepop_}};#delay {1} {leaderboard_update}};#if {"&4" == "am" && &2 == 7 && &3 == 00} {play sunrise};#elseif {"&4" == "pm" && &2 == 7 && &3 == 00} {play sunset};#if {"$clock" == "true"} {#variable {chimeCounter} {1};#variable {chimeLoop} {};#while {$chimeCounter <= &2}{#variable {chimeLoop} {$chimeLoop $HOME/sounds/clock.wav};#math {chimeCounter} {$chimeCounter + 1}};#echo {&2 O'clock &4};#if {"$msp" == "true"} {#system {play -q $chimeLoop gain $volume &> /dev/null &}}}};#variable {lastPlayedTime} {&2}}
+	#regexp {%1} {{.*} {.*}:{.*} {.*}} {#if {$lastPlayedTime != &2} {#if {"$editorMode" != "true"}{#delay {0.5}{#if {!&{repop[mob]}}{#variable {repop[mob]} {false}};#if {"${repop[mob]}" != "false"}{where ${repop[mob]} | prefix mobrepop_};#if {"${repop[instance]}" == "true"}{instance | prefix instancerepop_}};#delay {1}};#if {"&4" == "am" && &2 == 7 && &3 == 00} {play sunrise};#elseif {"&4" == "pm" && &2 == 7 && &3 == 00} {play sunset};#if {"$clock" == "true"} {#variable {chimeCounter} {1};#variable {chimeLoop} {};#while {$chimeCounter <= &2}{#variable {chimeLoop} {$chimeLoop $HOME/sounds/clock.wav};#math {chimeCounter} {$chimeCounter + 1}};#echo {&2 O'clock &4};#if {"$msp" == "true"} {#system {play -q $chimeLoop gain $volume &> /dev/null &}}}};#variable {lastPlayedTime} {&2}}
 }
 {8}
 
@@ -341,7 +341,7 @@
 }
 {9}
 
-#gag {^kxwt_{action|area|context|event|idle|longter_idle|mastercraft|spellup|spelldown|sky|spst|time|terrain|walkdir|waypoint}}
+#gag {^kxwt_{action|area|context|event|exp|fighting|gold|group|idle|longterm_idle|mastercraft|myname|position|prompt|rshort|rvnum|spellup|spelldown|sky|spst|time|terrain|walkdir|waypoint}}
 #substitute       { ]$}  { ]${exploredRoomString}}  {1}
 #variable         {areaNumber}  {-2}
 #variable         {checkedLevel}  {false}
