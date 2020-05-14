@@ -1,4 +1,4 @@
-#ACTION {^You add A liveoak to your group.$}
+#action {^You add A liveoak to your group.$}
 {
 	#if {"${character[cspam]}" == "true"}
 	{
@@ -7,14 +7,14 @@
 }
 {8}
 
-#ACTION {^%s'{Arim|Ber|Freth|Ganta|Gesu|Gesu-Char|Gesu-Ciru|Gesu-Faru|Gesu-Fell|Gesu-Ilnak|Gesu-Nar|Hett|Ilnak|Ilnak-Xix|Kenn|Oshi|Shul|Stis|Tal|Vin|Kama|Khil}'.}
+#action {^%s'{Arim|Ber|Freth|Ganta|Gesu|Gesu-Char|Gesu-Ciru|Gesu-Faru|Gesu-Fell|Gesu-Ilnak|Gesu-Nar|Hett|Ilnak|Ilnak-Xix|Kenn|Oshi|Shul|Stis|Tal|Vin|Kama|Khil}'.}
 {
 	#variable {runeCarveMessage} {%0};
 	SHOW_CARVING %1
 }
 {9}
 
-#ACTION {^A liveoak {starts|stops} following you.$}
+#action {^A liveoak {starts|stops} following you.$}
 {
 	#if {"${auto[liveoak]}" == "true"}
 	{
@@ -47,7 +47,7 @@
 }
 {9}
 
-#ACTION {^A shambling mound starts following you.$}
+#action {^A shambling mound starts following you.$}
 {
 	#if {!&{auto[mound]}}
 	{
@@ -57,7 +57,7 @@
 }
 {9}
 
-#ACTION {^A shambling mound {begins to fall apart and lose cohesion|stops following you}.}
+#action {^A shambling mound {begins to fall apart and lose cohesion|stops following you}.}
 {
 	#if {"${auto[mound]}" == "true"}
 	{
@@ -77,7 +77,7 @@
 }
 {9}
 
-#ACTION {^A wall of earth crumbles and collapses, returning to mother earth.$}
+#action {^A wall of earth crumbles and collapses, returning to mother earth.$}
 {
 	#if {"${auto[earthwall]}" == "true"}
 	{
@@ -86,7 +86,7 @@
 }
 {9}
 
-#ACTION {^It is %1  \x28{about |about -}%dC\x29$}
+#action {^It is %1  \x28{about |about -}%dC\x29$}
 {
 	#line {gag};
 	#if {"%2" != "about -"}
@@ -106,28 +106,28 @@
 }
 {9}
 
-#ACTION {^You carefully heat a branding tool and start firebranding %*.  Gradually you shape the rune '%*'.$}
+#action {^You carefully heat a branding tool and start firebranding %*.  Gradually you shape the rune '%*'.$}
 {
 	#variable {runeCarveMessage} {%0};
 	SHOW_CARVING %2
 }
 {9}
 
-#ACTION {^You carve the rune '%1' into %*.$}
+#action {^You carve the rune '%1' into %*.$}
 {
 	#variable {runeCarveMessage} {%0};
 	SHOW_CARVING %1
 }
 {9}
 
-#ACTION {^You examine %1 and start carving, and the knots and grain of the %2 fall into line with the rune '%3'.$}
+#action {^You examine %1 and start carving, and the knots and grain of the %2 fall into line with the rune '%3'.$}
 {
 	#variable {runeCarveMessage} {%0};
 	SHOW_CARVING %3
 }
 {9}
 
-#ACTION {^You find and gather up {a|some} {handful of different fruits|handful of local vegetables|large, edible roots|large greenish yellow squash|small, soft potato|stale bread crust}.}
+#action {^You find and gather up {a|some} {handful of different fruits|handful of local vegetables|large, edible roots|large greenish yellow squash|small, soft potato|stale bread crust}.}
 {
 	#if {"${auto[junk]}" == "true"}
 	{
@@ -136,21 +136,21 @@
 }
 {9}
 
-#ACTION {^You get out a pick and some other tiny enchanted tools and start chiseling on %*.  Gradually you shape the rune '%*'.$}
+#action {^You get out a pick and some other tiny enchanted tools and start chiseling on %*.  Gradually you shape the rune '%*'.$}
 {
 	#variable {runeCarveMessage} {%0};
 	SHOW_CARVING %2
 }
 {9}
 
-#ACTION {^You get out your heavily enchanted tools and start chiseling on %*.  Gradually you shape the rune '%*'.$}
+#action {^You get out your heavily enchanted tools and start chiseling on %*.  Gradually you shape the rune '%*'.$}
 {
 	#variable {runeCarveMessage} {%0};
 	SHOW_CARVING %2
 }
 {9}
 
-#ACTION {^You have collected %d acorns.$}
+#action {^You have collected %d acorns.$}
 {
 	#if {"${character[cspam]}" == "true"}
 	{
@@ -160,26 +160,26 @@
 }
 {9}
 
-#ACTION {^You open your sewing kit and begin tailoring %1.%sFollowing your instincts, you embroider the rune '%3'.$}
+#action {^You open your sewing kit and begin tailoring %1.%sFollowing your instincts, you embroider the rune '%3'.$}
 {
 	#variable {runeCarveMessage} {%0};
 	SHOW_CARVING %3
 }
 {9}
 
-#ACTION {^You throw a short spell to the wind and call for squirrels!$}
+#action {^You throw a short spell to the wind and call for squirrels!$}
 {
 	#variable {auto[lastCalledAnimal]} {squirrel}
 }
 {9}
 
-#ACTION {^You throw your magic to the wind and call {A blue|A mantis|A massive|A swarm of|A tall|An|An electric|A} %2 to this place!$}
+#action {^You throw your magic to the wind and call {A blue|A mantis|A massive|A swarm of|A tall|An|An electric|A} %2 to this place!$}
 {
 	#variable {auto[lastCalledAnimal]} {%2}
 }
 {9}
 
-#ACTION {^Your call goes unanswered.$}
+#action {^Your call goes unanswered.$}
 {
 	#if {"${auto[call]}" == "true"}
 	{
@@ -188,7 +188,7 @@
 }
 {9}
 
-#ACTION {^silent_[%s%d] a {star|sun|moon}catcher bottle in %4 - 100% full.$}
+#action {^silent_[%s%d] a {star|sun|moon}catcher bottle in %4 - 100% full.$}
 {
 	synth_play notificationSound;
 	#showme {Full %3catcher in %4.};
@@ -196,7 +196,7 @@
 }
 {9}
 
-#ACTION {^{A|a} water weird stops following you.$}
+#action {^{A|a} water weird stops following you.$}
 {
 	#if {"${client[releasing]}" != "true" && "${auto[weird]}" == "true"}
 	{
@@ -208,7 +208,7 @@
 }
 {9}
 
-#ACTION {^{It has the following runes \w+ into it|It has the following runes upon it}: %*}
+#action {^{It has the following runes \w+ into it|It has the following runes upon it}: %*}
 {
 	#local {runes} {%2};
 	#replace {runes} { } {;};
@@ -326,21 +326,21 @@
 }
 {9}
 
-#ACTION {^{vcast_.+_|}There are no suitable trees here, and you don't have any acorns.$}
+#action {^{vcast_.+_|}There are no suitable trees here, and you don't have any acorns.$}
 {
 	vcast liveoak acorn;
 	#line gag
 }
 {9}
 
-#ACTION {^{vcast_.+_|}There are no suitable trees here, but you could use an acorn if necessary.$}
+#action {^{vcast_.+_|}There are no suitable trees here, but you could use an acorn if necessary.$}
 {
 	#line {gag};
 	vcast liveoak acorn
 }
 {9}
 
-#ACTION {^{vcast_.+_|}There's not enough light left in a {cracked |}suncatcher bottle to create a liveoak{ from an acorn|}.$}
+#action {^{vcast_.+_|}There's not enough light left in a {cracked |}suncatcher bottle to create a liveoak{ from an acorn|}.$}
 {
 	#if {"${auto[liveoak]}" == "true"}
 	{
@@ -356,7 +356,7 @@
 }
 {9}
 
-#ACTION {^{vcast_.+_|}You don't have any acorns.$}
+#action {^{vcast_.+_|}You don't have any acorns.$}
 {
 	#if {"${auto[liveoak]}" == "true"}
 	{
@@ -372,7 +372,7 @@
 }
 {9}
 
-#ACTION {^{vcast_.+_|}an earth wall {stops|starts} following you.$}
+#action {^{vcast_.+_|}an earth wall {stops|starts} following you.$}
 {
 	#if {"${auto[earthwall]}" == "true"}
 	{
@@ -392,7 +392,7 @@
 }
 {9}
 
-#ALIAS {SHOW_CARVING %1}
+#alias {SHOW_CARVING %1}
 {
 	#switch {"%1"}
 	{
@@ -510,13 +510,13 @@
 }
 {9}
 
-#ALIAS {^ac{o|or|orn|orns}$}
+#alias {^ac{o|or|orn|orns}$}
 {
 	show acorns
 }
 {9}
 
-#ALIAS {^{auto|noauto}weird$}
+#alias {^{auto|noauto}weird$}
 {
 	#if {"%1" == "noauto"}
 	{
@@ -531,7 +531,7 @@
 }
 {9}
 
-#ALIAS {^{auto|noauto}{call|earthwall|liveoak|mound}$}
+#alias {^{auto|noauto}{call|earthwall|liveoak|mound}$}
 {
 	#if {"%1" == "auto"}
 	{
@@ -546,7 +546,7 @@
 }
 {9}
 
-#ALIAS {^{auto|noauto}{sun|star|moon|light}catcher$}
+#alias {^{auto|noauto}{sun|star|moon|light}catcher$}
 {
 	#if {"%1" == "auto"}
 	{
@@ -561,7 +561,7 @@
 }
 {9}
 
-#TICKER           {lightcatcher}  {#if {"${auto[suncatcher]}" == "true" && "${character[inBattle]}" == "false"}{gather lightcatcher list | prefix silent_}}                                                                                                {300.00}
-#VARIABLE  {client[spring]} {false}
-#VARIABLE         {earthWall}  {0}
-#VARIABLE         {runeCarveMessage}  {}
+#ticker           {lightcatcher}  {#if {"${auto[suncatcher]}" == "true" && "${character[inBattle]}" == "false"}{gather lightcatcher list | prefix silent_}}                                                                                                {300.00}
+#variable  {client[spring]} {false}
+#variable         {earthWall}  {0}
+#variable         {runeCarveMessage}  {}
