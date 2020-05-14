@@ -1,4 +1,4 @@
-#ACTION {%1 {\(.*\(unique\)|\(unique\)}$}
+#action {%1 {\(.*\(unique\)|\(unique\)}$}
 {
 	play unique;
 	#if {"${auto[getunique]}" == "true"}
@@ -12,20 +12,20 @@
 }
 {9}
 
-#ACTION {^junk_You drop %*.$}
+#action {^junk_You drop %*.$}
 {
 	sac $junkItem #unvariable {junkItem}
 }
 {9}
 
-#ACTION {^junk_You insult %1 %S.$}
+#action {^junk_You insult %1 %S.$}
 {
 	drop %2 | prefix junk_;
 	#variable {junkItem} {%2}
 }
 {9}
 
-#ACTION {^scrollcounter_%*_Found %d items matching the criteria: %*}
+#action {^scrollcounter_%*_Found %d items matching the criteria: %*}
 {
 	#variable {channelSilence} {true};
 	#variable {msg} {%2 scrolls of type %1 remaining.};
@@ -38,14 +38,14 @@
 }
 {9}
 
-#ACTION {^silent_%*$battleScroll}
+#action {^silent_%*$battleScroll}
 {
 	get $battleScroll corpse;
 	put $battleScroll ${character[container]}
 }
 {9}
 
-#ACTION {^silent_You insult {corpse carcass body|carcass gutted corpse} %S.$}
+#action {^silent_You insult {corpse carcass body|carcass gutted corpse} %S.$}
 {
 	#variable {corpseVnum} {%2};
 	#send {get coins $corpseVnum | grep -v There's nothing left};
@@ -77,7 +77,7 @@
 }
 {9}
 
-#ALIAS {^scrolls$}
+#alias {^scrolls$}
 {
 	#if {&{scrolls}}
 	{
@@ -97,7 +97,7 @@
 }
 {5}
 
-#ALIAS {^autostore %S}
+#alias {^autostore %S}
 {
 	#variable {character[soulstoneContainer]} {%1};
 	#variable {auto[store]} {true};
@@ -105,7 +105,7 @@
 }
 {8}
 
-#ALIAS {^autostore$}
+#alias {^autostore$}
 {
 	#if {!&{character[soulstoneContainer]}}
 	{
@@ -116,14 +116,14 @@
 }
 {9}
 
-#ALIAS {^cont{a|ai|ain|aine|ainer} %S$}
+#alias {^cont{a|ai|ain|aine|ainer} %S$}
 {
 	#showme {Container set to %2.};
 	#variable {character[container]} {%2}
 }
 {9}
 
-#ALIAS {^dscroll %S$}
+#alias {^dscroll %S$}
 {
 	#if {&{scrolls[%1]}}
 	{
@@ -137,7 +137,7 @@
 }
 {9}
 
-#ALIAS {^noscroll %S$}
+#alias {^noscroll %S$}
 {
 	#if {&{scrolls[%1]}}
 	{
@@ -151,14 +151,14 @@
 }
 {9}
 
-#ALIAS {^scroll %S %*}
+#alias {^scroll %S %*}
 {
 	#variable {scrolls[%1]} {%2};
 	#showme {Scroll type %1 created as %2. Use uscroll %1 to get and use it. You can also use uscroll %1 <name> to use it on someone else.}
 }
 {9}
 
-#ALIAS {^scroll %S$}
+#alias {^scroll %S$}
 {
 	#if {&{scrolls[%1]}}
 	{
@@ -171,7 +171,7 @@
 }
 {9}
 
-#ALIAS {^uscroll %S{ .+|}$}
+#alias {^uscroll %S{ .+|}$}
 {
 	#if {&{scrolls[%1]}}
 	{
@@ -190,13 +190,13 @@
 }
 {9}
 
-#ALIAS {^x$}
+#alias {^x$}
 {
 	insult corpse | prefix silent_
 }
 {9}
 
-#ALIAS {^{auto|noauto}{donate|get}unique$}
+#alias {^{auto|noauto}{donate|get}unique$}
 {
 	#switch {"%0"}
 	{
@@ -222,7 +222,7 @@
 }
 {9}
 
-#ALIAS {^{g|ge|get|gi|giv|give|p|pu|put} %2 %S$}
+#alias {^{g|ge|get|gi|giv|give|p|pu|put} %2 %S$}
 {
 	#if {!&{character[container]} && "%1" == "{p|pu|put}"}
 	{
@@ -238,41 +238,41 @@
 }
 {9}
 
-#ALIAS {g}
+#alias {g}
 {
 	#send {get all corpse}
 }
 {9}
 
-#ALIAS {junk %1}
+#alias {junk %1}
 {
 	insult ?%1 -inventory | prefix junk_
 }
 {9}
 
-#ALIAS {lic}
+#alias {lic}
 {
 	look in corpse
 }
 {9}
 
-#ALIAS {noautostore}
+#alias {noautostore}
 {
 	#unvariable {auto[store]};
 	#showme {You will no longer autostore anything.}
 }
 {9}
 
-#ALIAS {rm}
+#alias {rm}
 {
 	remove
 }
 {9}
 
-#GAG              {^You don't see anything named 'coins' in the corpse of %1.$}
-#GAG              {^junk_You insult%*}
-#GAG              {^scrollcounter_%*}
-#MACRO {\e\}
+#gag              {^You don't see anything named 'coins' in the corpse of %1.$}
+#gag              {^junk_You insult%*}
+#gag              {^scrollcounter_%*}
+#macro {\e\}
 {
 	#if {&{character[defaultScroll]}}
 	{
