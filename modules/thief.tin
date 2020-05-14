@@ -1,4 +1,4 @@
-#ACTION {%1 begins trying to pick %2...$}
+#action {%1 begins trying to pick %2...$}
 {
 	#if {"%1" == "${group[leader]}"}
 	{
@@ -15,7 +15,7 @@
 }
 {5}
 
-#ACTION {^Yo{u|ur} {lock picking skills failed you during that try|try another go at picking the lock|continue to manipulate the lock|attempt to pick the lock|thief abilities were insufficient for that attempt}{\.|\.\.\.}$}
+#action {^Yo{u|ur} {lock picking skills failed you during that try|try another go at picking the lock|continue to manipulate the lock|attempt to pick the lock|thief abilities were insufficient for that attempt}{\.|\.\.\.}$}
 {
 	#if {"${character[cspam]}" == "true"}
 	{
@@ -24,7 +24,7 @@
 }
 {5}
 
-#ACTION {^{stealing_You|You} do your best to explain to %2 that {it was an honest mistake|you didn't do it}.$}
+#action {^{stealing_You|You} do your best to explain to %2 that {it was an honest mistake|you didn't do it}.$}
 {
 	#math {i} {1d3};
 	#switch {$i}
@@ -50,13 +50,13 @@
 }
 {5}
 
-#ACTION {^You throw a %1 {bottle|potion} of %3 at %4, but it fails to break!$}
+#action {^You throw a %1 {bottle|potion} of %3 at %4, but it fails to break!$}
 {
 	get %2
 }
 {8}
 
-#ACTION {^You are forced to defend yourself against %2!$}
+#action {^You are forced to defend yourself against %2!$}
 {
 	#if {"${auto[withdraw]}" == "true"}
 	{
@@ -65,7 +65,7 @@
 }
 {9}
 
-#ACTION {^You throw caution to the wind and engage %1 in melee combat!$}
+#action {^You throw caution to the wind and engage %1 in melee combat!$}
 {
 	#if {"${auto[stop]}" == "true"}
 	{
@@ -74,7 +74,7 @@
 }
 {9}
 
-#ACTION {^Your reflexes trigger and you instantly wake to battle!$}
+#action {^Your reflexes trigger and you instantly wake to battle!$}
 {
 	#if {&{position}}
 	{
@@ -90,31 +90,31 @@
 }
 {9}
 
-#ACTION {^give crystal %1You don't see anyone named '%2' here.$}
+#action {^give crystal %1You don't see anyone named '%2' here.$}
 {
 	${auto[junkType]} crystal
 }
 {9}
 
-#ACTION {^give crystal %1You fail to cast the spel%*.$}
+#action {^give crystal %1You fail to cast the spel%*.$}
 {
 	vcast crystal light | prefix give crystal %1
 }
 {9}
 
-#ACTION {^give crystal %1You give a brightly glowing crystal to %2.$}
+#action {^give crystal %1You give a brightly glowing crystal to %2.$}
 {
 	bind %1
 }
 {9}
 
-#ACTION {^give crystal %1You hold your hands a few inches apart and grow a glowing crystal between them.$}
+#action {^give crystal %1You hold your hands a few inches apart and grow a glowing crystal between them.$}
 {
 	give crystal %1 | prefix give crystal %1
 }
 {9}
 
-#ACTION {^silent_You {carefully, carefully|carefully|disconnect|drain|scoop|scrape|unmount}%*.}
+#action {^silent_You {carefully, carefully|carefully|disconnect|drain|scoop|scrape|unmount}%*.}
 {
 	#showme {You %1%2.};
 	#if {"${auto[junk]}" == "true"}
@@ -139,7 +139,7 @@
 }
 {9}
 
-#ACTION {^stealing_%1 seems to have dropped %2!%sYou'll surely return it later.$}
+#action {^stealing_%1 seems to have dropped %2!%sYou'll surely return it later.$}
 {
 	play pickpocket;
 	#if {"${auto[junk]}" == "true"}
@@ -153,14 +153,14 @@
 }
 {9}
 
-#ALIAS {{swi|swie|swiel|swield} %1}
+#alias {{swi|swie|swiel|swield} %1}
 {
 	#variable {stabWeapon} {%1};
 	#showme {You will now use the %1 for backstabs.}
 }
 {5}
 
-#ALIAS {^get %S %S$}
+#alias {^get %S %S$}
 {
 	#if {"${skillsAndSpells[palm]}" == "true" && "$inBattle" != "true" && "%1" != "all" && "$position" != "sleep"}
 	{
@@ -173,25 +173,25 @@
 }
 {8}
 
-#ALIAS {^{bin|bind} %1}
+#alias {^{bin|bind} %1}
 {
 	shadow bind %1;
 }
 {9}
 
-#ALIAS {^{bin|bind}$}
+#alias {^{bin|bind}$}
 {
 	shadow bind;
 }
 {9}
 
-#ALIAS {^{strik|strike}%*}
+#alias {^{strik|strike}%*}
 {
 	#regexp {%0} {{.*} {.*}} {shadow strike &2} {shadow strike}
 }
 {9}
 
-#ALIAS {^{lb|lbi|lbin|lbind|lightb|lightbi|lightbin|lightbind} %1}
+#alias {^{lb|lbi|lbin|lbind|lightb|lightbi|lightbin|lightbind} %1}
 {
 	#if {"${skillsAndSpells[crystal light]}" == "true"}
 	{
@@ -204,7 +204,7 @@
 }
 {9}
 
-#ALIAS {^{noauto|auto}{stop|withdraw}$}
+#alias {^{noauto|auto}{stop|withdraw}$}
 {
 	#switch {"%0"}
 	{
@@ -227,89 +227,11 @@
 }
 {9}
 
-#ALIAS {^{pickp|pickpo|pickpoc|pickpock|pickpocke|pickpocket} %s%3}
+#alias {^{pickp|pickpo|pickpoc|pickpock|pickpocke|pickpocket} %s%3}
 {
 	#send {pickpocket %3 | prefix stealing_}
 }
 {9}
 
-#ALIAS {bs %1}
-{
-	#variable {victim} {%1};
-	#if {&{weapon}}
-	{
-		remove $weapon
-	};
-	#if {&{eqshield}}
-	{
-		remove shield
-	};
-	wield $stabWeapon;
-	#if {"$cloakOfDarkness" == "true"}
-	{
-		cloak on
-	};
-	#if {"$hide" == "true"}
-	{
-		hide
-	};
-	backstab %1;
-	remove $stabWeapon;
-	#if {&{weapon}}
-	{
-		wield $weapon
-	};
-	#if {&{eqshield}}
-	{
-		wear shield
-	};
-	#if {"$cloakOfDarkness" == "true"}
-	{
-		cloak off
-	}
-}
-{9}
-
-#ALIAS {slay %1 %2}
-{
-	#variable {victim} {%1};
-	#if {&{weapon}}
-	{
-		remove $weapon
-	};
-	#if {&{eqshield}}
-	{
-		remove shield
-	};
-	wield $stabWeapon;
-	#if {"$cloakOfDarkness" == "true"}
-	{
-		cloak on
-	};
-	#if {&{stealthyMovement}}
-	{
-		sneak %2
-	};
-	#else
-	{
-		%2
-	};
-	backstab %1;
-	remove $stabWeapon;
-	#if {&{eqshield}}
-	{
-		wear shield
-	};
-	#if {&{weapon}}
-	{
-		wield $weapon
-	};
-	#if {"$cloakOfDarkness" == "true"}
-	{
-		cloak off
-	}
-}
-{9}
-
-#SUBSTITUTE       {^stealing_}  {}  {1}
-#SUBSTITUTE       {^give crystal %1You}  {You}  {9}
+#substitute       {^stealing_}  {}  {1}
+#substitute       {^give crystal %1You}  {You}  {9}
