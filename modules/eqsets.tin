@@ -1,4 +1,4 @@
-#ACTION {^You are now wearing set '%S'.$}
+#action {^You are now wearing set '%S'.$}
 {
 	show stats | prefix silent_;
 	show clev | prefix silent_;
@@ -14,7 +14,7 @@
 }
 {9}
 
-#ACTION {^silent_%1_{head|neck|arms|wrist|hands|finger|on body|about body|waist|legs|feet|held|shield|wielded|weapon}%* %S$}
+#action {^silent_%1_{head|neck|arms|wrist|hands|finger|on body|about body|waist|legs|feet|held|shield|wielded|weapon}%* %S$}
 {
 	#switch {"%2"}
 	{
@@ -35,19 +35,19 @@
 }
 {9}
 
-#ACTION {^silent_You can't wear that!$}
+#action {^silent_You can't wear that!$}
 {
 	wield $lastEq | grep nospam
 }
 {9}
 
-#ALIAS {%.set$}
+#alias {%.set$}
 {
 	eqset wear %1set
 }
 {9}
 
-#ALIAS {^delset %S$}
+#alias {^delset %S$}
 {
 	#list {eq_%1} {size} {eqTotalItems};
 	#if {$eqTotalItems == 0}
@@ -62,7 +62,7 @@
 }
 {9}
 
-#ALIAS {^newset %S$}
+#alias {^newset %S$}
 {
 	#list {eq_%1} {size} {eqTotalItems};
 	#if {$eqTotalItems != 0}
@@ -94,7 +94,7 @@
 }
 {9}
 
-#ALIAS {^wearset %S$}
+#alias {^wearset %S$}
 {
 	#if {!&{character[equipmentContainer]}}
 	{
@@ -131,11 +131,11 @@
 }
 {9}
 
-#ALIAS {^{eqco|eqcon|eqcont|eqconta|eqcontai|eqcontain|eqcontaine|eqcontainer} %2}
+#alias {^{eqco|eqcon|eqcont|eqconta|eqcontai|eqcontain|eqcontaine|eqcontainer} %2}
 {
 	#variable {character[equipmentContainer]} {%2};
 	#showme {Equipment container set to ${character[equipmentContainer]}\.}
 }
 {9}
 
-#VARIABLE         {eqWearCommand}  {}
+#variable         {eqWearCommand}  {}
