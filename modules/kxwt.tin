@@ -341,7 +341,7 @@
 }
 {9}
 
-#gag {^kxwt_{action|area|context|event|exp|fighting|gold|group|idle|longterm_idle|mastercraft|mdeath|myname|position|prompt|rshort|rvnum|spellup|spelldown|sky|spst|supported|time|terrain|walkdir|waypoint}}
+#gag {^kxwt_{action|area|context|event|exp|fighting|gold|group|gdeath|idle|longterm_idle|mastercraft|mdeath|myname|position|prompt|rshort|rvnum|spellup|spelldown|sky|spst|supported|time|terrain|walkdir|waypoint|ydeath}}
 #gag {^kxwt_id_end$}
 #substitute       { ]$}  { ]${exploredRoomString}}  {1}
 #substitute {^kxwt_id_starta %1} {%1}
