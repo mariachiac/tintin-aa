@@ -341,10 +341,10 @@
 }
 {9}
 
-#gag {^kxwt_{action|area|context|event|exp|fighting|gold|group|gdeath|idle|longterm_idle|mastercraft|mdeath|myname|position|prompt|rshort|rvnum|spellup|spelldown|sky|spst|supported|time|terrain|walkdir|waypoint|ydeath}}
+#gag {^kxwt_{action|area|context|event|exp|fighting|gold|group|gdeath|idle|longterm_idle|mastercraft|mdeath|myname|nocast|position|prompt|rshort|rvnum|spellup|spelldown|sky|spst|supported|time|terrain|walkdir|waypoint|ydeath}}
 #gag {^kxwt_id_end$}
 #substitute       { ]$}  { ]${exploredRoomString}}  {1}
-#substitute {^kxwt_id_starta %1} {%1}
+#substitute {^kxwt_id_start%1} {%1}
 #variable         {areaNumber}  {-2}
 #variable         {checkedLevel}  {false}
 #variable         {chimeCounter}  {}
