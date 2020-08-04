@@ -305,12 +305,6 @@
 }
 {9}
 
-#action {^silent_brag_%wYou have died %d times to mobs.$}
-{
-	%1 I have died %2 times to mobs.
-}
-{9}
-
 #action {^{silent_You|You} can train to get a practice, at a cost of %d experience each.$}
 {
 	#variable {auto[buyPracticeExperience]} {%2}
@@ -659,17 +653,6 @@
 }
 {9}
 
-#alias {^{bra|brag|sh|sho|show} {md|mde|mdea|mdeat|mdeath}$}
-{
-	whoami | grep times to mobs.
-}
-{9}
-
-#alias {^{bra|brag} %s%w %s{md|mde|mdea|mdeat|mdeath}$}
-{
-	whoami | grep times to mobs. | prefix silent_brag_%3
-}
-{9}
 
 #alias {^{clock|noclock}$}
 {
