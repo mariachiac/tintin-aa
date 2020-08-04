@@ -90,30 +90,6 @@
 }
 {9}
 
-#action {^give crystal %1You don't see anyone named '%2' here.$}
-{
-	${auto[junkType]} crystal
-}
-{9}
-
-#action {^give crystal %1You fail to cast the spel%*.$}
-{
-	vcast crystal light | prefix give crystal %1
-}
-{9}
-
-#action {^give crystal %1You give a brightly glowing crystal to %2.$}
-{
-	bind %1
-}
-{9}
-
-#action {^give crystal %1You hold your hands a few inches apart and grow a glowing crystal between them.$}
-{
-	give crystal %1 | prefix give crystal %1
-}
-{9}
-
 #action {^silent_You {carefully, carefully|carefully|disconnect|drain|scoop|scrape|unmount}%*.}
 {
 	#showme {You %1%2.};
@@ -188,19 +164,6 @@
 #alias {^{strik|strike}%*}
 {
 	#regexp {%0} {{.*} {.*}} {shadow strike &2} {shadow strike}
-}
-{9}
-
-#alias {^{lb|lbi|lbin|lbind|lightb|lightbi|lightbin|lightbind} %1}
-{
-	#if {"${skillsAndSpells[crystal light]}" == "true"}
-	{
-		vcast crystal light | prefix give crystal %1
-	};
-	#else
-	{
-		#echo {You need to learn the spell crystal light to use lightbind.}
-	}
 }
 {9}
 
