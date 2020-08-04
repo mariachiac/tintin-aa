@@ -142,6 +142,8 @@
 #event {PROGRAM START}
 {
 	#system {clear};
+#nop {set screen split mode};
+#split {0} {0};
 	#nop {Set the home directory variable.};
 	#script {HOME} {if [ -z "$XDG_CONFIG_HOME" ] ; then if ! [ -d "$HOME/.config/tintin-alteraeon/" ] ; then mkdir -p "$HOME/.config/tintin-alteraeon";fi;echo -n "$HOME/.config/tintin-alteraeon";else if ! [ -d "$XDG_CONFIG_HOME/tintin-alteraeon/" ] ; then mkdir -p "$XDG_CONFIG_HOME/tintin-alteraeon/";fi;echo -n "$XDG_CONFIG_HOME/tintin-alteraeon";fi};
 	#variable {HOME} {${HOME[1]}};
