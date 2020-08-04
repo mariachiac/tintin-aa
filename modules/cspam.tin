@@ -479,15 +479,6 @@
 }
 {9}
 
-#action {^{You|A .*} {are|have|has|is} {a few scratches|in excellent condition}.$}
-{
-     #if {"${character[cspam]}" == "true"}
-     {
-          #line {gag}
-     }
-}
-{9}
-
 #action {^{\s+Y|vcast.*Y|Y}ou {gain|receive} %d experience{\.|!}$}
 {
      #if {"${character[cspam]}" == "true"}
