@@ -3,7 +3,7 @@
 #config           {charset}  {ascii}
 #config           {color patch}  {off}
 #config           {command color}  {<078>}
-#config           {command echo}  {on}
+#config           {command echo}  {off}
 #config           {connect retry}  {15}
 #config           {history size}  {1000}
 #config           {log}  {plain}
