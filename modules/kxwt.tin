@@ -25,13 +25,6 @@
 }
 {8}
 
-#ACTION {^kxwt_event quest %1}
-{
-	#variable {kxwt[event]} {quest %1};
-	post $name completed quest: %1
-}
-{8}
-
 #ACTION {^kxwt_exp %d}
 {
 	#variable {kxwt[exp]} {%1};
@@ -341,7 +334,7 @@
 }
 {9}
 
-#gag {^kxwt_{action|area|brew|context|edeath|event|exp|fighting|gold|group|gdeath|idle|longterm_idle|mastercraft|mdeath|myname|nocast|position|prompt|rshort|rvnum|spellup|spelldown|sky|spst|supported|time|terrain|walkdir|waypoint|ydeath}}
+#gag {^kxwt_{action|audio|area|brew|context|edeath|event|exp|fighting|gdeath|gold|group|idle|longterm_idle|mastercraft|mdeath|myname|nocast|pdeath|position|prompt|rshort|rvnum|spellup|spelldown|sky|spst|supported|time|terrain|walkdir|waypoint|ydeath}}
 #gag {^kxwt_id_end$}
 #substitute       { ]$}  { ]${exploredRoomString}}  {1}
 #substitute {^kxwt_id_start%1} {%1}
