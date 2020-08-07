@@ -166,7 +166,7 @@
 	#log {overwrite} {${logFilePath}${logFileName[1]}}
 }
 
-#vent {SESSION DISCONNECTED}
+#event {SESSION DISCONNECTED}
 {
 	qcsave;
 	#unvariable {connected};
