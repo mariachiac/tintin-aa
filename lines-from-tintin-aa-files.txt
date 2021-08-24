@@ -1,0 +1,13 @@
+* navigation.tin
+
+#action {^You enter a huge portal.$}
+{
+#	seq_play portal
+}
+{5}
+
+#action {%1 arrives from%2portal%3}
+{
+#	seq_play portal
+}
+{9}
