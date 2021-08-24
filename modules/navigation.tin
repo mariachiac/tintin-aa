@@ -22,13 +22,13 @@
 
 #action {^You enter a huge portal.$}
 {
-	seq_play portal
+#	seq_play portal
 }
 {5}
 
 #action {%1 arrives from%2portal%3}
 {
-	seq_play portal
+#	seq_play portal
 }
 {9}
 
@@ -58,7 +58,7 @@
 
 #action {^Alas, you cannot go that way.$}
 {
-	play bump;
+#	play bump;
 	#if {"$pathing" == "true"}
 	{
 		#path {del}

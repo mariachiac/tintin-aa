@@ -7,7 +7,7 @@
 #config           {connect retry}  {15}
 #config           {history size}  {1000}
 #config           {log}  {plain}
-#config           {packet patch}  {0.5}
+#config           {packet patch}  {0.2}
 #config           {repeat char}  {!}
 #config           {repeat enter}  {ON}
 #config {screen reader}  {on}
