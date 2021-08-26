@@ -47,7 +47,6 @@
 
 #action {^Alas, you cannot go that way.$}
 {
-#	play bump;
 	#if {"$pathing" == "true"}
 	{
 		#path {del}
