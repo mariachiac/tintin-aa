@@ -1,3 +1,5 @@
+#variable {areaNewSound} {"|sox -np synth trapezium %-9 trapezium %-2 fade
+p 0 0.1 remix - phaser"}
 #variable         {auctionChannel}  {"|sox -np synth .2 tri C4 tri F3" "|sox -np synth .55 tri C3 tri F2" remix - phaser}
 #variable         {botthwack}  {"|sox -np synth 2 sine 700:1000 sine 900:1200 fade 0 2 0 remix - norm -12 repeat 3 overdrive reverb speed 4"}
 #variable         {bovineChannel}  {"|sox -np synth .35 pl E2 pl G2" remix - flanger reverse gain -8}
