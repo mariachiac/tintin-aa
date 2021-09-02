@@ -5,7 +5,7 @@
 	#variable {areaName} {default};
 	#if {$oldAreaNumber != $areaNumber}
 	{
-		play new_area;
+		synth_play AreaNewSound;
 		#variable {oldAreaNumber} {-1}
 	}
 }
@@ -18,7 +18,7 @@
 	#variable {areaName} {%2};
 	#if {$oldAreaNumber != $areaNumber}
 	{
-		play new_area;
+		synth_play areaNewSound;
 		#variable {oldAreaNumber} {%1};
 		#showme %2
 	}
