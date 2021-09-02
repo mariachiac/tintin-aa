@@ -110,7 +110,6 @@
 
 #action {^(friend) %S was kille%*}
 {
-	play friend-death;
 	Channel_Event friend %0;
 	notify-send %0
 }
@@ -135,7 +134,17 @@
 	#nop {Note: Fires on the ticker ending, not on this action.};
 	autobrag You received %1 bonus camel experience. HAPPY HUMP DAY!;
 	#format {character[lastCamel]} {%T};
-	#ticker {humpTicker} {#local {time} {};#format {time} {%T};#if {$time - ${character[lastCamel]} >= 7200} {#var {channelSilence} {true};Channel_Event all It's time to kill a camel!;#showme {It's time to kill a camel!};synth_play notificationSound;#unticker {humpTicker};@do_hook{humpTime}}} {30}
+	#ticker {humpTicker} {#local {time} {};
+	#format {time} {%T};#if {$time - ${character[lastCamel]} >= 7200} {
+	#var {channelSilence} {true};
+	Channel_Event all It's time to kill a camel!;
+	#showme {It's time to kill a camel!};
+	synth_play notificationSound;
+	#unticker {humpTicker};
+	@do_hook{humpTime}
+	}
+	}
+	{30}
 }
 {9}
 
@@ -161,8 +170,7 @@
 	{
 		#variable {client[gambleGame]} {slots}
 	};
-	#else
-	{
+	#else {
 		#variable {client[gambleGame]} {merchant}
 	}
 }
