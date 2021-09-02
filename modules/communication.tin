@@ -92,7 +92,6 @@
 #action {^(friend) %1 has entered the game.$}
 {
 	#variable {friendNameEnter} {%1};
-	play friend-enter;
 	Channel_Event friend %0;
 	notify-send %0
 }
@@ -104,7 +103,6 @@
 	{
 		#unvariable {friendNameEnter}
 	};
-	play friend-leave;
 	Channel_Event friend %0;
 	notify-send %0
 }
@@ -191,7 +189,6 @@
 
 #action {^You gain a practice!$}
 {
-	play train-practice;
 	train | grep You can train to get a practice, | prefix silent_autobrag_
 }
 {9}
@@ -253,7 +250,6 @@
 {
 	#variable {channelSilence} {true};
 	Channel_Event all You gained favor in the eyes of %2!;
-	play favor;
 	notify-send you gained favor in the eyes of %2!;
 	autobrag %0
 }
