@@ -1,30 +1,37 @@
-#config           {auto tab}  {5000}
-#config           {buffer size}  {10000}
-#config           {charset}  {ascii}
-#config           {color patch}  {off}
-#config           {command color}  {<078>}
-#config           {command echo}  {off}
-#config           {connect retry}  {15}
-#config           {history size}  {1000}
-#config           {log}  {plain}
-#config           {packet patch}  {0.0}
-#config           {repeat char}  {!}
-#config           {repeat enter}  {ON}
-#config {screen reader}  {on}
-#config           {scroll lock}  {on}
-#config           {speedwalk}  {off}
-#config           {tintin char}  {#}
-#config           {verbatim}  {off}
-#config           {verbatim char}  {\}
-#config           {verbose}  {off}
-#config           {wordwrap}  {on}
-#PATHDIR          {d}  {u}  {32}
-#PATHDIR          {e}  {w}  {2}
-#PATHDIR          {n}  {s}  {1}
-#PATHDIR          {ne}  {sw}  {3}
-#PATHDIR          {nw}  {se}  {9}
-#PATHDIR          {s}  {n}  {4}
-#PATHDIR          {se}  {nw}  {6}
-#PATHDIR          {sw}  {ne}  {12}
-#PATHDIR          {u}  {d}  {16}
-#PATHDIR          {w}  {e}  {8}
+#CONFIG {AUTO TAB} {5000}
+#CONFIG {BUFFER SIZE} {10000}
+#CONFIG {CHARSET} {ASCII}
+#CONFIG {COLOR MODE} {TRUE}
+#CONFIG {COLOR PATCH} {OFF}
+#CONFIG {COMMAND COLOR} {\e[0;37m}
+#CONFIG {COMMAND ECHO} {OFF}
+#CONFIG {CONNECT RETRY} {0.0}
+#CONFIG {HISTORY SIZE} {5000}
+#CONFIG {LOG MODE} {RAW}
+#CONFIG {MOUSE} {OFF}
+#CONFIG {PACKET PATCH} {0.00}
+#CONFIG {RANDOM SEED} {1269884042}
+#CONFIG {REPEAT CHAR} {!}
+#CONFIG {REPEAT ENTER} {ON}
+#CONFIG {SCREEN READER} {ON}
+#CONFIG {SCROLL LOCK} {ON}
+#CONFIG {SPEEDWALK} {OFF}
+#CONFIG {TAB WIDTH} {8}
+#CONFIG {TELNET} {ON}
+#CONFIG {TINTIN CHAR} {#}
+#CONFIG {VERBATIM} {OFF}
+#CONFIG {VERBATIM CHAR} {\}
+#CONFIG {VERBOSE} {OFF}
+#CONFIG {WORDWRAP} {ON}
+
+#PATHDIR {d} {u} {32}
+#PATHDIR {e} {w} {2}
+#PATHDIR {n} {s} {1}
+#PATHDIR {ne} {sw} {3}
+#PATHDIR {nw} {se} {9}
+#PATHDIR {s} {n} {4}
+#PATHDIR {se} {nw} {6}
+#PATHDIR {sw} {ne} {12}
+#PATHDIR {u} {d} {16}
+#PATHDIR {w} {e} {8}
+
