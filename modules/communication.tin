@@ -723,7 +723,7 @@
     display_channel $channelBuffer[$channelBufferIndex] 3
 }
 
-#macro {\e5}
+#macro {\e4}
 {
     display_channel $channelBuffer[$channelBufferIndex] 4
 }
