@@ -89,7 +89,9 @@
 		#system {play -qV0 "$soundFileName" gain $volume &> /dev/null &};
 		#script {i} {soxi "$soundFileName" | grep Duration | cut -d ':' -f2- | cut -d '=' -f1 | tr -d "[:space:]"};
 		#variable {i} {${i[1]}};
-		#delay {$i}  {#unvariable {play_%1}}
+#replace i {%*:};
+#delay {$i}  {#unvariable {play_%1}
+}
 	}
 }
 {9}
