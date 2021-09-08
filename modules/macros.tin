@@ -145,3 +145,8 @@
 {
 	f02
 }
+
+#macro {\ex}
+{
+show ex
+}
