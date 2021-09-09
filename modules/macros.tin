@@ -146,6 +146,21 @@
 	f02
 }
 
+#macro {\ec}
+{
+show coordinates
+}
+
+#macro {\eh}
+{
+show hp
+}
+
+#macro {\ev}
+{
+show movement
+}
+
 #macro {\ex}
 {
 show ex
