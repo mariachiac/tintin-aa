@@ -60,4 +60,9 @@
 }
 {9}
 
+#macro {\em}
+{
+show mana
+}
+
 #variable         {castingWaterBreathing}   {false}
