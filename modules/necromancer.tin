@@ -1,6 +1,6 @@
 #action {%1 is mortally wounded, and will die soon if not aided.$}
 	{
-	synth_play mortallywounded;
+	synth_play mortallyWoundedSound;
 	#if {"${character[cspam]}" == "true"}
 	{
 		#showme {%1 is morted.};
