@@ -171,12 +171,12 @@
 
 #macro {\e,}
 {
-	southwest
+	south
 }
 
 #macro {\en}
 {
-	southwest
+	southeast
 }
 
 #macro {\e<}
@@ -228,7 +228,7 @@
 	east
 }
 
-#macro {\e,}
+#macro {\e.}
 {
 	southwest
 }
