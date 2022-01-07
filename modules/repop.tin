@@ -1,4 +1,4 @@
-#action {^instancerepop_You are not currently the owner of any instances.$}
+#ACTION {^instancerepop_You are not currently the owner of any instances.$}
 {
 	#if {"${repop[instance]}" == "true"}
 	{
@@ -9,7 +9,7 @@
 }
 {9}
 
-#action {^instancerepop_[%d] %s%d %s%d %s%d %s%D %S$}
+#ACTION {^instancerepop_[%d] %s%d %s%d %s%d %s%D %S$}
 {
 #if {%3 < 6}
 	{
@@ -22,7 +22,7 @@
 }
 {9}
 
-#action {^mobrepop_%1->%2}
+#ACTION {^mobrepop_%1->%2}
 {
 	#variable {repop[mob]} {false};
 	#showme {%1->%2};
@@ -30,14 +30,15 @@
 }
 {9}
 
-#alias {^repop %S}
+
+#ALIAS {^repop %S}
 {
 	#variable {repop[mob]} {%1};
 	#showme {Waiting for %1 to repop...}
 }
 {9}
 
-#alias {^{nore|re}pop$}
+#ALIAS {^{nore|re}pop$}
 {
 	#if {"%0" == "norepop"}
 	{
@@ -55,7 +56,7 @@
 }
 {9}
 
-#alias {^{nowatch|watch}instance$}
+#ALIAS {^{nowatch|watch}instance$}
 {
 	#if {"%0" == "nowatchinstance"}
 	{
@@ -70,4 +71,5 @@
 }
 {9}
 
-#gag              {^{instance|mob}repop_%*}
+
+#GAG              {^{instance|mob}repop_%*}

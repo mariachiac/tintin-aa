@@ -1,10 +1,10 @@
-#action {^silent_You have lost %1 experience points so far due to deaths.$}
+#ACTION {^silent_You have lost %1 experience points so far due to deaths.$}
 {
 	#variable {lostExp} {%1}
 }
 {1}
 
-#action {^%sYou have been playing a total of %d hours.}
+#ACTION {^%sYou have been playing a total of %d hours.}
 {
 	#line {gag};
 	#variable {yearCounter} {0};
@@ -54,13 +54,13 @@
 }
 {5}
 
-#action {^You are %1, and currently %2 tall.$}
+#ACTION {^You are %1, and currently %2 tall.$}
 {
 	#variable {character[sex]} {%1}
 }
 {5}
 
-#action {^silent_{Cleric|Druid|Mage|Necromancer} remaining: %2/%3}
+#ACTION {^silent_{Cleric|Druid|Mage|Necromancer} remaining: %2/%3}
 {
 	#if {%2 != %3}
 	{
@@ -69,13 +69,13 @@
 }
 {5}
 
-#action {^silent_{Evil|Good}{Sun|Mon|Tue|Wed|Thu|Fri|Sat}%s{Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec}%s%d%s%d:%*}
+#ACTION {^silent_{Evil|Good}{Sun|Mon|Tue|Wed|Thu|Fri|Sat}%s{Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec}%s%d%s%d:%*}
 {
 	#showme {%1 offset:%9}
 }
 {8}
 
-#action {^%w has given you a gift!$}
+#ACTION {^%w has given you a gift!$}
 {
 	#if {"${auto[thank]}" == "true"}
 	{
@@ -98,49 +98,49 @@
 }
 {9}
 
-#action {^Press <return> or 'cont' to continue, anything else to quit...$}
+#ACTION {^Press <return> or 'cont' to continue, anything else to quit...$}
 {
 	#history {insert} {#cr}
 }
 {9}
 
-#action {^Press return to continue...$}
+#ACTION {^Press return to continue...$}
 {
 	#history {insert} {#cr}
 }
 {9}
 
-#action {^Sleep while fighting?  Are you mad?$}
+#ACTION {^Sleep while fighting?  Are you mad?$}
 {
 	#unvariable {position}
 }
 {9}
 
-#action {^Someone steps on you, and you awake to see warriors locked in mortal combat!$}
+#ACTION {^Someone steps on you, and you awake to see warriors locked in mortal combat!$}
 {
 	#unvariable {position}
 }
 {9}
 
-#action {^Would you like to turn on low spam mode? (yes/no): $}
+#ACTION {^Would you like to turn on low spam mode? (yes/no): $}
 {
 	#variable {yes}  {#send {yes}}
 }
 {9}
 
-#action {^You are awakened by %1.$}
+#ACTION {^You are awakened by %1.$}
 {
 	#unvariable {position}
 }
 {9}
 
-#action {^You can't sleep here, there's a battle going on!$}
+#ACTION {^You can't sleep here, there's a battle going on!$}
 {
 	#unvariable {position}
 }
 {9}
 
-#action {^You now have %d combat poin{t|ts} you can spend.$}
+#ACTION {^You now have %d combat poin{t|ts} you can spend.$}
 {
 	#if {&{autocp} && %1 >= ${autocp[2]}}
 	{
@@ -150,7 +150,7 @@
 }
 {9}
 
-#action {^You now have %d profession poin{t|ts} you can spend.$}
+#ACTION {^You now have %d profession poin{t|ts} you can spend.$}
 {
 	#if {&{autopp} && %1 >= ${autopp[2]}}
 	{
@@ -160,7 +160,7 @@
 }
 {9}
 
-#action {^You receive %d gambling gold!$}
+#ACTION {^You receive %d gambling gold!$}
 {
 	#if {!&{auto[gamble]}}
 	{
@@ -179,7 +179,7 @@
 }
 {9}
 
-#action {^You {hold|wear|wield}%*}
+#ACTION {^You {hold|wear|wield}%*}
 {
 	#if {"${spam[stats]}" != "true"}
 	{
@@ -190,14 +190,14 @@
 }
 {9}
 
-#action {^Your {charisma|constitution|dexterity|intelligence|strength|wisdom} increases%*}
+#ACTION {^Your {charisma|constitution|dexterity|intelligence|strength|wisdom} increases%*}
 {
 	show stats | prefix silent_;
 	autobrag %0
 }
 {9}
 
-#action {^silent_Improving '%1' requires %d {combat|profession} points.$}
+#ACTION {^silent_Improving '%1' requires %d {combat|profession} points.$}
 {
 	#if {"%3" == "profession"}
 	{
@@ -213,13 +213,13 @@
 }
 {9}
 
-#action {^silent_No spell or skill by that name found.$}
+#ACTION {^silent_No spell or skill by that name found.$}
 {
 	#showme {^No spell or skill by that name found. Autocp not changed.}
 }
 {9}
 
-#action {^silent_You currently gain %1 hitpoints, %2 mana, and %3 movement while {standing|sleeping|sitting}.$}
+#ACTION {^silent_You currently gain %1 hitpoints, %2 mana, and %3 movement while {standing|sleeping|sitting}.$}
 {
 	#math {character[hpRegenTime]} {(${character[maxHp]} - ${character[currentHp]}) / %1};
 	#math {character[mnRegenTime]} {(${character[maxMana]} - ${character[currentMana]}) / %2};
@@ -228,7 +228,7 @@
 }
 {9}
 
-#action {^silent_You have %1/%2 str, %3/%4 int, %5/%6 wis, %7/%8 dex, %9/%10 con, and %11/%12 chr.$}
+#ACTION {^silent_You have %1/%2 str, %3/%4 int, %5/%6 wis, %7/%8 dex, %9/%10 con, and %11/%12 chr.$}
 {
 	#if {!&{character[strBonus]}}
 	{
@@ -293,31 +293,32 @@
 }
 {9}
 
-#action {^silent_You {become|learn}%2}
+#ACTION {^silent_You {become|learn}%2}
 {
 	#showme {You %1%2}
 }
 {9}
 
-#action {^silent_Your name is %S, and your fight string is %2.$}
+#ACTION {^silent_Your name is %S, and your fight string is %2.$}
 {
 	#showme {kxwt_myname %1}
 }
 {9}
 
-#action {^{silent_You|You} can train to get a practice, at a cost of %d experience each.$}
+#ACTION {^{silent_You|You} can train to get a practice, at a cost of %d experience each.$}
 {
 	#variable {auto[buyPracticeExperience]} {%2}
 }
 {9}
 
-#alias {^{f|fl|fle|flee}$}
+
+#ALIAS {^{f|fl|fle|flee}$}
 {
 	run
 }
 {1}
 
-#alias {^hands %1}
+#ALIAS {^hands %1}
 {
 	#if {"${skillsAndSpells[burning hands]}" == "true"}
 	{
@@ -342,7 +343,7 @@
 }
 {8}
 
-#alias {^%ddo %2}
+#ALIAS {^%ddo %2}
 {
 	#regexp {%2} {{.*} {.*}} {#loop {1} {%1} {i} {&1 $i\.&2}};
 	#else
@@ -355,7 +356,7 @@
 }
 {9}
 
-#alias {^:q!$}
+#ALIAS {^:q!$}
 {
 	#nop {quit without saving};
 	#send {quit};
@@ -363,7 +364,7 @@
 }
 {9}
 
-#alias {^:wq$}
+#ALIAS {^:wq$}
 {
 	#nop {Save and quit};
 	quit;
@@ -371,7 +372,7 @@
 }
 {9}
 
-#alias {^autobuypractice$}
+#ALIAS {^autobuypractice$}
 {
 	#showme {You will now automatically spend experience to buy practices.};
 	train | grep -i You can train to get a practice | prefix silent_;
@@ -379,7 +380,7 @@
 }
 {9}
 
-#alias {^autogamble %S}
+#ALIAS {^autogamble %S}
 {
 	#if {"%1" == "{merchant|slots}"}
 	{
@@ -393,7 +394,7 @@
 }
 {9}
 
-#alias {^autogamble$}
+#ALIAS {^autogamble$}
 {
 	#if {&{auto[gamble]}}
 	{
@@ -406,13 +407,13 @@
 }
 {9}
 
-#alias {^autopoints %1}
+#ALIAS {^autopoints %1}
 {
 	points value %1 | prefix silent_
 }
 {9}
 
-#alias {^autopoints$}
+#ALIAS {^autopoints$}
 {
 	#if {&{autocp}}
 	{
@@ -433,14 +434,14 @@
 }
 {9}
 
-#alias {^autothank$}
+#ALIAS {^autothank$}
 {
 	#variable {auto[thank]} {true};
 	#showme {You will now thank people for newbie gifts automatically.}
 }
 {9}
 
-#alias {^camel$}
+#ALIAS {^camel$}
 {
 	#if {!&{character[lastCamel]}}
 	{
@@ -473,7 +474,7 @@
 }
 {9}
 
-#alias {^chelp %*}
+#ALIAS {^chelp %*}
 {
 	#local {found} {0};
 	#local {tmp} {};
@@ -491,7 +492,7 @@
 }
 {9}
 
-#alias {^chelp$}
+#ALIAS {^chelp$}
 {
 	#local {found} {0};
 	#local {tmp} {};
@@ -510,13 +511,13 @@
 }
 {9}
 
-#alias {^getup$}
+#ALIAS {^getup$}
 {
 	\stand
 }
 {9}
 
-#alias {^hands$}
+#ALIAS {^hands$}
 {
 	#if {"${skillsAndSpells[burning hands]}" == "true"}
 	{
@@ -541,21 +542,21 @@
 }
 {9}
 
-#alias {^noautobuypractice$}
+#ALIAS {^noautobuypractice$}
 {
 	#showme {You will no longer automatically buy practices.};
 	#unvariable {auto[buypractice]}
 }
 {9}
 
-#alias {^noautogamble$}
+#ALIAS {^noautogamble$}
 {
 	#unvariable {auto[gamble]};
 	#showme {automatic gambling gold gambling disabled.}
 }
 {9}
 
-#alias {^noautopoints{.*}$}
+#ALIAS {^noautopoints{.*}$}
 {
 	#if {"%1" != " pp" && "%1" != " cp"}
 	{
@@ -574,14 +575,14 @@
 }
 {9}
 
-#alias {^noautothank$}
+#ALIAS {^noautothank$}
 {
 	#unvariable {auto[thank]};
 	#showme {You will no longer thank people for newbie gifts automatically.}
 }
 {9}
 
-#alias {^nopfile$}
+#ALIAS {^nopfile$}
 {
 	#unvariable {personalFile};
 	#class {personal} {kill};
@@ -589,21 +590,21 @@
 }
 {9}
 
-#alias {^nopkmode$}
+#ALIAS {^nopkmode$}
 {
 	#unvariable {pkMode};
 	#showme {PK mode disabled.}
 }
 {9}
 
-#alias {^notrack$}
+#ALIAS {^notrack$}
 {
 	#unvariable {tracking};
 	#showme {You are no longer tracking.}
 }
 {9}
 
-#alias {^of{f|fs|fse|fset|fsets}$}
+#ALIAS {^of{f|fs|fse|fset|fsets}$}
 {
 	who -level | grep Gold offset:;
 	graph 2 | head -n 7 | tail -n 2 | prefix silent_Good;
@@ -611,7 +612,7 @@
 }
 {9}
 
-#alias {^pfile %1}
+#ALIAS {^pfile %1}
 {
 	#variable {personalFile} {%1};
 	#class {personal} {read} {$personalFile};
@@ -619,27 +620,27 @@
 }
 {9}
 
-#alias {^pkmode$}
+#ALIAS {^pkmode$}
 {
 	#variable {pkMode} {true};
 	#showme {PK mode activated.}
 }
 {9}
 
-#alias {^regen$}
+#ALIAS {^regen$}
 {
 	show regen | prefix silent_
 }
 {9}
 
-#alias {^track %1}
+#ALIAS {^track %1}
 {
 	#variable {tracking} {%1};
 	#showme {You are now tracking.}
 }
 {9}
 
-#alias {^yes$}
+#ALIAS {^yes$}
 {
 	#if {"$yes" != "false"}
 	{
@@ -653,8 +654,7 @@
 }
 {9}
 
-
-#alias {^{clock|noclock}$}
+#ALIAS {^{clock|noclock}$}
 {
 	#if {"%0" == "clock"}
 	{
@@ -669,13 +669,13 @@
 }
 {9}
 
-#alias {^{cp|combatpoints}$}
+#ALIAS {^{cp|combatpoints}$}
 {
 	points | grep available to spend.
 }
 {9}
 
-#alias {^{c|qc}save$}
+#ALIAS {^{c|qc}save$}
 {
 	#unvariable {play_%*};
 	#if {&{gameDataPath}}
@@ -689,13 +689,13 @@
 }
 {9}
 
-#alias {^{fam|fame}$}
+#ALIAS {^{fam|fame}$}
 {
 	show fame
 }
 {9}
 
-#alias {^{loa|load}$}
+#ALIAS {^{loa|load}$}
 {
 	spells;
 	#cr;
@@ -715,14 +715,14 @@
 }
 {9}
 
-#alias {^{mi|min|mini|minio|minion|minions}$}
+#ALIAS {^{mi|min|mini|minio|minion|minions}$}
 {
 	#send {minions};
 	control | grep -i remaining | prefix silent_
 }
 {9}
 
-#alias {^{noaudio|audio}tick$}
+#ALIAS {^{noaudio|audio}tick$}
 {
 	#if {"%0" == "audiotick"}
 	{
@@ -737,13 +737,13 @@
 }
 {9}
 
-#alias {^{pracs|practices}$}
+#ALIAS {^{pracs|practices}$}
 {
 	show practices
 }
 {9}
 
-#alias {^{rest|si|sit}$}
+#ALIAS {^{rest|si|sit}$}
 {
 	#variable {position} {rest};
 	#send {rest};
@@ -751,7 +751,7 @@
 }
 {9}
 
-#alias {^{sl|sle|slee|sleep}$}
+#ALIAS {^{sl|sle|slee|sleep}$}
 {
 	#variable {position} {sleep};
 	#send {sleep};
@@ -759,21 +759,21 @@
 }
 {9}
 
-#alias {^{wa|wak|wake|stan|stand}$}
+#ALIAS {^{wa|wak|wake|stan|stand}$}
 {
 	#unvariable {position};
 	#send {%0}
 }
 {9}
 
-#alias {autorefresh}
+#ALIAS {autorefresh}
 {
 	#variable {auto[refresh]} {true};
 	#showme {You will automatically cast refresh spells if your MV is low.}
 }
 {9}
 
-#alias {cconf %1}
+#ALIAS {cconf %1}
 {
 	#if {!&{%1}}
 	{
@@ -786,47 +786,49 @@
 }
 {9}
 
-#alias {noautorefresh}
+#ALIAS {noautorefresh}
 {
 	#variable {auto[refresh]} {false};
 	#showme {You will no longer automatically cast refresh spells.}
 }
 {9}
 
-#alias {repeat %1}
+#ALIAS {repeat %1}
 {
 	replay | grep -i %1
 }
 {9}
 
-#alias {skill %1}
+#ALIAS {skill %1}
 {
 	skills | grep -i %1
 }
 {9}
 
-#function {command}
+
+#FUNCTION {command}
 {
 	#script {result} {bash scripts/rndcmd.sh "%1" "%2"};
 	#variable {result} {${result[1]}}
 }
 
-#gag              {^silent_%*}
-#macro {\e/}
+#MACRO {\e/}
 {
 	#showme {Buffer lock toggled.};
 	#buffer {lock}
 }
 
-#substitute       {MOV_REGEN}  {MOVE_REGEN}  {5}
-#substitute       {^%sjunk_%2}  { %2}  {5}
-#substitute       {^junk_%1}  {%1}  {5}
-#substitute       {tracking_[%1] }  {}  {5}
-#ticker           {historyWriter}  {#if {&{name}} {#history {write} {$historyPath}}}                        {5}
-#variable         {bufferLock}  {off}
-#variable         {castTankMinion}  {true}
-#variable         {lastHpAlert}  {}
-#variable         {lostExp}  {}
-#variable         {msg}  {}
-#variable         {playerSex}  {}
-#variable         {yes}  {#send {yes}}
+
+#GAG              {^silent_%*}
+#SUBSTITUTE      {MOV_REGEN}  {MOVE_REGEN}  {5}
+#SUBSTITUTE       {^%sjunk_%2}  { %2}  {5}
+#SUBSTITUTE       {^junk_%1}  {%1}  {5}
+#SUBSTITUTE       {tracking_[%1] }  {}  {5}
+#TICKER           {historyWriter}  {#if {&{name}} {#history {write} {$historyPath}}}                        {5}
+#VARIABLE         {bufferLock}  {off}
+#VARIABLE         {castTankMinion}  {true}
+#VARIABLE         {lastHpAlert}  {}
+#VARIABLE         {lostExp}  {}
+#VARIABLE         {msg}  {}
+#VARIABLE         {playerSex}  {}
+#VARIABLE         {yes}  {#send {yes}}

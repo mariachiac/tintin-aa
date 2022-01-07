@@ -1,10 +1,10 @@
-#action {^Invalid name, try another.}
+#ACTION {^Invalid name, try another.}
 {
 	#variable {loginName} {FALSE}
 }
 {9}
 
-#action {^Password:}
+#ACTION {^Password:}
 {
 	#if {"$loginName" != "FALSE"}
 	{
@@ -21,7 +21,7 @@
 }
 {9}
 
-#action {^Would you like to create a new character?}
+#ACTION {^Would you like to create a new character?}
 {
 	#if {"$loginName" != "FALSE"}
 	{
@@ -30,7 +30,7 @@
 }
 {9}
 
-#alias {^login$}
+#ALIAS {^login$}
 {
 	#if {!&{connected}}
 	{
@@ -50,7 +50,7 @@
 }
 {8}
 
-#alias {^bot{kill|load} %S$}
+#ALIAS {^bot{kill|load} %S$}
 {
     #nop {Kill, load, or reload a specified bot.};
     #if {"%1" == "kill"}
@@ -80,7 +80,7 @@
 }
 {9}
 
-#alias {^mod{kill|load|reload} %S$}
+#ALIAS {^mod{kill|load|reload} %S$}
 {
 	#nop {reload all modules};
 	#if {"%0" == "modreload all"}
@@ -106,7 +106,7 @@
 }
 {9}
 
-#alias {^login%s%w$}
+#ALIAS {^login%s%w$}
 {
 	#format {loginName} {%l} {%3};
 	#if {!&{connected}}
@@ -127,7 +127,7 @@
 }
 {9}
 
-#alias {^{quit|logoff}$}
+#ALIAS {^{quit|logoff}$}
 {
 	#class {gameData} {write} {$gameDataPath};
 	#if {&{name}}
@@ -139,7 +139,7 @@
 }
 {9}
 
-#event {PROGRAM START}
+#EVENT {PROGRAM START}
 {
 	#system {clear};
 #nop {set screen split mode};
@@ -159,7 +159,7 @@
 	#echo {To get started type login};
 }
 
-#event {SESSION CONNECTED}
+#EVENT {SESSION CONNECTED}
 {
 	synth_play connectedSound;
 	#nop {Set connected to true so if you accidently type login it won't try to login twice.};
@@ -172,11 +172,11 @@
 	#log {overwrite} {${logFilePath}${logFileName[1]}}
 }
 
-#event {SESSION DISCONNECTED}
+#EVENT {SESSION DISCONNECTED}
 {
 	qcsave;
 	#unvariable {connected};
 	#end
 }
 
-#variable         {loginName}  {FALSE}
+#VARIABLE         {loginName}  {FALSE}

@@ -1,4 +1,4 @@
-#action {^{(?:A|An|a|an) (?:shambling bone man|straw man|wood woad|greater ice elemental|ice elemental|lesser ice elemental|greater crystal elemental|crystal elemental|lesser crystal elemental|greater fire elemental|fire pillar elemental|lesser fire elemental|bone guardian|flesh beast|metal construct|clay man|liveoak|ancient oak tree|water weird|shambling mound) heroically rescues|.+ jumps to the aid of|.+ rushes to aid} %*!$}
+#ACTION {^{(?:A|An|a|an) (?:shambling bone man|straw man|wood woad|greater ice elemental|ice elemental|lesser ice elemental|greater crystal elemental|crystal elemental|lesser crystal elemental|greater fire elemental|fire pillar elemental|lesser fire elemental|bone guardian|flesh beast|metal construct|clay man|liveoak|ancient oak tree|water weird|shambling mound) heroically rescues|.+ jumps to the aid of|.+ rushes to aid} %*!$}
 {
 	#nop {Hook name: assist};
 	#nop {Hook args: none};
@@ -24,7 +24,8 @@
 }
 {9}
 
-#alias {^{noc|c}autoassist$}
+
+#ALIAS {^{noc|c}autoassist$}
 {
 	#if {"%1" == "noc"}
 	{
@@ -39,7 +40,8 @@
 }
 {9}
 
-#function {autorefresh}
+
+#FUnCTION {autorefresh}
 {
 	#if {"${kxwt[context]}" != "none" && "${kxwt[context]}" != ""}
 	{

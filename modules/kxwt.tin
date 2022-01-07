@@ -1,4 +1,4 @@
-#action {^kxwt_area -1}
+#ACTION {^kxwt_area -1}
 {
 	#variable {kxwt[area]} {-1};
 	#variable {areaNumber} {-1};
@@ -56,7 +56,7 @@
 }
 {8}
 
-#action {^kxwt_fighting %1 %2 %3}
+#ACTION {^kxwt_fighting %1 %2 %3}
 {
 	#undelay {autocombatDelay};
 	#unvariable {autocombatPaused};
@@ -116,14 +116,14 @@
 }
 {8}
 
-#action {^kxwt_fighting -1$}
+#ACTION {^kxwt_fighting -1$}
 {
 	#variable {kxwt[fighting]} {-1};
 	#variable {character[inBattle]} {false}
 }
 {8}
 
-#action {^kxwt_group %d %d %3 skelet%*}
+#ACTION {^kxwt_group %d %d %3 skelet%*}
 {
 	#if {%1 < %2 * 0.9}
 	{
@@ -132,7 +132,7 @@
 }
 {8}
 
-#action {^kxwt_mdeath %1}
+#ACTION {^kxwt_mdeath %1}
 {
 	#variable {kxwt[mdeath]} {%1};
 	#variable {client[capSound]} {true};
@@ -166,7 +166,7 @@
 }
 {8}
 
-#action {^kxwt_myname %S}
+#ACTION {^kxwt_myname %S}
 {
 	#variable {kxwt[myname]} {%1};
 	#variable {gameDataPath} {${HOME}/%1};
@@ -181,7 +181,7 @@
 }
 {8}
 
-#action {^kxwt_prompt %1 %2 %3 %4 %5 %6}
+#ACTION {^kxwt_prompt %1 %2 %3 %4 %5 %6}
 {
 	#variable {kxwt[prompt]} {%1 %2 %3 %4 %5 %6};
 	#variable {character[currentHp]} {%1};
@@ -239,7 +239,7 @@
 }
 {8}
 
-#action {^kxwt_rvnum {\d*}}
+#ACTION {^kxwt_rvnum {\d*}}
 {
 	#nop {Hook name: rvnum};
 	#nop {Hook args: %1 new room number};
@@ -273,39 +273,39 @@
 }
 {8}
 
-#action {^kxwt_terrain %d}
+#ACTION {^kxwt_terrain %d}
 {
 	#variable {kxwt[terrain]} {%1};
 	#variable {terrainNumber} {%1}
 }
 {8}
 
-#action {^kxwt_time %1}
+#ACTION {^kxwt_time %1}
 {
 	#variable {kxwt[time]} {%1};
 	#regexp {%1} {{.*} {.*}:{.*} {.*}} {#if {$lastPlayedTime != &2} {#if {"$editorMode" != "true"}{#delay {0.5}{#if {!&{repop[mob]}}{#variable {repop[mob]} {false}};#if {"${repop[mob]}" != "false"}{where ${repop[mob]} | prefix mobrepop_};#if {"${repop[instance]}" == "true"}{instance | prefix instancerepop_}};#delay {1}};#if {"&4" == "am" && &2 == 7 && &3 == 00} {play sunrise};#elseif {"&4" == "pm" && &2 == 7 && &3 == 00} {play sunset};#if {"$clock" == "true"} {#variable {chimeCounter} {1};#variable {chimeLoop} {};#while {$chimeCounter <= &2}{#variable {chimeLoop} {$chimeLoop $HOME/sounds/clock.wav};#math {chimeCounter} {$chimeCounter + 1}};#echo {&2 O'clock &4};#if {"$msp" == "true"} {#system {play -q $chimeLoop gain $volume &> /dev/null &}}}};#variable {lastPlayedTime} {&2}}
 }
 {8}
 
-#action {^kxwt_walkdir %d$}
+#ACTION {^kxwt_walkdir %d$}
 {
 	#variable {kxwt[walkdir]} {%1}
 }
 {8}
 
-#action {^kxwt_waypoint$}
+#ACTION {^kxwt_waypoint$}
 {
 	play waypoint
 }
 {8}
 
-#action {^kxwt_%1 %2}
+#ACTION {^kxwt_%1 %2}
 {
 	#variable {kxwt[%1]} {%2}
 }
 {9}
 
-#action {^kxwt_supported$}
+#ACTION {^kxwt_supported$}
 {
 	#cursor {echo} {on};
 	#variable {client[gagPing]} {true};
@@ -315,7 +315,8 @@
 }
 {9}
 
-#alias {^cmod{kill|load|reload} %S$}
+
+#ALIAS {^cmod{kill|load|reload} %S$}
 {
 	#nop {reload all modules};
 	#if {"%0" == "cmodreload all"}
@@ -342,20 +343,21 @@
 }
 {9}
 
-#gag {^kxwt_{action|audio|area|brew|context|edeath|event|exp|fighting|gdeath|gold|group|idle|longterm_idle|mastercraft|mdeath|myname|nocast|pdeath|position|prompt|rshort|rvnum|spellup|spelldown|sky|spst|supported|time|terrain|walkdir|waypoint|ydeath}}
-#gag {^kxwt_id_end$}
-#substitute       { ]$}  { ]${exploredRoomString}}  {1}
-#substitute {^kxwt_id_start%1} {%1}
-#variable         {areaNumber}  {-2}
-#variable         {checkedLevel}  {false}
-#variable         {chimeCounter}  {}
-#variable         {chimeLoop}  {}
-#variable         {currentMv}  {}
-#variable         {enemyConditionTone}  {}
-#variable         {ignoredMobs}  {A blood red winged demon|A clutch of poison ivy vines|.*draconian|.*draconian.*|.*elemental|a fire ant.*|.*fungus.*|A mass of tangling roots|.*shroom.*A number of magical dancing lights|.*moogle|the soul faerie|a .* slime|A slimy fish|.*spore.*|a.*tree|Vampiric vines|.*zombie.*|an icebolg|.* skelet.*}
-#variable         {kxwt}  {}
-#variable         {lastPlayedTime}  {0}
-#variable         {mvRegenTime}  {}
-#variable         {oldAreaNumber}  {-2}
-#variable         {roomVnumList}  {}
-#variable         {vnum}  {0}
+
+#GAG {^kxwt_{action|audio|area|brew|context|edeath|event|exp|fighting|gdeath|gold|group|idle|longterm_idle|mastercraft|mdeath|myname|nocast|pdeath|position|prompt|rshort|rvnum|spellup|spelldown|sky|spst|supported|time|terrain|walkdir|waypoint|ydeath}}
+#GAG {^kxwt_id_end$}
+#SUBSTITUTE       { ]$}  { ]${exploredRoomString}}  {1}
+#SUBSTITUTE {^kxwt_id_start%1} {%1}
+#VARIABLE         {areaNumber}  {-2}
+#VARIABLE         {checkedLevel}  {false}
+#VARIABLE         {chimeCounter}  {}
+#VARIABLE         {chimeLoop}  {}
+#VARIABLE         {currentMv}  {}
+#VARIABLE         {enemyConditionTone}  {}
+#VARIABLE         {ignoredMobs}  {A blood red winged demon|A clutch of poison ivy vines|.*draconian|.*draconian.*|.*elemental|a fire ant.*|.*fungus.*|A mass of tangling roots|.*shroom.*A number of magical dancing lights|.*moogle|the soul faerie|a .* slime|A slimy fish|.*spore.*|a.*tree|Vampiric vines|.*zombie.*|an icebolg|.* skelet.*}
+#VARIABLE         {kxwt}  {}
+#VARIABLE         {lastPlayedTime}  {0}
+#VARIABLE         {mvRegenTime}  {}
+#VARIABLE         {oldAreaNumber}  {-2}
+#VARIABLE         {roomVnumList}  {}
+#VARIABLE         {vnum}  {0}

@@ -1,91 +1,92 @@
-#action {^You start harvesting teeth from %1.$}
+#ACTION {^You start harvesting teeth from %1.$}
 {
 	#variable {busy} {true}
 }
 {8}
 
-#action {^%S appreciates your sacrifice.$}
+#ACTION {^%S appreciates your sacrifice.$}
 {
 	#variable {busy} {false}
 }
 {9}
 
-#action {^The lock yields and opens.$}
+#ACTION {^The lock yields and opens.$}
 {
 	#variable {busy} {false}
 }
 {9}
 
-#action {^The lock {finally yields|yields quickly} to your skills.$}
+#ACTION {^The lock {finally yields|yields quickly} to your skills.$}
 {
 	#variable {busy} {false}
 }
 {9}
 
-#action {^There is no more {hide|meat} left on}
+#ACTION {^There is no more {hide|meat} left on}
 {
 	#variable {busy} {false}
 }
 {9}
 
-#action {^You are no longer harvesting teeth.$}
+#ACTION {^You are no longer harvesting teeth.$}
 {
 	#variable {busy} {false}
 }
 {9}
 
-#action {^You are too exhausted to continue picking the lock.$}
+#ACTION {^You are too exhausted to continue picking the lock.$}
 {
 	#variable {busy} {false}
 }
 {9}
 
-#action {^You begin trying to pick}
+#ACTION {^You begin trying to pick}
 {
 	#variable {busy} {true}
 }
 {9}
 
-#action {^You can't safely carry any more teeth, and stop.$}
+#ACTION {^You can't safely carry any more teeth, and stop.$}
 {
 	#variable {busy} {false}
 }
 {9}
 
-#action {^You don't see any usable teeth remaining.$}
+#ACTION {^You don't see any usable teeth remaining.$}
 {
 	#variable {busy} {false}
 }
 {9}
 
-#action {^You stop trying to pick the lock.$}
+#ACTION {^You stop trying to pick the lock.$}
 {
 	#variable {busy} {false}
 }
 {9}
 
-#action {^You%1begin cutting pieces of hide from}
+#ACTION {^You%1begin cutting pieces of hide from}
 {
 	#variable {busy} {true}
 }
 {9}
 
-#action {^You%1begin cutting pieces of meat from}
+#ACTION {^You%1begin cutting pieces of meat from}
 {
 	#variable {busy} {true}
 }
 {9}
 
-#action {^Your collected teeth grow restless.  It would be unwise to collect any more.$}
+#ACTION {^Your collected teeth grow restless.  It would be unwise to collect any more.$}
 {
 	#variable {busy} {false}
 }
 {9}
 
-#action {^Your dragon teeth grow restless.  It would be unwise to collect any more.$}
+#ACTION {^Your dragon teeth grow restless.  It would be unwise to collect any more.$}
 {
 	#variable {busy} {false}
 }
 {9}
 
-#variable         {busy}  {false}
+
+#VARIABLE         {busy}  {false}

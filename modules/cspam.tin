@@ -1,4 +1,4 @@
-#action {%1 *** %2 *** %3!$}
+#ACTION {%1 *** %2 *** %3!$}
 {
 	#if {"${character[cspam]}" == "true"}
 	{
@@ -10,7 +10,7 @@
 }
 {9}
 
-#action {%1 kicks at %2 but barely makes contact.$}
+#ACTION {%1 kicks at %2 but barely makes contact.$}
 {
      #if {"${character[cspam]}" == "true"}
      {
@@ -19,7 +19,7 @@
 }
 {9}
 
-#action {%1 notices and ignores your feigned attack.$}
+#ACTION {%1 notices and ignores your feigned attack.$}
 {
      #if {"${character[cspam]}" == "true"}
      {
@@ -29,7 +29,7 @@
 }
 {9}
 
-#action {A ball of light flies idly in circles around your head.}
+#ACTION {A ball of light flies idly in circles around your head.}
 {
      #if {"${character[cspam]}" == "true"}
      {
@@ -38,7 +38,7 @@
 }
 {9}
 
-#action {You carefully extract one %1 and put it in your bag.$}
+#ACTION {You carefully extract one %1 and put it in your bag.$}
 {
      #if {"${character[cspam]}" == "true"}
      {
@@ -48,7 +48,7 @@
 }
 {9}
 
-#action {You don't see any of your group members here to split the gold with}
+#ACTION {You don't see any of your group members here to split the gold with}
 {
      #if {"${character[cspam]}" == "true"}
      {
@@ -57,7 +57,7 @@
 }
 {9}
 
-#action {You don't see anything by that name here.}
+#ACTION {You don't see anything by that name here.}
 {
      #if {"${character[cspam]}" == "true"}
      {
@@ -66,7 +66,7 @@
 }
 {9}
 
-#action {^%S appreciates your sacrifice of %2.$}
+#ACTION {^%S appreciates your sacrifice of %2.$}
 {
      #if {"${character[cspam]}" == "true"}
      {
@@ -76,7 +76,7 @@
 }
 {9}
 
-#action {^%S dra{w|ws} a strange pattern on the ground with a stick, ligh{t|ts} it up, and dro{p|ps} {an acorn|something} in the middle of it.$}
+#ACTION {^%S dra{w|ws} a strange pattern on the ground with a stick, ligh{t|ts} it up, and dro{p|ps} {an acorn|something} in the middle of it.$}
 {
      #if {"${character[cspam]}" == "true"}
      {
@@ -85,7 +85,7 @@
 }
 {9}
 
-#action {^%S gives you {0|1} gold coi{n|ns}.$}
+#ACTION {^%S gives you {0|1} gold coi{n|ns}.$}
 {
      #if {"${character[cspam]}" == "true"}
      {
@@ -94,7 +94,7 @@
 }
 {9}
 
-#action {^%S has restored you to full health!$}
+#ACTION {^%S has restored you to full health!$}
 {
      #if {"${character[cspam]}" == "true"}
      {
@@ -104,7 +104,7 @@
 }
 {9}
 
-#action {^%S twitches and starts fidgeting.$}
+#ACTION {^%S twitches and starts fidgeting.$}
 {
      #if {"${character[cspam]}" == "true"}
      {
@@ -113,7 +113,7 @@
 }
 {9}
 
-#action {^%S {taps|tap} {her|his|its|your} life, and {a swarm of|a} blood red {demons|winged demon} {flaps|flap|flies|fly} quickly toward %7!$}
+#ACTION {^%S {taps|tap} {her|his|its|your} life, and {a swarm of|a} blood red {demons|winged demon} {flaps|flap|flies|fly} quickly toward %7!$}
 {
      #if {"${character[cspam]}" == "true"}
      {
@@ -123,7 +123,7 @@
 }
 {9}
 
-#action {^(FYI: %1 has just sent you a mudmail)$}
+#ACTION {^(FYI: %1 has just sent you a mudmail)$}
 {
      #if {"${character[cspam]}" == "true"}
      {
@@ -133,7 +133,7 @@
 }
 {9}
 
-#action {^A %1 is too much for you to carry, so you prepare a spot on the ground for it.$}
+#ACTION {^A %1 is too much for you to carry, so you prepare a spot on the ground for it.$}
 {
      #if {"${character[cspam]}" == "true"}
      {
@@ -143,7 +143,7 @@
 }
 {9}
 
-#action {^A ghoul jumps at %1 clawing and biting!$}
+#ACTION {^A ghoul jumps at %1 clawing and biting!$}
 {
      #if {"${character[cspam]}" == "true"}
      {
@@ -152,7 +152,7 @@
 }
 {9}
 
-#action {^A ghoul rips and tears into %1 with filthy, diseased claws!$}
+#ACTION {^A ghoul rips and tears into %1 with filthy, diseased claws!$}
 {
      #if {"${character[cspam]}" == "true"}
      {
@@ -161,7 +161,7 @@
 }
 {9}
 
-#action {^A skeletal mage throws %1 at %2!$}
+#ACTION {^A skeletal mage throws %1 at %2!$}
 {
      #if {"%2" != "you" && "${character[cspam]}" == "true"}
      {
@@ -170,7 +170,7 @@
 }
 {9}
 
-#action {^A skeleton lands a textbook roundhouse kick squarely on%*}
+#ACTION {^A skeleton lands a textbook roundhouse kick squarely on%*}
 {
      #if {"${character[cspam]}" == "true"}
      {
@@ -179,7 +179,7 @@
 }
 {9}
 
-#action {^A skeleton's {shield bash|slash|slice|pierce|flail}%*}
+#ACTION {^A skeleton's {shield bash|slash|slice|pierce|flail}%*}
 {
      #if {"${character[cspam]}" == "true"}
      {
@@ -188,7 +188,7 @@
 }
 {9}
 
-#action {^A vampire quietly hisses an unintelligible and foul sounding word...$}
+#ACTION {^A vampire quietly hisses an unintelligible and foul sounding word...$}
 {
      #if {"${character[cspam]}" == "true"}
      {
@@ -197,7 +197,7 @@
 }
 {9}
 
-#action {^A vampire shouts a ferocious warcry at %1!$}
+#ACTION {^A vampire shouts a ferocious warcry at %1!$}
 {
      #if {"${character[cspam]}" == "true"}
      {
@@ -206,7 +206,7 @@
 }
 {9}
 
-#action {^A vampire's eyes take on an unsettling red glow, and it glares at %1!}
+#ACTION {^A vampire's eyes take on an unsettling red glow, and it glares at %1!}
 {
      #if {"${character[cspam]}" == "true"}
      {
@@ -215,7 +215,7 @@
 }
 {9}
 
-#action {^A {bone guardian|ghoul|skeleton|vampire} knocks the legs out from under%*}
+#ACTION {^A {bone guardian|ghoul|skeleton|vampire} knocks the legs out from under%*}
 {
      #if {"${character[cspam]}" == "true"}
      {
@@ -224,7 +224,7 @@
 }
 {9}
 
-#action {^A {bone guardian|ghoul|skeleton|vampire} trips%*}
+#ACTION {^A {bone guardian|ghoul|skeleton|vampire} trips%*}
 {
      #if {"${character[cspam]}" == "true"}
      {
@@ -233,7 +233,7 @@
 }
 {9}
 
-#action {^A {bone|clay|flesh|shadow|wood} {beast|fiend|guardian|man|woad} stands up.$}
+#ACTION {^A {bone|clay|flesh|shadow|wood} {beast|fiend|guardian|man|woad} stands up.$}
 {
      #if {"${character[cspam]}" == "true"}
      {
@@ -242,7 +242,7 @@
 }
 {9}
 
-#action {^A {clay man|flesh beast|ghoul|vampire|wood woad|zombie}'s {bite|claw|crush|grapple|pound|punch|splat}%*}
+#ACTION {^A {clay man|flesh beast|ghoul|vampire|wood woad|zombie}'s {bite|claw|crush|grapple|pound|punch|splat}%*}
 {
      #if {"${character[cspam]}" == "true"}
      {
@@ -251,7 +251,7 @@
 }
 {9}
 
-#action {^A {coyote|feral boar|swarm of rats|viper}'s {bash|bite|gore|poisonous bite|venomous bite} %*{\.|!}$}
+#ACTION {^A {coyote|feral boar|swarm of rats|viper}'s {bash|bite|gore|poisonous bite|venomous bite} %*{\.|!}$}
 {
      #if {"${character[cspam]}" == "true"}
      {
@@ -260,7 +260,7 @@
 }
 {9}
 
-#action {^A {ghoul|vampire} bites%*}
+#ACTION {^A {ghoul|vampire} bites%*}
 {
      #if {"${character[cspam]}" == "true"}
      {
@@ -269,7 +269,7 @@
 }
 {9}
 
-#action {^All present and accounted for.$}
+#ACTION {^All present and accounted for.$}
 {
      #if {"${character[cspam]}" == "true"}
      {
@@ -279,7 +279,7 @@
 }
 {9}
 
-#action {^CLANWAR STARTS IN APPROXIMATELY %D MINUTES, FYI.$}
+#ACTION {^CLANWAR STARTS IN APPROXIMATELY %D MINUTES, FYI.$}
 {
      #if {"${character[cspam]}" == "true"}
      {
@@ -289,7 +289,7 @@
 }
 {9}
 
-#action {^It is {mid|near}%*.$}
+#ACTION {^It is {mid|near}%*.$}
 {
      #if {"${character[cspam]}" == "true"}
      {
@@ -298,7 +298,7 @@
 }
 {9}
 
-#action {^Sorry, but you're missing ingredient '%1' for this recipe.}
+#ACTION {^Sorry, but you're missing ingredient '%1' for this recipe.}
 {
      #if {"${character[cspam]}" == "true"}
      {
@@ -308,7 +308,7 @@
 }
 {9}
 
-#action {^The demonic flames engulf and follow %1!}
+#ACTION {^The demonic flames engulf and follow %1!}
 {
      #if {"${character[cspam]}" == "true"}
      {
@@ -318,7 +318,7 @@
 }
 {9}
 
-#action {^The tooth splits, unfolds, and grows into %*}
+#ACTION {^The tooth splits, unfolds, and grows into %*}
 {
      #if {"${character[cspam]}" == "true"}
      {
@@ -327,7 +327,7 @@
 }
 {9}
 
-#action {^The {corpse|gutted carcass|skinned corpse} of %2 is too big for you to sacrifice.$}
+#ACTION {^The {corpse|gutted carcass|skinned corpse} of %2 is too big for you to sacrifice.$}
 {
      #if {"${character[cspam]}" == "true"}
      {
@@ -337,7 +337,7 @@
 }
 {9}
 
-#action {^To see the lost exp hall of fame, see the 'lost experience' leaderboard.$}
+#ACTION {^To see the lost exp hall of fame, see the 'lost experience' leaderboard.$}
 {
      #if {"${character[cspam]}" == "true"}
      {
@@ -346,7 +346,7 @@
 }
 {9}
 
-#action {^You add %1 to your group.$}
+#ACTION {^You add %1 to your group.$}
 {
      #if {"${character[cspam]}" == "true"}
      {
@@ -356,7 +356,7 @@
 }
 {9}
 
-#action {^You are not allowed to harm other players minions.$}
+#ACTION {^You are not allowed to harm other players minions.$}
 {
      #if {"${character[cspam]}" == "true"}
      {
@@ -365,7 +365,7 @@
 }
 {9}
 
-#action {^You feel extremely jittery and awake.$}
+#ACTION {^You feel extremely jittery and awake.$}
 {
      #if {"${character[cspam]}" == "true"}
      {
@@ -374,7 +374,7 @@
 }
 {9}
 
-#action {^You find yourself unable to sit still, gotta keep moving...$}
+#ACTION {^You find yourself unable to sit still, gotta keep moving...$}
 {
      #if {"${character[cspam]}" == "true"}
      {
@@ -383,7 +383,7 @@
 }
 {9}
 
-#action {^You have %d %w out of %d max.$}
+#ACTION {^You have %d %w out of %d max.$}
 {
      #if {"${character[cspam]}" == "true"}
      {
@@ -393,7 +393,7 @@
 }
 {9}
 
-#action {^You link hands with %S to the {left|right}.$}
+#ACTION {^You link hands with %S to the {left|right}.$}
 {
      #if {"${character[cspam]}" == "true"}
      {
@@ -402,7 +402,7 @@
 }
 {9}
 
-#action {^You quickly evaluate %1 armor and anatomy...$}
+#ACTION {^You quickly evaluate %1 armor and anatomy...$}
 {
      #if {"${character[cspam]}" == "true"}
      {
@@ -411,7 +411,7 @@
 }
 {9}
 
-#action {^You reanimate and unpack a ball of twisted bones, forming it into A bone guardian.$}
+#ACTION {^You reanimate and unpack a ball of twisted bones, forming it into A bone guardian.$}
 {
      #if {"${character[cspam]}" == "true"}
      {
@@ -421,7 +421,7 @@
 }
 {9}
 
-#action {^You see nothing in it for you to get.$}
+#ACTION {^You see nothing in it for you to get.$}
 {
      #if {"${character[cspam]}" == "true"}
      {
@@ -430,7 +430,7 @@
 }
 {9}
 
-#action {^You see nothing left to loot from the gutted carcass of %1}
+#ACTION {^You see nothing left to loot from the gutted carcass of %1}
 {
      #if {"${character[cspam]}" == "true"}
      {
@@ -440,7 +440,7 @@
 }
 {9}
 
-#action {^You shatter one of the teeth attempting to remove it.$}
+#ACTION {^You shatter one of the teeth attempting to remove it.$}
 {
      #if {"${character[cspam]}" == "true"}
      {
@@ -450,7 +450,7 @@
 }
 {9}
 
-#action {^You use magic to rip the bones and cartilage from%*}
+#ACTION {^You use magic to rip the bones and cartilage from%*}
 {
      #if {"${character[cspam]}" == "true"}
      {
@@ -460,7 +460,7 @@
 }
 {9}
 
-#action {^You utter a short invocation over a tooth, then roll it out into a bone arrow, then another, and another...$}
+#ACTION {^You utter a short invocation over a tooth, then roll it out into a bone arrow, then another, and another...$}
 {
      #if {"${character[cspam]}" == "true"}
      {
@@ -470,7 +470,7 @@
 }
 {9}
 
-#action {^{A|An|The} %1 twitches and starts fidgeting.$}
+#ACTION {^{A|An|The} %1 twitches and starts fidgeting.$}
 {
      #if {"${character[cspam]}" == "true"}
      {
@@ -479,7 +479,7 @@
 }
 {9}
 
-#action {^{\s+Y|vcast.*Y|Y}ou {gain|receive} %d experience{\.|!}$}
+#ACTION {^{\s+Y|vcast.*Y|Y}ou {gain|receive} %d experience{\.|!}$}
 {
      #if {"${character[cspam]}" == "true"}
      {
@@ -498,7 +498,7 @@
 }
 {9}
 
-#action {^{head|neck|arms|wrist|hands|finger|on body|about body|waist|legs|feet|shield|weapon}%s- $}
+#ACTION {^{head|neck|arms|wrist|hands|finger|on body|about body|waist|legs|feet|shield|weapon}%s- $}
 {
      #if {"${character[cspam]}" == "true"}
      {
@@ -507,7 +507,8 @@
 }
 {9}
 
-#alias {^{noc|c}spam$}
+
+#ALIAS {^{noc|c}spam$}
 {
      #if {"%0" == "cspam"}
      {
@@ -522,7 +523,7 @@
 }
 {9}
 
-#alias {^{l|lo|loo|look} %s%S$}
+#ALIAS {^{l|lo|loo|look} %s%S$}
 {
 	#send {%0};
 	#if {"${character[cspam]}" == "true"}
@@ -532,7 +533,8 @@
 }
 {9}
 
-#event {RECEIVED LINE}
+
+#EVENT {RECEIVED LINE}
 {
 	#if {"${character[cspam]}" == "true"}
 	{
@@ -554,4 +556,5 @@
 	}
 }
 
-#variable         {cspam}  {{formatString}{}{lastLineOfText}{}{lastLineOfTextCounter}{1}{oldText}{}{textCounterExceptions}{!!SOUND.*|\(using a .* soulstone\)|Alas,.*|.*empty\.|kxwt.*|\(auction\).*|\*tick\*|finger      - .*|neck        - .*|wrist       - .*|.* growls at you, warning you away\.|.* is mortally wounded, and will die soon if not aided\.|.* someone else beat .*|Mudmail.*|Sorry.*|You .*|.* rips a bone .*|.* starts harvesting .*|.* from the corpse.*|Nothing\.|Someone.*|\*interrupt\*|\[new line\]:|.*cannot carry any more weight without sinking\.|In your dreams, or what\?|silent_.*|scrollcounter_.*}}
+
+#VARIABLE         {cspam}  {{formatString}{}{lastLineOfText}{}{lastLineOfTextCounter}{1}{oldText}{}{textCounterExceptions}{!!SOUND.*|\(using a .* soulstone\)|Alas,.*|.*empty\.|kxwt.*|\(auction\).*|\*tick\*|finger      - .*|neck        - .*|wrist       - .*|.* growls at you, warning you away\.|.* is mortally wounded, and will die soon if not aided\.|.* someone else beat .*|Mudmail.*|Sorry.*|You .*|.* rips a bone .*|.* starts harvesting .*|.* from the corpse.*|Nothing\.|Someone.*|\*interrupt\*|\[new line\]:|.*cannot carry any more weight without sinking\.|In your dreams, or what\?|silent_.*|scrollcounter_.*}}

@@ -1,4 +1,4 @@
-#action {^silent_%1%s(%d {hours|minutes} remaining)}
+#ACTION {^silent_%1%s(%d {hours|minutes} remaining)}
 {
 	#if {"%4" == "hours" && %3 > 1}
 	{
@@ -18,7 +18,7 @@
 }
 {5}
 
-#action {^silent_Your levels are:  Ma %1  Cl %2  Th %3  Wa %4  Nc %5}
+#ACTION {^silent_Your levels are:  Ma %1  Cl %2  Th %3  Wa %4  Nc %5}
 {
 	#variable {character[mageLevel]} {%1};
 	#variable {character[clericLevel]} {%2};
@@ -28,7 +28,7 @@
 }
 {7}
 
-#action {^ %sYOU GAIN A LEVEL!$}
+#ACTION {^ %sYOU GAIN A LEVEL!$}
 {
 	#if {&{autolevelClass}}
 	{
@@ -44,7 +44,7 @@
 }
 {9}
 
-#action {^ %sYou advance another rank closer to level %d %w!$}
+#ACTION {^ %sYou advance another rank closer to level %d %w!$}
 {
 	#if {&{autolevelClass}}
 	{
@@ -61,13 +61,13 @@
 }
 {9}
 
-#action {^You have leveled recently.  You must wait one day to level this class.$}
+#ACTION {^You have leveled recently.  You must wait one day to level this class.$}
 {
 	level | grep -i ${autolevelClass[2]} | prefix silent_
 }
 {9}
 
-#action {^You need %d experience to level {Cleric|Druid|Mage|Necromancer|Thief|Warrior} to %d and have %d experience. (%s%d%)$}
+#ACTION {^You need %d experience to level {Cleric|Druid|Mage|Necromancer|Thief|Warrior} to %d and have %d experience. (%s%d%)$}
 {
 	#variable {showCost[cost]} {%1};
 	#variable {showCost[class]} {%2};
@@ -79,13 +79,13 @@
 }
 {9}
 
-#action {^silent_That class type does not exist (yet).$}
+#ACTION {^silent_That class type does not exist (yet).$}
 {
 	#showme {That class type does not exist (yet).}
 }
 {9}
 
-#action {^silent_You are casting at level %d mage, level %d cleric, level %d necromancer, level %d druid%*}
+#ACTION {^silent_You are casting at level %d mage, level %d cleric, level %d necromancer, level %d druid%*}
 {
 	#if {!&{character[mageClev]}}
 	{
@@ -126,33 +126,34 @@
 }
 {9}
 
-#action {^silent_You need %d experience to {level|micro level} {Cleric|Druid|Mage|Necromancer|Thief|Warrior}%*}
+#ACTION {^silent_You need %d experience to {level|micro level} {Cleric|Druid|Mage|Necromancer|Thief|Warrior}%*}
 {
 	#list {autolevelClass} {add} {%3};
 	#list {autolevelClass} {add} {%1}
 }
 {9}
 
-#action {^silent_{Cleric|Druid|Mage|Necromancer|Thief|Warrior} %s%d %s%d/%s%d %s%d%s(%12}
+#ACTION {^silent_{Cleric|Druid|Mage|Necromancer|Thief|Warrior} %s%d %s%d/%s%d %s%d%s(%12}
 {
 	#math {i} {%5+1};
 	#showme {You need ${showCost[cost]} experience to microlevel ${showCost[class]} to $i of %7 toward level ${showCost[level]} and have ${showCost[experience]} experience.%11 (%12}
 }
 {9}
 
-#action {^silent_{Cleric|Druid|Mage|Necromancer|Thief|Warrior}%s %d%s %d$}
+#ACTION {^silent_{Cleric|Druid|Mage|Necromancer|Thief|Warrior}%s %d%s %d$}
 {
 	#showme {You need ${showCost[cost]} experience to level ${showCost[class]} to ${showCost[level]} and have ${showCost[experience]} experience.}
 }
 {9}
 
-#action {^silent_{Cleric|Druid|Mage|Necromancer|Thief|Warrior}%s %d%s %d%s(%7}
+#ACTION {^silent_{Cleric|Druid|Mage|Necromancer|Thief|Warrior}%s %d%s %d%s(%7}
 {
 	#showme {You need ${showCost[cost]} experience to level ${showCost[class]} to ${showCost[level]} and have ${showCost[experience]} experience.%6(%7}
 }
 {9}
 
-#alias {^autolevel %s{a|al|all|c|cl|cle|cler|cleri|cleric|d|dr|dru|drui|druid|m|ma|mag|mage|n|ne|nec|necr|necro|necrom|necroma|necroman|necromanc|necromance|necromancer|t|th|thi|thie|thief|w|wa|war|warr|warri|warrio|warrior}$}
+
+#ALIAS {^autolevel %s{a|al|all|c|cl|cle|cler|cleri|cleric|d|dr|dru|drui|druid|m|ma|mag|mage|n|ne|nec|necr|necro|necrom|necroma|necroman|necromanc|necromance|necromancer|t|th|thi|thie|thief|w|wa|war|warr|warri|warrio|warrior}$}
 {
 	#list {autolevelClass} {clear};
 	#list {autolevelClass} {add} {%2};
@@ -168,7 +169,7 @@
 }
 {9}
 
-#alias {^{auto|noauto}level$}
+#ALIAS {^{auto|noauto}level$}
 {
 	#if {"%0" == "autolevel"}
 	{
@@ -189,6 +190,7 @@
 }
 {9}
 
-#variable         {justLeveled}  {false}
-#variable         {levelTimer}  {0}
-#variable         {showCost}  {}
+
+#VARIABLE         {justLeveled}  {false}
+#VARIABLE         {levelTimer}  {0}
+#VARIABLE         {showCost}  {}

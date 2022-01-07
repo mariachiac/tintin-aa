@@ -1,4 +1,4 @@
-#action {^You add water and thin the tincture until it turns %1 color.$}
+#ACTION {^You add water and thin the tincture until it turns %1 color.$}
 {
 	#if {&{character[brewContainer]}}
 	{
@@ -7,7 +7,7 @@
 }
 {9}
 
-#action {^You create {a|an} %2 {potion|tincture} from %3.$}
+#ACTION {^You create {a|an} %2 {potion|tincture} from %3.$}
 {
 	#if {"${auto[junk]}" == "true"}
 	{
@@ -16,7 +16,7 @@
 }
 {9}
 
-#action {^You end up with a stinky{, nasty mess| sludge}, but no{thing useful| magic potion}.}
+#ACTION {^You end up with a stinky{, nasty mess| sludge}, but no{thing useful| magic potion}.}
 {
 	#if {&{character[brewContainer]}}
 	{
@@ -25,7 +25,7 @@
 }
 {9}
 
-#action {^Your brew turns to a %* complete.$}
+#ACTION {^Your brew turns to a %* complete.$}
 {
 	#if {&{character[brewContainer]}}
 	{
@@ -34,20 +34,21 @@
 }
 {9}
 
-#alias {^brew in %S$}
+#ACTION {^brew in %S$}
 {
 	#showme {Brew container set to %1.};
 	#variable {character[brewContainer]} {%1}
 }
 {9}
 
-#alias {^fbrew %1}
+
+#ALIAS {^fbrew %1}
 {
 	brew potion focus %1
 }
 {9}
 
-#alias {^{bot|bott|bottle|em|emp|empt|empty}$}
+#ALIAS {^{bot|bott|bottle|em|emp|empt|empty}$}
 {
 	#if {&{character[brewContainer]}}
 	{
@@ -60,7 +61,7 @@
 }
 {9}
 
-#alias {^{comb|combi|combin|combine} %w$}
+#ALIAS {^{comb|combi|combin|combine} %w$}
 {
 	combine %2 2.%2
 }

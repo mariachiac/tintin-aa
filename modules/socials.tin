@@ -1,133 +1,133 @@
-#action {%1 po{p|ps} open a bottle of beer and enjo{y|ys}.$}
+#ACTION {%1 po{p|ps} open a bottle of beer and enjo{y|ys}.$}
 {
 	seq_play socials/beer
 }
 {9}
 
-#action {^%S than{k|ks} {the world for music|herself, for a job well done|himself, for a job well done|itself, for a job well done|yourself, for a job well done}.$}
+#ACTION {^%S than{k|ks} {the world for music|herself, for a job well done|himself, for a job well done|itself, for a job well done|yourself, for a job well done}.$}
 {
 	seq_play socials/thanks
 }
 {9}
 
-#action {^%S {thank|thanks} %S.$}
+#ACTION {^%S {thank|thanks} %S.$}
 {
 	seq_play socials/thanks
 }
 {9}
 
-#action {^%S laug{h|hs} out loud.$}
+#ACTION {^%S laug{h|hs} out loud.$}
 {
 seq_play socials/laugh
 }
 {9}
 
-#action {^%w rol{l|ls} about the floor laughing.$}
+#ACTION {^%w rol{l|ls} about the floor laughing.$}
 {
 seq_play socials/laugh
 }
 {9}
 
-#action {^%w rol{l|ls} around the floor laughing at {her|his|its|your} stupidity.$}
+#ACTION {^%w rol{l|ls} around the floor laughing at {her|his|its|your} stupidity.$}
 {
 seq_play socials/laugh
 }
 {9}
 
-#action {^Wink, wink, nudge nudge.$}
+#ACTION {^Wink, wink, nudge nudge.$}
 {
 seq_play socials/nudge
 }
 {5}
-#action {^I do not even want to know what you are thinking.$}
+#ACTION {^I do not even want to know what you are thinking.$}
 {
 seq_play socials/nudge
 }
 {5}
-#action {^You give %1 a soft nudge.$}
+#ACTION {^You give %1 a soft nudge.$}
 {
 seq_play socials/nudge
 }
 {5}
 
-#action {^You poke at something.$}
+#ACTION {^You poke at something.$}
 {
 seq_play socials/poke
 }
 {5}
-#action {^%S pokes you in the ribs.$}
+#ACTION {^%S pokes you in the ribs.$}
 {
 seq_play socials/nudge
 }
 {5}
-#action {^You poke yourself in the gut, looking at your sparetire.$}
+#ACTION {^You poke yourself in the gut, looking at your sparetire.$}
 {
 seq_play socials/poke
 }
 {5}
-#action {^%w pokes {herself|himself|itself} in the gut, ever self-conscious of {her|his|its} appearance.$}
+#ACTION {^%w pokes {herself|himself|itself} in the gut, ever self-conscious of {her|his|its} appearance.$}
 {
 seq_play socials/poke
 }
 {9}
 
-#action {^You sigh.$}
+#ACTION {^You sigh.$}
 {
 seq_play socials/sigh
 }
 {9}
-#action {^%1 sighs somberly.$}
+#ACTION {^%1 sighs somberly.$}
 {
 seq_play socials/sigh
 }
 {9}
-#action {^You sigh in your own general direction.$}
+#ACTION {^You sigh in your own general direction.$}
 {
 seq_play socials/sigh
 }
 {9}
-#action {^%1 sighs at you.$}
+#ACTION {^%1 sighs at you.$}
 {
 seq_play socials/sigh
 }
 {9}
-#action {^%1 sighs at %2.$}
+#ACTION {^%1 sighs at %2.$}
 {
 seq_play socials/sigh
 }
 {9}
-#action {^You cough loudly.$}
+#ACTION {^You cough loudly.$}
 {
 seq_play socials/cough
 }
 {9}
-#action {^You cough quietly to yourself.$}
+#ACTION {^You cough quietly to yourself.$}
 {
 seq_play socials/cough
 }
 {9}
-#action {^%w coughs loudly.$}
+#ACTION {^%w coughs loudly.$}
 {
 seq_play socials/cough
 }
 {9}
-#action {^You cough *bullshit* at %1.$}
+#ACTION {^You cough *bullshit* at %1.$}
 {
 seq_play socials/cough
 }
 {9}
-#action {^%1 coughs quietly to {her|him|itself}.$}
+#ACTION {^%1 coughs quietly to {her|him|itself}.$}
 {
 seq_play socials/cough
 }
 {9}
-#action {^%1 coughs *bullshit* at %2.$}
+#ACTION {^%1 coughs *bullshit* at %2.$}
 {
 seq_play socials/cough
 }
 {9}
 
-#action {^%w snicker%*.$}
+#ACTION {^%w snicker%*.$}
 {
 seq_play socials/laugh
 }

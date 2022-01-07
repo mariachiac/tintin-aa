@@ -1,4 +1,4 @@
-#action {^silent_follow %s(mutual)%s %w %4)$}
+#ACTION {^silent_follow %s(mutual)%s %w %4)$}
 {
 	#if {"${auto[follow]}" == "true"}
 	{
@@ -7,7 +7,7 @@
 }
 {8}
 
-#action {^%S quickly climbs up the side and boards the ship.$}
+#ACTION {^%S quickly climbs up the side and boards the ship.$}
 {
 	#if {"${group[leader]}" == "%1"}
 	{
@@ -16,7 +16,7 @@
 }
 {9}
 
-#action {^%S stares at a painting of %2 and fades away.$}
+#ACTION {^%S stares at a painting of %2 and fades away.$}
 {
 	#if {"${group[leader]}" == "%1"}
 	{
@@ -25,7 +25,7 @@
 }
 {9}
 
-#action {^%S touches the orb and disappears in a blinding flash of light.$}
+#ACTION {^%S touches the orb and disappears in a blinding flash of light.$}
 {
 	#if {"${group[leader]}" == "%1"}
 	{
@@ -34,7 +34,7 @@
 }
 {9}
 
-#action {^%w beckons for you to follow.$}
+#ACTION {^%w beckons for you to follow.$}
 {
 	#if {"${auto[follow]}" == "true"}
 	{
@@ -43,28 +43,28 @@
 }
 {9}
 
-#action {^%w would like to join your group!  Use the 'group summon' command to add {her|him|it}.$}
+#ACTION {^%w would like to join your group!  Use the 'group summon' command to add {her|him|it}.$}
 {
 	#macro {\eY} {group summon %1};
 	play group-request
 }
 {9}
 
-#action {^You are now a group member.$}
+#ACTION {^You are now a group member.$}
 {
 	#variable {auto[donateunique]} {false};
 	#variable {auto[getunique]} {false};
 }
 {9}
 
-#action {^You stop following %1.$}
+#ACTION {^You stop following %1.$}
 {
 	exp | prefix silent_;
 	#unvariable {group};
 }
 {9}
 
-#action {^You stop using%*}
+#ACTION {^You stop using%*}
 {
 	#if {"${spam[stats]}" != "true"}
 	{
@@ -76,13 +76,13 @@
 }
 {9}
 
-#action {^You {are already|start} following %1.$}
+#ACTION {^You {are already|start} following %1.$}
 {
 	#variable {group[leader]} {%1}
 }
 {9}
 
-#action {^Your blood curdles as you hear 's dying scream!$}
+#ACTION {^Your blood curdles as you hear 's dying scream!$}
 {
 	#if {"${auto[earthwall]}" == "true"}
 	{
@@ -110,7 +110,7 @@
 }
 {9}
 
-#action {^silent_follow %s(mutual)%s %w$}
+#ACTION {^silent_follow %s(mutual)%s %w$}
 {
 	#if {"${auto[follow]}" == "true"}
 	{
@@ -119,14 +119,15 @@
 }
 {9}
 
-#alias {^group{t|ta|tan|tank} %s%S$}
+
+#ALIAS {^group{t|ta|tan|tank} %s%S$}
 {
 	#format {group[tank} {%n} {%3]};
 	#echo {${group[tank]} is now set as tank.}
 }
 {9}
 
-#alias {^oom$}
+#ALIAS {^oom$}
 {
 	#variable {channel[message]} {};
 	#if {${character[currentMana]} < ${character[maxMana]} / 3}
@@ -155,7 +156,7 @@
 }
 {9}
 
-#alias {^{auto|noauto}follow$}
+#ALIAS {^{auto|noauto}follow$}
 {
 	#if {"%0" == "autofollow"}
 	{
@@ -170,5 +171,6 @@
 }
 {9}
 
-#substitute       {^%S would like to join your group!  Use the 'group summon' command to add {her|him|it}.}                                                                     {%1 would like to join your group!  Press alt+shift+Y or use the 'group summon' command to add %2.}                                                                          {5}
-#variable         {group}  {}
+
+#SUBSTITUTE       {^%S would like to join your group!  Use the 'group summon' command to add {her|him|it}.}                                                                     {%1 would like to join your group!  Press alt+shift+Y or use the 'group summon' command to add %2.}                                                                          {5}
+#VARIABLE         {group}  {}

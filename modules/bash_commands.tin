@@ -1,10 +1,10 @@
-#alias {^fortune %1}
+#ALIAS {^fortune %1}
 {
 	#regexp {%1} {{.*} {.*}} {#script {echo -n "&1 ";fortune -n 500 -s &2 | tr "[:space:]" " " | sed "s/%u2019/'/g"}} {#script {echo -n "%1 ";fortune -n 500 -s | tr "[:space:]" " "}}
 }
 {9}
 
-#alias {^{da|dat|date}$}
+#ALIAS {^{da|dat|date}$}
 {
 	#if {!&{zipCode}}
 	{
@@ -17,13 +17,13 @@
 }
 {9}
 
-#alias {^{ft|fti|ftim|ftime|flit|flite|flite_|flite_ti|flite_tim|flite_time}$}
+#ALIAS {^{ft|fti|ftim|ftime|flit|flite|flite_|flite_ti|flite_tim|flite_time}$}
 {
 	#system {flite_time $(date +'%H:%M')&}
 }
 {9}
 
-#alias {^{zi|zip|zipc|zipco|zipcod|zipcode}%s%S$}
+#ALIAS {^{zi|zip|zipc|zipco|zipcod|zipcode}%s%S$}
 {
 	#variable {zipCode} {%3};
 	#showme {Your zipcode is now set to $zipCode\.}

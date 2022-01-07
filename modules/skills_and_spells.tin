@@ -1,27 +1,30 @@
-#action {^You spend one practice to learn %1 (%2 percent gained).$}
+#ACTION {^You spend one practice to learn %1 (%2 percent gained).$}
 {
 	spell %1;
 	skill %1
 }
 {5}
 
-#action {^  %s  %2  %s{$skillAndSpellLevels}}
+#ACTION {^  %s  %2  %s{$skillAndSpellLevels}}
 {
 	#format {i} {%p} {%2};
 	#variable {skillsAndSpells[$i]} {true}
 }
 {9}
 
-#action {^You practice %1(%2 percent gained).$}
+#ACTION {^You practice %1(%2 percent gained).$}
 {
 	spell %1;
 	skill %1
 }
 {9}
 
-#alias {spell %1}
+
+#ALIAS {spell %1}
 {
 	spells | grep -i %1
 }
 {9}
-#variable {skillAndSpellLevels} {average|bad|exceptional|fair|good|moderate|perfect|poor|very bad|very good}
+
+
+#VARIABLE {skillAndSpellLevels} {average|bad|exceptional|fair|good|moderate|perfect|poor|very bad|very good}

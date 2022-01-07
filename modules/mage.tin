@@ -1,4 +1,4 @@
-#action {^You {are drowning|struggle for air but find none|struggle desperately for air to breathe}!$}
+#ACTION {^You {are drowning|struggle for air but find none|struggle desperately for air to breathe}!$}
 {
 	#if {"${skillsAndSpells[water breathing]}" == "true" && "$castingWaterBreathing" == "false"}
 	{
@@ -9,7 +9,7 @@
 }
 {1}
 
-#action {^{An|A|a|an} {greater ice|ice|lesser ice} elemental {starts|stops} following you.$}
+#ACTION {^{An|A|a|an} {greater ice|ice|lesser ice} elemental {starts|stops} following you.$}
 {
 	#if {"%3" == "starts"}
 	{
@@ -45,7 +45,8 @@
 }
 {9}
 
-#alias {^{noauto|auto}ice$}
+
+#ALIAS {^{noauto|auto}ice$}
 {
 	#if {"%1" == "auto"}
 	{
@@ -60,9 +61,11 @@
 }
 {9}
 
-#macro {\em}
+
+#MACRO {\em}
 {
 show mana
 }
 
-#variable         {castingWaterBreathing}   {false}
+
+#VARIABLE         {castingWaterBreathing}   {false}

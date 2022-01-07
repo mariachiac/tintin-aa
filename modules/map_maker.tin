@@ -1,4 +1,4 @@
-#action {^You follow %S %S.$}
+#ACTION {^You follow %S %S.$}
 {
 	#if {"$pathing" == "true"}
 	{
@@ -7,7 +7,8 @@
 }
 {9}
 
-#alias {Add_Direction %S}
+
+#ALIAS {Add_Direction %S}
 {
 	#if {"$pathing" == "true"}
 	{
@@ -62,7 +63,7 @@
 }
 {9}
 
-#alias {^nopath$}
+#ALIAS {^nopath$}
 {
 	#if {"$pathing" == "true"}
 	{
@@ -78,7 +79,7 @@
 }
 {9}
 
-#alias {^path %S}
+#ALIAS {^path %S}
 {
 	#if {"$pathing" != "true"}
 	{
@@ -94,7 +95,7 @@
 }
 {9}
 
-#alias {^pathload %S}
+#ALIAS {^pathload %S}
 {
 	#if {&{%1}}
 	{
@@ -108,7 +109,8 @@
 }
 {9}
 
-#alias {^pathrun %S}
+
+#ALIAS {^pathrun %S}
 {
 	#if {&{%1}}
 	{
@@ -122,11 +124,12 @@
 }
 {9}
 
-#event {END OF PATH}
+#EVENT {END OF PATH}
 {
 	#unvariable {pathLoaded};
 	@do_hook{endOfPath}
 }
 
-#variable         {pathName}  {}
-#variable         {pathing}  {}
+
+#VARIABLE         {pathName}  {}
+#VARIABLE         {pathing}  {}
