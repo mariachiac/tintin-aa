@@ -46,7 +46,7 @@
 #VARIABLE {mv8} {"|sox -np synth pl A2 sq E3 tri A3 pl C#4 sq E4 delay 0 .05 .1 .15 .2 remix - fade 0 0.55" remix v0.4 v0.9 pitch 300}
 #VARIABLE {newVolumeSound} {"|sox -np synth .05 sq B5" gain -5}
 #VARIABLE {notificationSound} {"|sox -np synth sin 900 sin 1100 delay 0 .1 fade h 0 .25 .2"}
-#VARIABLE	{questinfoChannel}	{"|sox -np synth .2 saw A3" "|sox -np synth .1 sin A3 flanger phaser"}
+#VARIABLE	{questinfoChannel}	{"|sox -np synth .1 sin D4 flanger - phaser"}
 #VARIABLE {rittykatChannel} {"|sox -np synth sine 480 sine 660 sine 550 sine 770 sine 990 sine 1200 delay 0 0 .1 .1 .2 .2 remix - fade 0 0.35"}
 #VARIABLE {sayChannel} {"|sox -np synth pl E1 sq B1 remix - gain -6 fade 0 0.2 0.5"}
 #VARIABLE {tellChannel} {"|sox -np synth pl E3 pl E4 pl D3 pl D4 pl G2 pl G3 delay 0 .05 .25 .3 .5 .55 remix - fade p 0 .74 .75 flanger norm -10 tempo 1.8"}
