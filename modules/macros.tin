@@ -147,7 +147,7 @@
 	f02
 }
 
-#MACRO {\ec}
+#MACRO {\eC}
 {
 show coordinates
 }
