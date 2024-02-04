@@ -11,6 +11,13 @@
 }
 {7}
 
+#ACTION {^kxwt_id_start%*}
+{
+    #echo {%1};
+    #variable {kxwt[id_start]} {%1}
+}
+{7}
+
 #ACTION {^kxwt_area %d %2}
 {
 	#variable {kxwt[area]} {%1 %2};
@@ -344,12 +351,10 @@
 {9}
 
 
-#GAG {^kxwt_{action|audio|area|brew|context|edeath|event|exp|fighting|gdeath|gold|group|idle|longterm_idle|mastercraft|mdeath|myname|nocast|pdeath|position|prompt|rshort|rvnum|spellup|spelldown|sky|spst|supported|time|terrain|walkdir|waypoint|ydeath}}
-#GAG {^kxwt_id_end$}
+#GAG {^kxwt_*}
 #GAG {^kxwt_%*}
 
 #SUBSTITUTE       { ]$}  { ]${exploredRoomString}}  {1}
-#SUBSTITUTE {^kxwt_id_start%1} {%1}
 
 #VARIABLE         {areaNumber}  {-2}
 #VARIABLE         {checkedLevel}  {false}
