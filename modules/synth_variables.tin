@@ -33,7 +33,7 @@
 #VARIABLE {mn6} {"|sox -np synth pl D2 pl A3 pl D3 pl F#3 delay 0 .05 .1 .15 remix - fade 0 0.55" pitch -300}
 #VARIABLE {mn7} {"|sox -np synth pl D2 pl A3 pl D3 pl F#3 delay 0 .05 .1 .15 remix - fade 0 0.55"}
 #VARIABLE {mn8} {"|sox -np synth pl D2 pl A3 pl D3 pl F#3 delay 0 .05 .1 .15 remix - fade 0 0.55" pitch 300}
-#VARIABLE {mortallyWoundedSound} {"|sox -np synth .1 squ C4 tra B3" remix - phaser pitch -900} 
+#VARIABLE {mortallyWoundedSound} {"|Sox -np synth .3 pl B4 pl F3 pl A3 pl B3" remix - fade 0.1 norm -1 vol 0.75} 
 #VARIABLE {musicChannel} {"|sox -np synth pl E4 pl C4 pl A3 pl E3 pl A2 delay 0 .05 .1 .15 .2 remix - fade 0 0.5 .1 flanger norm -1 vol 0.4"}
 #VARIABLE {mv0} {"|sox -np synth pl E2 sq B2 tri E3 pl G3 sq B3 tri E4 delay 0 .05 .1 .15 .2 .25 remix - fade 0 0.55" remix v0.4 v0.9 pitch -300}
 #VARIABLE {mv1} {"|sox -np synth pl E2 sq B2 tri E3 pl G3 sq B3 tri E4 delay 0 .05 .1 .15 .2 .25 remix - fade 0 0.55" remix v0.4 v0.9}
